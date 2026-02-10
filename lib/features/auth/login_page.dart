@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../core/theme/app_colors.dart';
-import '../../core/widgets/custom_text_field.dart';
-import '../../core/widgets/primary_button.dart';
-import '../../core/widgets/social_login_button.dart';
+import '../../core/theme/theme.dart';
+import '../../core/widgets/widgets.dart';
 import 'auth_controller.dart';
 
 class LoginPage extends StatefulWidget {
@@ -48,22 +46,17 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     final size = MediaQuery.of(context).size;
 
     return ChangeNotifierProvider(
       create: (_) => AuthController(),
       child: Scaffold(
-        backgroundColor: isDark
-            ? AppColors.backgroundDark
-            : AppColors.backgroundLight,
+        backgroundColor: context.backgroundColor,
         body: SafeArea(
           child: Container(
             width: size.width,
             height: size.height,
-            decoration: BoxDecoration(
-              color: isDark ? AppColors.surfaceDark : AppColors.surfaceLight,
-            ),
+            decoration: BoxDecoration(color: context.surfaceColor),
             child: SingleChildScrollView(
               child: ConstrainedBox(
                 constraints: BoxConstraints(
@@ -72,12 +65,15 @@ class _LoginPageState extends State<LoginPage> {
                 child: IntrinsicHeight(
                   child: Column(
                     children: [
-                      _buildHeader(isDark),
-                      _buildForm(isDark),
-                      _buildDivider(isDark),
+                      const AuthHeader(
+                        title: 'Bem-vindo de volta',
+                        subtitle: 'Faça login para continuar trocando livros',
+                      ),
+                      _buildForm(),
+                      _buildDivider(),
                       _buildSocialLogin(),
                       const Spacer(),
-                      _buildFooter(isDark),
+                      _buildFooter(),
                     ],
                   ),
                 ),
@@ -89,59 +85,13 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _buildHeader(bool isDark) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 48, bottom: 24, left: 16, right: 16),
-      child: Column(
-        children: [
-          // Logo/Ícone
-          Container(
-            width: 96,
-            height: 96,
-            decoration: BoxDecoration(
-              color: AppColors.primary.withOpacity(0.2),
-              shape: BoxShape.circle,
-            ),
-            child: const Icon(
-              Icons.menu_book_rounded,
-              size: 48,
-              color: AppColors.primary,
-            ),
-          ),
-          const SizedBox(height: 24),
-
-          // Título
-          Text(
-            'Bem-vindo de volta',
-            style: Theme.of(context).textTheme.displayLarge?.copyWith(
-              fontSize: 32,
-              fontWeight: FontWeight.bold,
-              color: isDark ? AppColors.textLight : AppColors.textMain,
-            ),
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 8),
-
-          // Subtítulo
-          Text(
-            'Faça login para continuar trocando livros',
-            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-              color: isDark ? AppColors.textMutedLight : AppColors.textMuted,
-            ),
-            textAlign: TextAlign.center,
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildForm(bool isDark) {
+  Widget _buildForm() {
     return Consumer<AuthController>(
       builder: (context, controller, _) {
         return Form(
           key: _formKey,
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+            padding: AppSpacing.paddingForm,
             child: Column(
               children: [
                 // Campo Email
@@ -161,7 +111,7 @@ class _LoginPageState extends State<LoginPage> {
                     return null;
                   },
                 ),
-                const SizedBox(height: 20),
+                AppSpacing.verticalLG,
 
                 // Campo Senha
                 CustomTextField(
@@ -175,9 +125,7 @@ class _LoginPageState extends State<LoginPage> {
                       controller.isPasswordVisible
                           ? Icons.visibility_outlined
                           : Icons.visibility_off_outlined,
-                      color: isDark
-                          ? AppColors.textMutedLight
-                          : AppColors.textMuted,
+                      color: context.textMuted,
                     ),
                     onPressed: controller.togglePasswordVisibility,
                   ),
@@ -188,7 +136,7 @@ class _LoginPageState extends State<LoginPage> {
                     return null;
                   },
                 ),
-                const SizedBox(height: 8),
+                AppSpacing.verticalSM,
 
                 // Esqueceu a senha
                 Align(
@@ -204,17 +152,13 @@ class _LoginPageState extends State<LoginPage> {
                     },
                     child: Text(
                       'Esqueceu a senha?',
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                        color: isDark
-                            ? AppColors.textMutedLight
-                            : AppColors.textMuted,
-                      ),
+                      style: AppTextStyles.bodyMedium(
+                        context,
+                      ).copyWith(color: context.textMuted),
                     ),
                   ),
                 ),
-                const SizedBox(height: 8),
+                AppSpacing.verticalSM,
 
                 // Botão Entrar
                 PrimaryButton(
@@ -230,34 +174,22 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _buildDivider(bool isDark) {
+  Widget _buildDivider() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 24),
       child: Row(
         children: [
-          Expanded(
-            child: Container(
-              height: 1,
-              color: isDark ? AppColors.borderDark : AppColors.borderLight,
-            ),
-          ),
+          Expanded(child: Container(height: 1, color: context.borderColor)),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Text(
               'Ou continue com',
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-                color: isDark ? AppColors.textMutedLight : AppColors.textMuted,
-              ),
+              style: AppTextStyles.bodyMedium(
+                context,
+              ).copyWith(color: context.textMuted),
             ),
           ),
-          Expanded(
-            child: Container(
-              height: 1,
-              color: isDark ? AppColors.borderDark : AppColors.borderLight,
-            ),
-          ),
+          Expanded(child: Container(height: 1, color: context.borderColor)),
         ],
       ),
     );
@@ -280,7 +212,7 @@ class _LoginPageState extends State<LoginPage> {
               );
             },
           ),
-          const SizedBox(width: 16),
+          const SizedBox(width: AppSpacing.md),
           SocialLoginButton(
             icon: Icons.apple_rounded,
             tooltip: 'Continuar com Apple',
@@ -297,19 +229,13 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _buildFooter(bool isDark) {
+  Widget _buildFooter() {
     return Container(
-      margin: const EdgeInsets.only(top: 32),
-      padding: const EdgeInsets.symmetric(vertical: 32),
+      margin: const EdgeInsets.only(top: AppSpacing.xl),
+      padding: const EdgeInsets.symmetric(vertical: AppSpacing.xl),
       decoration: BoxDecoration(
-        color: isDark
-            ? AppColors.backgroundDark.withOpacity(0.5)
-            : AppColors.backgroundLight,
-        border: Border(
-          top: BorderSide(
-            color: isDark ? AppColors.surfaceDark : const Color(0xFFF0F5F1),
-          ),
-        ),
+        color: context.backgroundColor.withOpacity(0.5),
+        border: Border(top: BorderSide(color: context.overlay)),
       ),
       child: Center(
         child: Row(
@@ -317,19 +243,17 @@ class _LoginPageState extends State<LoginPage> {
           children: [
             Text(
               'Não tem uma conta? ',
-              style: TextStyle(
-                fontSize: 16,
-                color: isDark ? AppColors.textMutedLight : AppColors.textMuted,
-              ),
+              style: AppTextStyles.bodyLarge(
+                context,
+              ).copyWith(color: context.textMuted),
             ),
             GestureDetector(
               onTap: () {
                 Navigator.pushNamed(context, '/signup');
               },
-              child: const Text(
+              child: Text(
                 'Cadastre-se',
-                style: TextStyle(
-                  fontSize: 16,
+                style: AppTextStyles.bodyLarge(context).copyWith(
                   fontWeight: FontWeight.bold,
                   color: AppColors.primary,
                 ),

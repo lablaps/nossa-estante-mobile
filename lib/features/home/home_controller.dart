@@ -29,28 +29,24 @@ class HomeController extends ChangeNotifier {
       'author': 'Paulo Coelho',
       'distance': '0.5km',
       'credits': 2,
-      'imageUrl': 'https://via.placeholder.com/140x210/13ec5b/ffffff?text=Book',
     },
     {
       'title': 'Sapiens',
       'author': 'Yuval Noah Harari',
       'distance': '1.2km',
       'credits': 3,
-      'imageUrl': 'https://via.placeholder.com/140x210/0ea641/ffffff?text=Book',
     },
     {
       'title': 'Duna',
       'author': 'Frank Herbert',
       'distance': '2.0km',
       'credits': 2,
-      'imageUrl': 'https://via.placeholder.com/140x210/13ec5b/ffffff?text=Book',
     },
     {
       'title': '1984',
       'author': 'George Orwell',
       'distance': '3.5km',
       'credits': 1,
-      'imageUrl': 'https://via.placeholder.com/140x210/0ea641/ffffff?text=Book',
     },
   ];
 

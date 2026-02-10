@@ -1,0 +1,117 @@
+import 'package:flutter/material.dart';
+
+/// Espaçamentos padronizados do aplicativo Nossa Estante
+///
+/// Define constantes para todos os espaçamentos verticais, horizontais
+/// e paddings/margins para manter consistência visual.
+///
+/// Uso:
+/// ```dart
+/// SizedBox(height: AppSpacing.md)  // 16px
+/// Padding(padding: AppSpacing.paddingPage)
+/// ```
+class AppSpacing {
+  AppSpacing._();
+
+  // ========== ESPAÇAMENTOS VERTICAIS/HORIZONTAIS ==========
+
+  /// Extra pequeno: 4px
+  /// Uso: Espaçamentos mínimos entre elementos muito próximos
+  static const double xs = 4.0;
+
+  /// Pequeno: 8px
+  /// Uso: Espaçamento entre ícones e textos, elementos relacionados
+  static const double sm = 8.0;
+
+  /// Médio: 16px (padrão mais comum)
+  /// Uso: Espaçamento entre seções, elementos de formulário
+  static const double md = 16.0;
+
+  /// Grande: 24px
+  /// Uso: Espaçamento entre seções grandes, padding de páginas
+  static const double lg = 24.0;
+
+  /// Extra grande: 32px
+  /// Uso: Espaçamento entre blocos principais
+  static const double xl = 32.0;
+
+  /// Extra extra grande: 48px
+  /// Uso: Espaçamento em headers, seções de destaque
+  static const double xxl = 48.0;
+
+  /// Gigante: 64px
+  /// Uso: Espaçamentos especiais, topo de páginas
+  static const double xxxl = 64.0;
+
+  // ========== PADDINGS PRÉ-DEFINIDOS ==========
+
+  /// Padding padrão de página (16px todos os lados)
+  static const EdgeInsets paddingPage = EdgeInsets.all(md);
+
+  /// Padding de card/container (12px todos os lados)
+  static const EdgeInsets paddingCard = EdgeInsets.all(12.0);
+
+  /// Padding de seção (16px horizontal, 8px vertical)
+  static const EdgeInsets paddingSection = EdgeInsets.symmetric(
+    horizontal: md,
+    vertical: sm,
+  );
+
+  /// Padding de botão (20px horizontal, 16px vertical)
+  static const EdgeInsets paddingButton = EdgeInsets.symmetric(
+    horizontal: 20.0,
+    vertical: md,
+  );
+
+  /// Padding horizontal padrão (24px)
+  static const EdgeInsets paddingHorizontal = EdgeInsets.symmetric(
+    horizontal: lg,
+  );
+
+  /// Padding vertical padrão (16px)
+  static const EdgeInsets paddingVertical = EdgeInsets.symmetric(vertical: md);
+
+  /// Padding de formulário (24px horizontal, 16px vertical)
+  static const EdgeInsets paddingForm = EdgeInsets.symmetric(
+    horizontal: lg,
+    vertical: md,
+  );
+
+  /// Padding de header (16px horizontal, 32px topo, 24px baixo)
+  static const EdgeInsets paddingHeader = EdgeInsets.fromLTRB(md, xl, md, lg);
+
+  // ========== WIDGETS DE ESPAÇAMENTO ==========
+
+  /// SizedBox vertical extra pequeno (4px)
+  static const Widget verticalXS = SizedBox(height: xs);
+
+  /// SizedBox vertical pequeno (8px)
+  static const Widget verticalSM = SizedBox(height: sm);
+
+  /// SizedBox vertical médio (16px)
+  static const Widget verticalMD = SizedBox(height: md);
+
+  /// SizedBox vertical grande (24px)
+  static const Widget verticalLG = SizedBox(height: lg);
+
+  /// SizedBox vertical extra grande (32px)
+  static const Widget verticalXL = SizedBox(height: xl);
+
+  /// SizedBox vertical extra extra grande (48px)
+  static const Widget verticalXXL = SizedBox(height: xxl);
+
+  /// SizedBox horizontal extra pequeno (4px)
+  static const Widget horizontalXS = SizedBox(width: xs);
+
+  /// SizedBox horizontal pequeno (8px)
+  static const Widget horizontalSM = SizedBox(width: sm);
+
+  /// SizedBox horizontal médio (16px)
+  static const Widget horizontalMD = SizedBox(width: md);
+
+  /// SizedBox horizontal grande (24px)
+  static const Widget horizontalLG = SizedBox(width: lg);
+
+  /// SizedBox horizontal extra grande (32px)
+  static const Widget horizontalXL = SizedBox(width: xl);
+}
