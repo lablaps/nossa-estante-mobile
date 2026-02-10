@@ -29,9 +29,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
   }
 
   void _handleComplete() {
-    // TODO: Navegar para a tela de login
-    // Navigator.pushReplacementNamed(context, '/login');
-    debugPrint('Onboarding completo - navegando para login');
+    Navigator.pushReplacementNamed(context, '/login');
   }
 
   @override

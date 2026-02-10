@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'core/theme/app_theme.dart';
-import 'features/onboarding/onboarding_page.dart';
+import 'core/routes/app_routes.dart';
 
 void main() {
   runApp(const MainApp());
@@ -17,7 +17,9 @@ class MainApp extends StatelessWidget {
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.system,
-      home: const OnboardingPage(),
+      initialRoute: AppRoutes.onboarding,
+      routes: AppRoutes.routes,
+      onGenerateRoute: AppRoutes.onGenerateRoute,
     );
   }
 }
