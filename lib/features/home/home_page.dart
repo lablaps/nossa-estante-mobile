@@ -48,7 +48,9 @@ class _HomeView extends StatelessWidget {
             const SliverToBoxAdapter(child: CommunityActivitySection()),
 
             // Bottom padding for navigation bar
-            SliverToBoxAdapter(child: SizedBox(height: AppSpacing.xxxl + 16)),
+            SliverToBoxAdapter(
+              child: SizedBox(height: AppSpacing.bottomNavPadding),
+            ),
           ],
         ),
       ),

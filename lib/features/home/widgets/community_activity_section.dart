@@ -40,7 +40,7 @@ class CommunityActivitySection extends StatelessWidget {
               else
                 ...controller.communityActivities.map((activity) {
                   return Container(
-                    margin: EdgeInsets.only(bottom: AppSpacing.sm + 4),
+                    margin: AppSpacing.marginActivityCard,
                     padding: AppSpacing.paddingCard,
                     decoration: BoxDecoration(
                       color: context.surfaceColor,

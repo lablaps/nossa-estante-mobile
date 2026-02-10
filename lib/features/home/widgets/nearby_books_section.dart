@@ -13,8 +13,8 @@ class NearbyBooksSection extends StatelessWidget {
     return Consumer<HomeController>(
       builder: (context, controller, _) {
         return Container(
-          margin: EdgeInsets.only(top: AppSpacing.sm),
-          padding: EdgeInsets.symmetric(vertical: AppSpacing.lg),
+          margin: AppSpacing.marginBooksSection,
+          padding: AppSpacing.paddingBooksSection,
           decoration: BoxDecoration(
             color: context.backgroundColor,
             borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
@@ -55,7 +55,10 @@ class NearbyBooksSection extends StatelessWidget {
                       ],
                     ),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        debugPrint('Navegação: Ver todos os livros');
+                        // TODO: Navegar para lista completa de livros
+                      },
                       child: Text(
                         'Ver todos',
                         style: AppTextStyles.labelLarge(
@@ -113,82 +116,88 @@ class _BookCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 140,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Book cover
-          Container(
-            height: 168,
-            decoration: BoxDecoration(
-              borderRadius: AppDimensions.borderRadiusMD,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.15),
-                  blurRadius: 8,
-                  offset: const Offset(0, 4),
-                ),
-              ],
-            ),
-            child: Stack(
-              children: [
-                BookPlaceholder(width: 140, height: 210, text: book['title']),
-                Positioned(
-                  top: AppSpacing.sm,
-                  right: AppSpacing.sm,
-                  child: Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: AppSpacing.sm,
-                      vertical: 4,
-                    ),
-                    decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.6),
-                      borderRadius: AppDimensions.borderRadiusSM,
-                    ),
-                    child: Text(
-                      book['distance'],
-                      style: AppTextStyles.caption(context).copyWith(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
+    return GestureDetector(
+      onTap: () {
+        debugPrint('Navegação: Detalhes do livro ${book['title']}');
+        // TODO: Navegar para detalhes do livro
+      },
+      child: SizedBox(
+        width: 140,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Book cover
+            Container(
+              height: 168,
+              decoration: BoxDecoration(
+                borderRadius: AppDimensions.borderRadiusMD,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.15),
+                    blurRadius: 8,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
+              ),
+              child: Stack(
+                children: [
+                  BookPlaceholder(width: 140, height: 210, text: book['title']),
+                  Positioned(
+                    top: AppSpacing.sm,
+                    right: AppSpacing.sm,
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: AppSpacing.sm,
+                        vertical: AppSpacing.xs,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.black.withOpacity(0.6),
+                        borderRadius: AppDimensions.borderRadiusSM,
+                      ),
+                      child: Text(
+                        book['distance'],
+                        style: AppTextStyles.caption(context).copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),
+                ],
+              ),
+            ),
+            AppSpacing.verticalSM,
+
+            // Book info
+            Text(
+              book['title'],
+              style: AppTextStyles.labelLarge(context),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+            Text(
+              book['author'],
+              style: AppTextStyles.bodySmall(
+                context,
+              ).copyWith(color: context.textMuted),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+            AppSpacing.verticalXS,
+            Row(
+              children: [
+                const Icon(Icons.token, color: AppColors.primary, size: 14),
+                AppSpacing.horizontalXS,
+                Text(
+                  '${book['credits']} Créditos',
+                  style: AppTextStyles.bodySmall(
+                    context,
+                  ).copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
             ),
-          ),
-          AppSpacing.verticalSM,
-
-          // Book info
-          Text(
-            book['title'],
-            style: AppTextStyles.labelLarge(context),
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
-          Text(
-            book['author'],
-            style: AppTextStyles.bodySmall(
-              context,
-            ).copyWith(color: context.textMuted),
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
-          AppSpacing.verticalXS,
-          Row(
-            children: [
-              const Icon(Icons.token, color: AppColors.primary, size: 14),
-              AppSpacing.horizontalXS,
-              Text(
-                '${book['credits']} Créditos',
-                style: AppTextStyles.bodySmall(
-                  context,
-                ).copyWith(fontWeight: FontWeight.bold),
-              ),
-            ],
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

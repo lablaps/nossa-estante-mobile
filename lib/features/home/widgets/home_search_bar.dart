@@ -34,7 +34,7 @@ class HomeSearchBar extends StatelessWidget {
             child: Row(
               children: [
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: AppSpacing.sm + 4),
+                  padding: AppSpacing.paddingSearchIcon,
                   child: Icon(Icons.search, color: context.textMuted),
                 ),
                 Expanded(
@@ -51,7 +51,7 @@ class HomeSearchBar extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: AppSpacing.sm + 4),
+                  padding: AppSpacing.paddingSearchIcon,
                   decoration: BoxDecoration(
                     border: Border(
                       left: BorderSide(color: context.borderColor),

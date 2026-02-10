@@ -44,7 +44,7 @@ class HomeHeader extends StatelessWidget {
                     ),
                   ),
                   AppSpacing.horizontalSM,
-                  const SizedBox(width: 4),
+                  AppSpacing.horizontalXS,
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

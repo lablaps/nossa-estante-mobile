@@ -10,7 +10,7 @@ class MapSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 320,
-      margin: EdgeInsets.only(top: AppSpacing.md),
+      margin: AppSpacing.marginMapSection,
       child: Stack(
         children: [
           // Map background (placeholder)
@@ -61,10 +61,7 @@ class MapSection extends StatelessWidget {
             bottom: AppSpacing.md,
             left: AppSpacing.md,
             child: Container(
-              padding: EdgeInsets.symmetric(
-                horizontal: AppSpacing.sm + 4,
-                vertical: 6,
-              ),
+              padding: AppSpacing.paddingMapInfo,
               decoration: BoxDecoration(
                 color: context.surfaceColor.withOpacity(0.9),
                 borderRadius: AppDimensions.borderRadiusSM,

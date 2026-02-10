@@ -78,6 +78,34 @@ class AppSpacing {
     vertical: 6.0,
   );
 
+  /// Padding de ícone de busca (12px horizontal)
+  static const EdgeInsets paddingSearchIcon = EdgeInsets.symmetric(
+    horizontal: 12.0,
+  );
+
+  /// Padding de info badge do mapa (12px horizontal, 6px vertical)
+  static const EdgeInsets paddingMapInfo = EdgeInsets.symmetric(
+    horizontal: 12.0,
+    vertical: 6.0,
+  );
+
+  /// Margin de card de atividade (bottom 12px)
+  static const EdgeInsets marginActivityCard = EdgeInsets.only(bottom: 12.0);
+
+  /// Margin de seção de mapa (top 16px)
+  static const EdgeInsets marginMapSection = EdgeInsets.only(top: md);
+
+  /// Margin de seção de livros (top 8px)
+  static const EdgeInsets marginBooksSection = EdgeInsets.only(top: sm);
+
+  /// Padding vertical de seção de livros (24px)
+  static const EdgeInsets paddingBooksSection = EdgeInsets.symmetric(
+    vertical: lg,
+  );
+
+  /// Padding inferior para navegação (80px)
+  static const double bottomNavPadding = 80.0;
+
   // ========== WIDGETS DE ESPAÇAMENTO ==========
 
   /// SizedBox vertical extra pequeno (4px)
