@@ -1,0 +1,75 @@
+import 'package:flutter/material.dart';
+import '../theme/app_colors.dart';
+
+/// Botão primário circular com ícone (usado no onboarding)
+class CircularIconButton extends StatelessWidget {
+  final VoidCallback onPressed;
+  final IconData icon;
+  final double size;
+
+  const CircularIconButton({
+    super.key,
+    required this.onPressed,
+    this.icon = Icons.arrow_forward,
+    this.size = 56.0,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onPressed,
+      child: Container(
+        width: size,
+        height: size,
+        decoration: BoxDecoration(
+          color: AppColors.primary,
+          shape: BoxShape.circle,
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.primary.withOpacity(0.3),
+              blurRadius: 16,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Icon(icon, color: AppColors.textMain, size: 28),
+      ),
+    );
+  }
+}
+
+/// Botão primário com texto (usado na última tela do onboarding)
+class PrimaryButton extends StatelessWidget {
+  final String text;
+  final VoidCallback onPressed;
+
+  const PrimaryButton({super.key, required this.text, required this.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      height: 56,
+      child: ElevatedButton(
+        onPressed: onPressed,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: AppColors.primary,
+          foregroundColor: AppColors.textMain,
+          elevation: 8,
+          shadowColor: AppColors.primary.withOpacity(0.2),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(9999),
+          ),
+        ),
+        child: Text(
+          text,
+          style: const TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w700,
+            letterSpacing: 0.15,
+          ),
+        ),
+      ),
+    );
+  }
+}
