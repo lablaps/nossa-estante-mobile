@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../core/theme/app_colors.dart';
+import '../home/home_page.dart';
 import 'app_shell_controller.dart';
 
 class AppShellPage extends StatelessWidget {
@@ -18,13 +19,13 @@ class AppShellPage extends StatelessWidget {
 class _AppShellView extends StatelessWidget {
   const _AppShellView();
 
-  // Páginas/telas do app (placeholders por enquanto)
+  // Páginas/telas do app
   static final List<Widget> _pages = [
-    _PlaceholderPage(title: 'Início', icon: Icons.home),
-    _PlaceholderPage(title: 'Explorar', icon: Icons.explore),
-    _PlaceholderPage(title: 'Adicionar', icon: Icons.add),
-    _PlaceholderPage(title: 'Trocas', icon: Icons.swap_horiz),
-    _PlaceholderPage(title: 'Perfil', icon: Icons.person),
+    const HomePage(),
+    const _PlaceholderPage(title: 'Explorar', icon: Icons.explore),
+    const _PlaceholderPage(title: 'Adicionar', icon: Icons.add),
+    const _PlaceholderPage(title: 'Trocas', icon: Icons.swap_horiz),
+    const _PlaceholderPage(title: 'Perfil', icon: Icons.person),
   ];
 
   @override
@@ -45,58 +46,167 @@ class _AppShellView extends StatelessWidget {
               index: controller.currentIndex,
               children: _pages,
             ),
-            bottomNavigationBar: _buildBottomNavigationBar(context, controller),
+            bottomNavigationBar: _buildCustomBottomNav(context, controller),
           );
         },
       ),
     );
   }
 
-  Widget _buildBottomNavigationBar(
+  Widget _buildCustomBottomNav(
     BuildContext context,
     AppShellController controller,
   ) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
-    return BottomNavigationBar(
-      currentIndex: controller.currentIndex,
-      onTap: controller.setIndex,
-      type: BottomNavigationBarType.fixed,
-      selectedItemColor: AppColors.primary,
-      unselectedItemColor: isDark
-          ? AppColors.textMutedLight.withOpacity(0.6)
-          : AppColors.textMuted.withOpacity(0.6),
-      backgroundColor: isDark ? AppColors.surfaceDark : AppColors.surfaceLight,
-      elevation: 8,
-      selectedFontSize: 12,
-      unselectedFontSize: 12,
-      items: const [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home_outlined),
-          activeIcon: Icon(Icons.home),
-          label: 'Início',
+    return Container(
+      decoration: BoxDecoration(
+        color: isDark ? AppColors.backgroundDark : AppColors.backgroundLight,
+        border: Border(
+          top: BorderSide(
+            color: (isDark ? Colors.white : Colors.black).withOpacity(0.05),
+          ),
         ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.explore_outlined),
-          activeIcon: Icon(Icons.explore),
-          label: 'Explorar',
+      ),
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          _buildNavItem(
+            context,
+            icon: Icons.home,
+            iconOutlined: Icons.home_outlined,
+            label: 'Início',
+            isActive: controller.currentIndex == 0,
+            onTap: () => controller.setIndex(0),
+            isDark: isDark,
+          ),
+          _buildNavItem(
+            context,
+            icon: Icons.map,
+            iconOutlined: Icons.map_outlined,
+            label: 'Explorar',
+            isActive: controller.currentIndex == 1,
+            onTap: () => controller.setIndex(1),
+            isDark: isDark,
+          ),
+          _buildCentralAddButton(
+            context,
+            isActive: controller.currentIndex == 2,
+            onTap: () => controller.setIndex(2),
+            isDark: isDark,
+          ),
+          _buildNavItem(
+            context,
+            icon: Icons.chat,
+            iconOutlined: Icons.chat_outlined,
+            label: 'Trocas',
+            isActive: controller.currentIndex == 3,
+            onTap: () => controller.setIndex(3),
+            isDark: isDark,
+          ),
+          _buildNavItem(
+            context,
+            icon: Icons.person,
+            iconOutlined: Icons.person_outline,
+            label: 'Perfil',
+            isActive: controller.currentIndex == 4,
+            onTap: () => controller.setIndex(4),
+            isDark: isDark,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildNavItem(
+    BuildContext context, {
+    required IconData icon,
+    required IconData iconOutlined,
+    required String label,
+    required bool isActive,
+    required VoidCallback onTap,
+    required bool isDark,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      behavior: HitTestBehavior.opaque,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 8),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              isActive ? icon : iconOutlined,
+              size: 26,
+              color: isActive
+                  ? AppColors.primary
+                  : isDark
+                  ? AppColors.textMutedLight
+                  : AppColors.textMuted,
+            ),
+            const SizedBox(height: 4),
+            Text(
+              label,
+              style: TextStyle(
+                fontSize: 10,
+                fontWeight: isActive ? FontWeight.bold : FontWeight.w500,
+                color: isActive
+                    ? AppColors.primary
+                    : isDark
+                    ? AppColors.textMutedLight
+                    : AppColors.textMuted,
+              ),
+            ),
+          ],
         ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.add_circle_outline, size: 32),
-          activeIcon: Icon(Icons.add_circle, size: 32),
-          label: 'Adicionar',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.swap_horiz_outlined),
-          activeIcon: Icon(Icons.swap_horiz),
-          label: 'Trocas',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.person_outline),
-          activeIcon: Icon(Icons.person),
-          label: 'Perfil',
-        ),
-      ],
+      ),
+    );
+  }
+
+  Widget _buildCentralAddButton(
+    BuildContext context, {
+    required bool isActive,
+    required VoidCallback onTap,
+    required bool isDark,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Transform.translate(
+            offset: const Offset(0, -12),
+            child: Container(
+              width: 56,
+              height: 56,
+              decoration: BoxDecoration(
+                color: AppColors.primary,
+                shape: BoxShape.circle,
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.primary.withOpacity(0.4),
+                    blurRadius: 20,
+                    offset: const Offset(0, 8),
+                  ),
+                ],
+              ),
+              child: const Icon(Icons.add, color: Colors.white, size: 28),
+            ),
+          ),
+          Transform.translate(
+            offset: const Offset(0, -8),
+            child: Text(
+              'Adicionar',
+              style: TextStyle(
+                fontSize: 10,
+                fontWeight: FontWeight.w500,
+                color: isDark ? AppColors.textMutedLight : AppColors.textMuted,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -106,10 +216,7 @@ class _PlaceholderPage extends StatelessWidget {
   final String title;
   final IconData icon;
 
-  const _PlaceholderPage({
-    required this.title,
-    required this.icon,
-  });
+  const _PlaceholderPage({required this.title, required this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -118,31 +225,29 @@ class _PlaceholderPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
-        backgroundColor: isDark ? AppColors.surfaceDark : AppColors.surfaceLight,
+        backgroundColor: isDark
+            ? AppColors.surfaceDark
+            : AppColors.surfaceLight,
         elevation: 0,
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              icon,
-              size: 80,
-              color: AppColors.primary.withOpacity(0.3),
-            ),
+            Icon(icon, size: 80, color: AppColors.primary.withOpacity(0.3)),
             const SizedBox(height: 24),
             Text(
               title,
               style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                    color: isDark ? AppColors.textLight : AppColors.textMain,
-                  ),
+                color: isDark ? AppColors.textLight : AppColors.textMain,
+              ),
             ),
             const SizedBox(height: 8),
             Text(
               'Em desenvolvimento',
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: isDark ? AppColors.textMutedLight : AppColors.textMuted,
-                  ),
+                color: isDark ? AppColors.textMutedLight : AppColors.textMuted,
+              ),
             ),
           ],
         ),
