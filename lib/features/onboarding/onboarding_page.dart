@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../core/theme/app_colors.dart';
-import '../../core/widgets/primary_button.dart';
-import '../../core/widgets/page_indicator.dart';
+import '../../core/theme/theme.dart';
+import '../../core/widgets/widgets.dart';
 import 'onboarding_controller.dart';
 
 /// Página de Onboarding do aplicativo Nossa Estante
@@ -70,18 +69,28 @@ class _OnboardingPageState extends State<OnboardingPage> {
     }
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(24, 32, 24, 16),
+      padding: EdgeInsets.fromLTRB(
+        AppSpacing.lg,
+        AppSpacing.xxl,
+        AppSpacing.lg,
+        AppSpacing.md,
+      ),
       child: Align(
         alignment: Alignment.centerRight,
         child: TextButton(
           onPressed: _controller.skip,
           style: TextButton.styleFrom(
-            foregroundColor: AppColors.textMuted,
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            foregroundColor: context.textMuted,
+            padding: EdgeInsets.symmetric(
+              horizontal: AppSpacing.md,
+              vertical: AppSpacing.xs,
+            ),
           ),
-          child: const Text(
+          child: Text(
             'Pular',
-            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
+            style: AppTextStyles.labelMedium(
+              context,
+            ).copyWith(fontWeight: FontWeight.w800),
           ),
         ),
       ),
@@ -91,7 +100,12 @@ class _OnboardingPageState extends State<OnboardingPage> {
   /// Footer com indicadores e botão de navegação
   Widget _buildFooter() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(32, 16, 32, 32),
+      padding: EdgeInsets.fromLTRB(
+        AppSpacing.xxl,
+        AppSpacing.md,
+        AppSpacing.xxl,
+        AppSpacing.xxl,
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -185,7 +199,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
       description:
           'Troque livros que você leu para ganhar créditos e descobrir sua próxima história favorita.',
       actionButton: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
+        padding: AppSpacing.paddingPage,
         child: PrimaryButton(text: 'Começar', onPressed: _handleComplete),
       ),
     );
@@ -201,7 +215,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
       width: double.infinity,
       decoration: BoxDecoration(
         color: AppColors.primary.withOpacity(0.05),
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(AppDimensions.radiusXL),
       ),
       child: Center(child: child),
     );
@@ -225,41 +239,33 @@ class _OnboardingPageContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
+      padding: AppSpacing.paddingPage,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           // Hero Illustration
           imagePlaceholder,
 
-          const SizedBox(height: 32),
+          AppSpacing.verticalXXL,
 
           // Title
           title,
 
-          const SizedBox(height: 16),
+          AppSpacing.verticalMD,
 
           // Description
           Text(
             description,
             textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-              height: 1.5,
-              color: Theme.of(context).brightness == Brightness.dark
-                  ? AppColors.slate400
-                  : AppColors.slate600,
-            ),
+            style: AppTextStyles.bodyLarge(
+              context,
+            ).copyWith(height: 1.5, color: context.textMuted),
           ),
 
           // Action Button (only on last page)
-          if (actionButton != null) ...[
-            const SizedBox(height: 32),
-            actionButton!,
-          ],
+          if (actionButton != null) ...[AppSpacing.verticalXXL, actionButton!],
 
-          const SizedBox(height: 24),
+          AppSpacing.verticalLG,
         ],
       ),
     );
@@ -275,18 +281,12 @@ class _OnboardingTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
-        style: TextStyle(
-          fontSize: 32,
-          fontWeight: FontWeight.w800,
-          height: 1.1,
-          letterSpacing: -0.5,
-          color: isDark ? AppColors.white : AppColors.textMain,
-        ),
+        style: AppTextStyles.h1(
+          context,
+        ).copyWith(height: 1.1, letterSpacing: -0.5, color: context.textColor),
         children: [
           TextSpan(text: mainText),
           if (highlightText != null) ...[

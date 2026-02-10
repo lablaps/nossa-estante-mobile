@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../core/theme/app_colors.dart';
-import '../../core/widgets/custom_text_field.dart';
-import '../../core/widgets/primary_button.dart';
+import '../../core/theme/theme.dart';
+import '../../core/widgets/widgets.dart';
 import 'auth_controller.dart';
 
 class SignupPage extends StatefulWidget {
@@ -66,22 +65,17 @@ class _SignupPageState extends State<SignupPage> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     final size = MediaQuery.of(context).size;
 
     return ChangeNotifierProvider(
       create: (_) => AuthController(),
       child: Scaffold(
-        backgroundColor: isDark
-            ? AppColors.backgroundDark
-            : AppColors.backgroundLight,
+        backgroundColor: context.backgroundColor,
         body: SafeArea(
           child: Container(
             width: size.width,
             height: size.height,
-            color: isDark
-                ? AppColors.backgroundDark
-                : AppColors.backgroundLight,
+            color: context.backgroundColor,
             child: Stack(
               children: [
                 // Elementos decorativos de fundo
@@ -96,15 +90,19 @@ class _SignupPageState extends State<SignupPage> {
                     ),
                     child: IntrinsicHeight(
                       child: Padding(
-                        padding: const EdgeInsets.all(24),
+                        padding: AppSpacing.paddingPage,
                         child: Column(
                           children: [
-                            _buildHeader(isDark),
-                            const SizedBox(height: 24),
-                            _buildForm(isDark),
+                            const AuthHeader(
+                              title: 'Criar conta',
+                              subtitle:
+                                  'Junte-se à comunidade de troca de livros',
+                            ),
+                            AppSpacing.verticalLG,
+                            _buildForm(),
                             const Spacer(),
-                            _buildFooter(isDark),
-                            const SizedBox(height: 16),
+                            _buildFooter(),
+                            AppSpacing.verticalMD,
                           ],
                         ),
                       ),
@@ -150,59 +148,7 @@ class _SignupPageState extends State<SignupPage> {
     );
   }
 
-  Widget _buildHeader(bool isDark) {
-    return Column(
-      children: [
-        // Logo
-        Container(
-          width: 80,
-          height: 80,
-          decoration: BoxDecoration(
-            color: isDark ? AppColors.surfaceDark : AppColors.surfaceLight,
-            shape: BoxShape.circle,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.1),
-                blurRadius: 8,
-                offset: const Offset(0, 4),
-              ),
-            ],
-          ),
-          child: const Icon(
-            Icons.menu_book_rounded,
-            size: 40,
-            color: AppColors.primary,
-          ),
-        ),
-        const SizedBox(height: 24),
-
-        // Título
-        Text(
-          'Criar conta',
-          style: Theme.of(context).textTheme.displayLarge?.copyWith(
-            fontSize: 32,
-            fontWeight: FontWeight.bold,
-            color: isDark ? AppColors.textLight : AppColors.textMain,
-          ),
-          textAlign: TextAlign.center,
-        ),
-        const SizedBox(height: 8),
-
-        // Subtítulo
-        Text(
-          'Junte-se à comunidade de troca de livros',
-          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-            fontSize: 18,
-            fontWeight: FontWeight.w500,
-            color: isDark ? AppColors.textMutedLight : AppColors.textMuted,
-          ),
-          textAlign: TextAlign.center,
-        ),
-      ],
-    );
-  }
-
-  Widget _buildForm(bool isDark) {
+  Widget _buildForm() {
     return Consumer<AuthController>(
       builder: (context, controller, _) {
         return Form(
@@ -225,7 +171,7 @@ class _SignupPageState extends State<SignupPage> {
                   return null;
                 },
               ),
-              const SizedBox(height: 16),
+              AppSpacing.verticalMD,
 
               // Campo Email
               CustomTextField(
@@ -243,7 +189,7 @@ class _SignupPageState extends State<SignupPage> {
                   return null;
                 },
               ),
-              const SizedBox(height: 16),
+              AppSpacing.verticalMD,
 
               // Campo Senha
               CustomTextField(
@@ -256,9 +202,7 @@ class _SignupPageState extends State<SignupPage> {
                     controller.isPasswordVisible
                         ? Icons.visibility_outlined
                         : Icons.visibility_off_outlined,
-                    color: isDark
-                        ? AppColors.textMutedLight
-                        : AppColors.textMuted,
+                    color: context.textMuted,
                   ),
                   onPressed: controller.togglePasswordVisibility,
                 ),
@@ -272,7 +216,7 @@ class _SignupPageState extends State<SignupPage> {
                   return null;
                 },
               ),
-              const SizedBox(height: 16),
+              AppSpacing.verticalMD,
 
               // Campo Confirmar Senha
               CustomTextField(
@@ -285,9 +229,7 @@ class _SignupPageState extends State<SignupPage> {
                     controller.isConfirmPasswordVisible
                         ? Icons.visibility_outlined
                         : Icons.visibility_off_outlined,
-                    color: isDark
-                        ? AppColors.textMutedLight
-                        : AppColors.textMuted,
+                    color: context.textMuted,
                   ),
                   onPressed: controller.toggleConfirmPasswordVisibility,
                 ),
@@ -301,7 +243,7 @@ class _SignupPageState extends State<SignupPage> {
                   return null;
                 },
               ),
-              const SizedBox(height: 16),
+              AppSpacing.verticalMD,
 
               // Checkbox Termos
               Row(
@@ -323,7 +265,7 @@ class _SignupPageState extends State<SignupPage> {
                       ),
                     ),
                   ),
-                  const SizedBox(width: 12),
+                  AppSpacing.horizontalSM,
                   Expanded(
                     child: GestureDetector(
                       onTap: () {
@@ -333,13 +275,9 @@ class _SignupPageState extends State<SignupPage> {
                       },
                       child: RichText(
                         text: TextSpan(
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                            color: isDark
-                                ? AppColors.textMutedLight
-                                : AppColors.textMuted,
-                          ),
+                          style: AppTextStyles.labelMedium(
+                            context,
+                          ).copyWith(color: context.textMuted),
                           children: [
                             const TextSpan(text: 'Concordo com os '),
                             TextSpan(
@@ -364,7 +302,7 @@ class _SignupPageState extends State<SignupPage> {
                   ),
                 ],
               ),
-              const SizedBox(height: 24),
+              AppSpacing.verticalLG,
 
               // Botão Criar Conta
               PrimaryButton(
@@ -379,30 +317,26 @@ class _SignupPageState extends State<SignupPage> {
     );
   }
 
-  Widget _buildFooter(bool isDark) {
+  Widget _buildFooter() {
     return Center(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
             'Já tem uma conta? ',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-              color: isDark ? AppColors.textLight : AppColors.textMain,
-            ),
+            style: AppTextStyles.bodyMedium(
+              context,
+            ).copyWith(color: context.textColor),
           ),
           GestureDetector(
             onTap: () {
               Navigator.pop(context);
             },
-            child: const Text(
+            child: Text(
               'Entrar',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: AppColors.primary,
-              ),
+              style: AppTextStyles.bodyMedium(
+                context,
+              ).copyWith(fontWeight: FontWeight.bold, color: AppColors.primary),
             ),
           ),
         ],
