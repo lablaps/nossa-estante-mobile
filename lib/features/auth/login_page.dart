@@ -33,15 +33,8 @@ class _LoginPageState extends State<LoginPage> {
       );
 
       if (mounted && success) {
-        // Navega para a home (mock)
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Login realizado com sucesso!'),
-            backgroundColor: AppColors.primary,
-          ),
-        );
-        // TODO: Navegar para home quando existir
-        // Navigator.pushReplacementNamed(context, '/home');
+        // Navega para o AppShell (não permite voltar para login)
+        Navigator.pushReplacementNamed(context, '/home');
       } else if (mounted && controller.errorMessage != null) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -57,11 +50,13 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final size = MediaQuery.of(context).size;
-    
+
     return ChangeNotifierProvider(
       create: (_) => AuthController(),
       child: Scaffold(
-        backgroundColor: isDark ? AppColors.backgroundDark : AppColors.backgroundLight,
+        backgroundColor: isDark
+            ? AppColors.backgroundDark
+            : AppColors.backgroundLight,
         body: SafeArea(
           child: Container(
             width: size.width,
@@ -114,7 +109,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
           const SizedBox(height: 24),
-          
+
           // Título
           Text(
             'Bem-vindo de volta',
@@ -126,7 +121,7 @@ class _LoginPageState extends State<LoginPage> {
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 8),
-          
+
           // Subtítulo
           Text(
             'Faça login para continuar trocando livros',
@@ -167,7 +162,7 @@ class _LoginPageState extends State<LoginPage> {
                   },
                 ),
                 const SizedBox(height: 20),
-                
+
                 // Campo Senha
                 CustomTextField(
                   labelText: 'Senha',
@@ -180,8 +175,8 @@ class _LoginPageState extends State<LoginPage> {
                       controller.isPasswordVisible
                           ? Icons.visibility_outlined
                           : Icons.visibility_off_outlined,
-                      color: isDark 
-                          ? AppColors.textMutedLight 
+                      color: isDark
+                          ? AppColors.textMutedLight
                           : AppColors.textMuted,
                     ),
                     onPressed: controller.togglePasswordVisibility,
@@ -194,7 +189,7 @@ class _LoginPageState extends State<LoginPage> {
                   },
                 ),
                 const SizedBox(height: 8),
-                
+
                 // Esqueceu a senha
                 Align(
                   alignment: Alignment.centerRight,
@@ -212,15 +207,15 @@ class _LoginPageState extends State<LoginPage> {
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
-                        color: isDark 
-                            ? AppColors.textMutedLight 
+                        color: isDark
+                            ? AppColors.textMutedLight
                             : AppColors.textMuted,
                       ),
                     ),
                   ),
                 ),
                 const SizedBox(height: 8),
-                
+
                 // Botão Entrar
                 PrimaryButton(
                   text: 'Entrar',
@@ -253,9 +248,7 @@ class _LoginPageState extends State<LoginPage> {
               style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w500,
-                color: isDark 
-                    ? AppColors.textMutedLight 
-                    : AppColors.textMuted,
+                color: isDark ? AppColors.textMutedLight : AppColors.textMuted,
               ),
             ),
           ),
@@ -309,14 +302,12 @@ class _LoginPageState extends State<LoginPage> {
       margin: const EdgeInsets.only(top: 32),
       padding: const EdgeInsets.symmetric(vertical: 32),
       decoration: BoxDecoration(
-        color: isDark 
+        color: isDark
             ? AppColors.backgroundDark.withOpacity(0.5)
             : AppColors.backgroundLight,
         border: Border(
           top: BorderSide(
-            color: isDark 
-                ? AppColors.surfaceDark 
-                : const Color(0xFFF0F5F1),
+            color: isDark ? AppColors.surfaceDark : const Color(0xFFF0F5F1),
           ),
         ),
       ),
@@ -328,9 +319,7 @@ class _LoginPageState extends State<LoginPage> {
               'Não tem uma conta? ',
               style: TextStyle(
                 fontSize: 16,
-                color: isDark 
-                    ? AppColors.textMutedLight 
-                    : AppColors.textMuted,
+                color: isDark ? AppColors.textMutedLight : AppColors.textMuted,
               ),
             ),
             GestureDetector(

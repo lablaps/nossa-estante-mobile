@@ -25,10 +25,7 @@ class AuthController extends ChangeNotifier {
   }
 
   /// Simula login mockado
-  Future<bool> login({
-    required String email,
-    required String password,
-  }) async {
+  Future<bool> login({required String email, required String password}) async {
     _isLoading = true;
     _errorMessage = null;
     notifyListeners();

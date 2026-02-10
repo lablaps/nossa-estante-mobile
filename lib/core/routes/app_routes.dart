@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../features/onboarding/onboarding_page.dart';
 import '../../features/auth/login_page.dart';
 import '../../features/auth/signup_page.dart';
+import '../../features/app_shell/app_shell_page.dart';
 
 class AppRoutes {
   static const String onboarding = '/';
@@ -13,7 +14,7 @@ class AppRoutes {
     onboarding: (context) => const OnboardingPage(),
     login: (context) => const LoginPage(),
     signup: (context) => const SignupPage(),
-    // home será adicionado quando implementado
+    home: (context) => const AppShellPage(),
   };
 
   static Route<dynamic>? onGenerateRoute(RouteSettings settings) {
@@ -24,6 +25,8 @@ class AppRoutes {
         return MaterialPageRoute(builder: (context) => const LoginPage());
       case signup:
         return MaterialPageRoute(builder: (context) => const SignupPage());
+      case home:
+        return MaterialPageRoute(builder: (context) => const AppShellPage());
       default:
         return null;
     }

@@ -33,7 +33,9 @@ class _SignupPageState extends State<SignupPage> {
     if (!_acceptedTerms) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Você precisa aceitar os Termos de Uso e Política de Privacidade'),
+          content: Text(
+            'Você precisa aceitar os Termos de Uso e Política de Privacidade',
+          ),
           backgroundColor: Colors.orange,
         ),
       );
@@ -49,14 +51,8 @@ class _SignupPageState extends State<SignupPage> {
       );
 
       if (mounted && success) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Conta criada com sucesso!'),
-            backgroundColor: AppColors.primary,
-          ),
-        );
-        // TODO: Navegar para home ou login
-        // Navigator.pushReplacementNamed(context, '/home');
+        // Navega para o AppShell (não permite voltar para cadastro)
+        Navigator.pushReplacementNamed(context, '/home');
       } else if (mounted && controller.errorMessage != null) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -72,26 +68,31 @@ class _SignupPageState extends State<SignupPage> {
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final size = MediaQuery.of(context).size;
-    
+
     return ChangeNotifierProvider(
       create: (_) => AuthController(),
       child: Scaffold(
-        backgroundColor: isDark ? AppColors.backgroundDark : AppColors.backgroundLight,
+        backgroundColor: isDark
+            ? AppColors.backgroundDark
+            : AppColors.backgroundLight,
         body: SafeArea(
           child: Container(
             width: size.width,
             height: size.height,
-            color: isDark ? AppColors.backgroundDark : AppColors.backgroundLight,
+            color: isDark
+                ? AppColors.backgroundDark
+                : AppColors.backgroundLight,
             child: Stack(
               children: [
                 // Elementos decorativos de fundo
                 _buildBackgroundDecorations(),
-                
+
                 // Conteúdo principal
                 SingleChildScrollView(
                   child: ConstrainedBox(
                     constraints: BoxConstraints(
-                      minHeight: size.height - MediaQuery.of(context).padding.top,
+                      minHeight:
+                          size.height - MediaQuery.of(context).padding.top,
                     ),
                     child: IntrinsicHeight(
                       child: Padding(
@@ -174,7 +175,7 @@ class _SignupPageState extends State<SignupPage> {
           ),
         ),
         const SizedBox(height: 24),
-        
+
         // Título
         Text(
           'Criar conta',
@@ -186,7 +187,7 @@ class _SignupPageState extends State<SignupPage> {
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 8),
-        
+
         // Subtítulo
         Text(
           'Junte-se à comunidade de troca de livros',
@@ -225,7 +226,7 @@ class _SignupPageState extends State<SignupPage> {
                 },
               ),
               const SizedBox(height: 16),
-              
+
               // Campo Email
               CustomTextField(
                 hintText: 'Email',
@@ -243,7 +244,7 @@ class _SignupPageState extends State<SignupPage> {
                 },
               ),
               const SizedBox(height: 16),
-              
+
               // Campo Senha
               CustomTextField(
                 hintText: 'Senha',
@@ -255,8 +256,8 @@ class _SignupPageState extends State<SignupPage> {
                     controller.isPasswordVisible
                         ? Icons.visibility_outlined
                         : Icons.visibility_off_outlined,
-                    color: isDark 
-                        ? AppColors.textMutedLight 
+                    color: isDark
+                        ? AppColors.textMutedLight
                         : AppColors.textMuted,
                   ),
                   onPressed: controller.togglePasswordVisibility,
@@ -272,7 +273,7 @@ class _SignupPageState extends State<SignupPage> {
                 },
               ),
               const SizedBox(height: 16),
-              
+
               // Campo Confirmar Senha
               CustomTextField(
                 hintText: 'Confirmar senha',
@@ -284,8 +285,8 @@ class _SignupPageState extends State<SignupPage> {
                     controller.isConfirmPasswordVisible
                         ? Icons.visibility_outlined
                         : Icons.visibility_off_outlined,
-                    color: isDark 
-                        ? AppColors.textMutedLight 
+                    color: isDark
+                        ? AppColors.textMutedLight
                         : AppColors.textMuted,
                   ),
                   onPressed: controller.toggleConfirmPasswordVisibility,
@@ -301,7 +302,7 @@ class _SignupPageState extends State<SignupPage> {
                 },
               ),
               const SizedBox(height: 16),
-              
+
               // Checkbox Termos
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -335,8 +336,8 @@ class _SignupPageState extends State<SignupPage> {
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
-                            color: isDark 
-                                ? AppColors.textMutedLight 
+                            color: isDark
+                                ? AppColors.textMutedLight
                                 : AppColors.textMuted,
                           ),
                           children: [
@@ -364,7 +365,7 @@ class _SignupPageState extends State<SignupPage> {
                 ],
               ),
               const SizedBox(height: 24),
-              
+
               // Botão Criar Conta
               PrimaryButton(
                 text: 'Criar conta',
@@ -388,9 +389,7 @@ class _SignupPageState extends State<SignupPage> {
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w500,
-              color: isDark 
-                  ? AppColors.textLight 
-                  : AppColors.textMain,
+              color: isDark ? AppColors.textLight : AppColors.textMain,
             ),
           ),
           GestureDetector(
