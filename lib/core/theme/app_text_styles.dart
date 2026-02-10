@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'app_colors.dart';
 
 /// Estilos de texto padronizados do aplicativo Nossa Estante
-///
-/// Centraliza toda a tipografia para evitar estilos inline hardcoded.
-/// Usa context para detectar tema escuro/claro automaticamente.
+
 class AppTextStyles {
   AppTextStyles._();
 

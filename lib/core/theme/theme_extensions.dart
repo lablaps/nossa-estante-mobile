@@ -2,18 +2,7 @@ import 'package:flutter/material.dart';
 import 'app_colors.dart';
 
 /// Extensões convenientes para acesso rápido a propriedades do tema
-///
-/// Elimina a necessidade de repetir:
-/// `final isDark = Theme.of(context).brightness == Brightness.dark;`
-///
-/// Uso:
-/// ```dart
-/// // Antes:
-/// color: isDark ? AppColors.textLight : AppColors.textMain
-///
-/// // Depois:
-/// color: context.textColor
-/// ```
+
 extension ThemeX on BuildContext {
   /// Verifica se o tema atual é escuro
   bool get isDark => Theme.of(this).brightness == Brightness.dark;

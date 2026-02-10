@@ -88,7 +88,7 @@ class HomeHeader extends StatelessWidget {
 
   Widget _buildCreditsBadge(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      padding: AppSpacing.paddingBadge,
       decoration: BoxDecoration(
         color: AppColors.primary.withOpacity(
           context.isDark

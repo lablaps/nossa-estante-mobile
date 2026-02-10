@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../theme/app_colors.dart';
+import '../theme/theme_extensions.dart';
 
 class SocialLoginButton extends StatelessWidget {
   final IconData icon;
@@ -15,22 +15,18 @@ class SocialLoginButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-
     return Container(
       width: 56,
       height: 56,
       decoration: BoxDecoration(
-        color: isDark ? AppColors.inputBackgroundDark : AppColors.surfaceLight,
+        color: context.inputBackground,
         borderRadius: BorderRadius.circular(28),
-        border: Border.all(
-          color: isDark ? AppColors.borderDark : AppColors.borderLight,
-        ),
+        border: Border.all(color: context.borderColor),
       ),
       child: IconButton(
         onPressed: onPressed,
         icon: Icon(icon),
-        color: isDark ? AppColors.textLight : AppColors.textMain,
+        color: context.textColor,
         tooltip: tooltip,
         iconSize: 24,
       ),

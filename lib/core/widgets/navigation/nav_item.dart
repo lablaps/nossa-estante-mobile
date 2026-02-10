@@ -2,20 +2,7 @@ import 'package:flutter/material.dart';
 import '../../theme/theme.dart';
 
 /// Item de navegação para bottom navigation bar
-///
-/// Exibe um ícone e label com estado ativo/inativo.
-/// Aplica cores e estilos do design system automaticamente.
-///
-/// Uso:
-/// ```dart
-/// NavItem(
-///   icon: Icons.home,
-///   iconOutlined: Icons.home_outlined,
-///   label: 'Início',
-///   isActive: currentIndex == 0,
-///   onTap: () => setIndex(0),
-/// )
-/// ```
+
 class NavItem extends StatelessWidget {
   /// Ícone preenchido (exibido quando ativo)
   final IconData icon;

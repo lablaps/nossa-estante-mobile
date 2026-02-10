@@ -1,15 +1,7 @@
 import 'package:flutter/material.dart';
 
 /// Dimensões padronizadas do aplicativo Nossa Estante
-///
-/// Define constantes para border radius, tamanhos de componentes,
-/// ícones, elevações e outros valores dimensionais.
-///
-/// Uso:
-/// ```dart
-/// borderRadius: BorderRadius.circular(AppDimensions.radiusMD)
-/// width: AppDimensions.buttonHeight
-/// ```
+
 class AppDimensions {
   AppDimensions._();
 

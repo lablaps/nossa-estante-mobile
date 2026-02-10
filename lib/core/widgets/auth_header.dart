@@ -5,18 +5,7 @@ import '../theme/app_text_styles.dart';
 import '../theme/theme_extensions.dart';
 
 /// Header compartilhado para páginas de autenticação (Login e Signup)
-///
-/// Exibe ícone circular, título e subtítulo.
-/// Elimina duplicação de código entre login_page.dart e signup_page.dart.
-///
-/// Uso:
-/// ```dart
-/// AuthHeader(
-///   title: 'Bem-vindo de volta',
-///   subtitle: 'Faça login para continuar',
-///   icon: Icons.menu_book_rounded,
-/// )
-/// ```
+
 class AuthHeader extends StatelessWidget {
   /// Título principal (ex: "Bem-vindo de volta")
   final String title;

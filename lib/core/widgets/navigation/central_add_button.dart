@@ -2,17 +2,7 @@ import 'package:flutter/material.dart';
 import '../../theme/theme.dart';
 
 /// Botão central elevado de adicionar para bottom navigation bar
-///
-/// Widget com design destacado (circular, elevado, com sombra)
-/// para ação principal de adicionar conteúdo.
-///
-/// Uso:
-/// ```dart
-/// CentralAddButton(
-///   isActive: currentIndex == 2,
-///   onTap: () => setIndex(2),
-/// )
-/// ```
+
 class CentralAddButton extends StatelessWidget {
   /// Se o botão está ativo/selecionado
   final bool isActive;

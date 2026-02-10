@@ -1,15 +1,7 @@
 import 'package:flutter/material.dart';
 
 /// Espaçamentos padronizados do aplicativo Nossa Estante
-///
-/// Define constantes para todos os espaçamentos verticais, horizontais
-/// e paddings/margins para manter consistência visual.
-///
-/// Uso:
-/// ```dart
-/// SizedBox(height: AppSpacing.md)  // 16px
-/// Padding(padding: AppSpacing.paddingPage)
-/// ```
+
 class AppSpacing {
   AppSpacing._();
 
@@ -79,6 +71,12 @@ class AppSpacing {
 
   /// Padding de header (16px horizontal, 32px topo, 24px baixo)
   static const EdgeInsets paddingHeader = EdgeInsets.fromLTRB(md, xl, md, lg);
+
+  /// Padding de badge/tag (12px horizontal, 6px vertical)
+  static const EdgeInsets paddingBadge = EdgeInsets.symmetric(
+    horizontal: 12.0,
+    vertical: 6.0,
+  );
 
   // ========== WIDGETS DE ESPAÇAMENTO ==========
 

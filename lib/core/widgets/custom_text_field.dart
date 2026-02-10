@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../theme/app_colors.dart';
+import '../theme/app_spacing.dart';
+import '../theme/theme_extensions.dart';
 
 class CustomTextField extends StatelessWidget {
   final String hintText;
@@ -29,19 +31,20 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (labelText != null) ...[
           Padding(
-            padding: const EdgeInsets.only(left: 4, bottom: 8),
+            padding: const EdgeInsets.only(
+              left: AppSpacing.xs,
+              bottom: AppSpacing.sm,
+            ),
             child: Text(
               labelText!,
-              style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                color: isDark ? AppColors.textLight : AppColors.textMain,
-              ),
+              style: Theme.of(
+                context,
+              ).textTheme.labelMedium?.copyWith(color: context.textColor),
             ),
           ),
         ],
@@ -63,30 +66,21 @@ class CustomTextField extends StatelessWidget {
             validator: validator,
             onChanged: onChanged,
             enabled: enabled,
-            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-              color: isDark ? AppColors.textLight : AppColors.textMain,
-            ),
+            style: Theme.of(
+              context,
+            ).textTheme.bodyLarge?.copyWith(color: context.textColor),
             decoration: InputDecoration(
               hintText: hintText,
-              hintStyle: TextStyle(
-                color: (isDark ? AppColors.textMutedLight : AppColors.textMuted)
-                    .withOpacity(0.6),
-              ),
+              hintStyle: TextStyle(color: context.textMuted.withOpacity(0.6)),
               filled: true,
-              fillColor: isDark
-                  ? AppColors.inputBackgroundDark
-                  : AppColors.inputBackgroundLight,
+              fillColor: context.inputBackground,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(16),
-                borderSide: BorderSide(
-                  color: isDark ? AppColors.borderDark : AppColors.borderLight,
-                ),
+                borderSide: BorderSide(color: context.borderColor),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(16),
-                borderSide: BorderSide(
-                  color: isDark ? AppColors.borderDark : AppColors.borderLight,
-                ),
+                borderSide: BorderSide(color: context.borderColor),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(16),
@@ -104,12 +98,7 @@ class CustomTextField extends StatelessWidget {
                 borderSide: const BorderSide(color: Colors.red, width: 1.5),
               ),
               prefixIcon: prefixIcon != null
-                  ? Icon(
-                      prefixIcon,
-                      color: isDark
-                          ? AppColors.textMutedLight
-                          : AppColors.textMuted,
-                    )
+                  ? Icon(prefixIcon, color: context.textMuted)
                   : null,
               suffixIcon: suffixIcon,
               contentPadding: EdgeInsets.symmetric(
