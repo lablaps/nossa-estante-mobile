@@ -71,16 +71,31 @@ class NearbyBooksSection extends StatelessWidget {
               // Horizontal book list
               SizedBox(
                 height: 240,
-                child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  padding: AppSpacing.paddingHorizontal,
-                  itemCount: controller.nearbyBooks.length,
-                  separatorBuilder: (_, __) => AppSpacing.horizontalMD,
-                  itemBuilder: (context, index) {
-                    final book = controller.nearbyBooks[index];
-                    return _BookCard(book: book);
-                  },
-                ),
+                child: controller.isLoading
+                    ? Center(
+                        child: CircularProgressIndicator(
+                          color: AppColors.primary,
+                        ),
+                      )
+                    : controller.nearbyBooks.isEmpty
+                    ? Center(
+                        child: Text(
+                          'Nenhum livro encontrado por perto',
+                          style: AppTextStyles.bodyMedium(
+                            context,
+                          ).copyWith(color: context.textMuted),
+                        ),
+                      )
+                    : ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        padding: AppSpacing.paddingHorizontal,
+                        itemCount: controller.nearbyBooks.length,
+                        separatorBuilder: (_, __) => AppSpacing.horizontalMD,
+                        itemBuilder: (context, index) {
+                          final book = controller.nearbyBooks[index];
+                          return _BookCard(book: book);
+                        },
+                      ),
               ),
             ],
           ),

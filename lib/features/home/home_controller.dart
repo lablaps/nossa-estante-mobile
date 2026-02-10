@@ -1,10 +1,24 @@
 import 'package:flutter/material.dart';
+import 'home_repository.dart';
 
 /// Controller para gerenciar o estado da Home
 class HomeController extends ChangeNotifier {
+  final HomeRepository _repository;
+
+  HomeController({required HomeRepository repository})
+    : _repository = repository {
+    _loadData();
+  }
+
   String _selectedFilter = 'Perto de mim';
+  List<Map<String, dynamic>> _nearbyBooks = [];
+  List<Map<String, dynamic>> _communityActivities = [];
+  bool _isLoading = true;
 
   String get selectedFilter => _selectedFilter;
+  List<Map<String, dynamic>> get nearbyBooks => _nearbyBooks;
+  List<Map<String, dynamic>> get communityActivities => _communityActivities;
+  bool get isLoading => _isLoading;
 
   /// Lista de filtros disponíveis
   final List<String> filters = [
@@ -14,59 +28,40 @@ class HomeController extends ChangeNotifier {
     'Sci-Fi',
   ];
 
+  /// Carrega dados iniciais
+  Future<void> _loadData() async {
+    _isLoading = true;
+    notifyListeners();
+
+    try {
+      final books = await _repository.fetchNearbyBooks();
+      final activities = await _repository.fetchCommunityActivities();
+
+      _nearbyBooks = books.map((book) => book.toMap()).toList();
+      _communityActivities = activities
+          .map((activity) => activity.toMap())
+          .toList();
+    } catch (e) {
+      // Por enquanto, falhas silenciosas
+      // Futuramente: tratamento de erro apropriado
+      debugPrint('Erro ao carregar dados: $e');
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
   /// Altera o filtro selecionado
   void setFilter(String filter) {
     if (_selectedFilter != filter) {
       _selectedFilter = filter;
       notifyListeners();
+      // Futuramente: recarregar dados baseado no filtro
     }
   }
 
-  /// Dados mockados de livros próximos
-  List<Map<String, dynamic>> get nearbyBooks => [
-    {
-      'title': 'O Alquimista',
-      'author': 'Paulo Coelho',
-      'distance': '0.5km',
-      'credits': 2,
-    },
-    {
-      'title': 'Sapiens',
-      'author': 'Yuval Noah Harari',
-      'distance': '1.2km',
-      'credits': 3,
-    },
-    {
-      'title': 'Duna',
-      'author': 'Frank Herbert',
-      'distance': '2.0km',
-      'credits': 2,
-    },
-    {
-      'title': '1984',
-      'author': 'George Orwell',
-      'distance': '3.5km',
-      'credits': 1,
-    },
-  ];
-
-  /// Dados mockados de atividades da comunidade
-  List<Map<String, dynamic>> get communityActivities => [
-    {
-      'type': 'exchange',
-      'text': 'Ana trocou um livro com Miguel',
-      'time': '15 minutos atrás',
-      'location': 'Perto',
-      'icon': Icons.swap_horiz,
-      'color': Color(0xFF13EC5B),
-    },
-    {
-      'type': 'add',
-      'text': 'Lucas adicionou 3 novos livros',
-      'time': '1 hora atrás',
-      'location': '2km de distância',
-      'icon': Icons.add_circle,
-      'color': Colors.blue,
-    },
-  ];
+  /// Recarrega os dados
+  Future<void> refresh() async {
+    await _loadData();
+  }
 }
