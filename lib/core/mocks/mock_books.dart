@@ -10,6 +10,8 @@ class MockBooks {
       title: 'O Alquimista',
       author: 'Paulo Coelho',
       isbn: '9788576651239',
+      coverUrl:
+          'https://images-na.ssl-images-amazon.com/images/I/81pQPZAFWbL.jpg',
       description:
           'A história de Santiago, um jovem pastor andaluz que sonha encontrar um tesouro.',
       genres: ['Ficção', 'Filosofia'],
@@ -22,6 +24,8 @@ class MockBooks {
       title: 'Sapiens',
       author: 'Yuval Noah Harari',
       isbn: '9788525432629',
+      coverUrl:
+          'https://images-na.ssl-images-amazon.com/images/I/713jIoMO3UL.jpg',
       description:
           'Uma breve história da humanidade desde a Idade da Pedra até a era da tecnologia.',
       genres: ['História', 'Ciência'],
@@ -34,6 +38,8 @@ class MockBooks {
       title: 'Duna',
       author: 'Frank Herbert',
       isbn: '9788576573146',
+      coverUrl:
+          'https://images-na.ssl-images-amazon.com/images/I/81ym2eCIRyL.jpg',
       description: 'Uma das maiores obras de ficção científica já escritas.',
       genres: ['Ficção Científica', 'Aventura'],
       owner: MockUsers.users[2], // Lucas Oliveira
@@ -45,6 +51,8 @@ class MockBooks {
       title: '1984',
       author: 'George Orwell',
       isbn: '9788535914849',
+      coverUrl:
+          'https://images-na.ssl-images-amazon.com/images/I/71kxa1-0mfL.jpg',
       description: 'Uma distopia sobre vigilância, controle e manipulação.',
       genres: ['Ficção', 'Distopia'],
       owner: MockUsers.users[3], // Julia Costa
@@ -56,6 +64,8 @@ class MockBooks {
       title: 'O Senhor dos Anéis',
       author: 'J.R.R. Tolkien',
       isbn: '9788595084742',
+      coverUrl:
+          'https://images-na.ssl-images-amazon.com/images/I/91dSMhdIzTL.jpg',
       description: 'A épica jornada de Frodo para destruir o Um Anel.',
       genres: ['Fantasia', 'Aventura'],
       owner: MockUsers.users[4], // Pedro Almeida
@@ -67,6 +77,8 @@ class MockBooks {
       title: 'A Culpa é das Estrelas',
       author: 'John Green',
       isbn: '9788580573466',
+      coverUrl:
+          'https://images-na.ssl-images-amazon.com/images/I/81a4kCNuH+L.jpg',
       description: 'A história de amor entre Hazel e Augustus.',
       genres: ['Romance', 'Drama'],
       owner: MockUsers.users[0], // Ana Silva
@@ -78,6 +90,8 @@ class MockBooks {
       title: 'Harry Potter e a Pedra Filosofal',
       author: 'J.K. Rowling',
       isbn: '9788532530802',
+      coverUrl:
+          'https://images-na.ssl-images-amazon.com/images/I/81YOuOGFCJL.jpg',
       description: 'O início da jornada mágica de Harry Potter.',
       genres: ['Fantasia', 'Aventura'],
       owner: MockUsers.users[1], // Miguel Santos
@@ -89,6 +103,8 @@ class MockBooks {
       title: 'O Código Da Vinci',
       author: 'Dan Brown',
       isbn: '9788580411966',
+      coverUrl:
+          'https://images-na.ssl-images-amazon.com/images/I/91Q5dCjc2KL.jpg',
       description: 'Mistério e suspense envolvendo simbologias religiosas.',
       genres: ['Suspense', 'Mistério'],
       owner: MockUsers.users[2], // Lucas Oliveira

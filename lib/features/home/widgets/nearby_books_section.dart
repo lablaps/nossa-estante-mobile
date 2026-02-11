@@ -47,7 +47,7 @@ class NearbyBooksSection extends StatelessWidget {
 
               // Horizontal book list
               SizedBox(
-                height: 240,
+                height: 290,
                 child: controller.isLoading
                     ? Center(
                         child: CircularProgressIndicator(

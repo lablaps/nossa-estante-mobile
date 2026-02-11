@@ -1,12 +1,68 @@
 import 'package:flutter/material.dart';
 import '../../core/theme/theme.dart';
 
-/// Widget placeholder para mapa quando não há conexão ou imagem disponível
+/// Widget placeholder para mapa - exibe mapa estático visual
 class MapPlaceholder extends StatelessWidget {
   final double? width;
   final double? height;
 
   const MapPlaceholder({super.key, this.width, this.height});
+
+  @override
+  Widget build(BuildContext context) {
+    // Coordenadas de exemplo (Lisboa, Portugal)
+    const lat = 38.7223;
+    const lng = -9.1393;
+    const zoom = 14;
+
+    // Garante valores finitos para a URL do mapa
+    final mapWidth = (width != null && width!.isFinite) ? width!.toInt() : 600;
+    final mapHeight = (height != null && height!.isFinite)
+        ? height!.toInt()
+        : 320;
+
+    // Usando OpenStreetMap static map (não requer API key)
+    // Alternativa: pode usar uma imagem local de mapa ou outro serviço
+    final mapUrl =
+        'https://staticmap.openstreetmap.de/staticmap.php'
+        '?center=$lat,$lng'
+        '&zoom=$zoom'
+        '&size=${mapWidth}x$mapHeight'
+        '&maptype=mapnik';
+
+    return ClipRRect(
+      borderRadius: AppDimensions.borderRadiusMD,
+      child: Container(
+        width: width,
+        height: height,
+        decoration: BoxDecoration(
+          color: context.isDark ? Colors.grey[800] : Colors.grey[200],
+        ),
+        child: Image.network(
+          mapUrl,
+          width: width,
+          height: height,
+          fit: BoxFit.cover,
+          errorBuilder: (context, error, stackTrace) {
+            // Fallback para grid pattern se imagem falhar
+            return _FallbackMap(width: width, height: height);
+          },
+          loadingBuilder: (context, child, loadingProgress) {
+            if (loadingProgress == null) return child;
+            return _FallbackMap(width: width, height: height);
+          },
+        ),
+      ),
+    );
+  }
+}
+
+/// Mapa fallback com grid pattern
+class _FallbackMap extends StatelessWidget {
+  final double? width;
+  final double? height;
+
+  const _FallbackMap({this.width, this.height});
 
   @override
   Widget build(BuildContext context) {

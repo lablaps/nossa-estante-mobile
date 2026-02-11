@@ -24,7 +24,7 @@ class CentralAddButton extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Transform.translate(
-            offset: const Offset(0, -12),
+            offset: const Offset(0, -20),
             child: Container(
               width: 56,
               height: 56,
@@ -45,7 +45,7 @@ class CentralAddButton extends StatelessWidget {
             ),
           ),
           Transform.translate(
-            offset: const Offset(0, -8),
+            offset: const Offset(0, -16),
             child: Text(
               'Adicionar',
               style: AppTextStyles.caption(

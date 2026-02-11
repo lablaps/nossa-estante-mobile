@@ -3,6 +3,7 @@ library;
 
 export 'auth_header.dart';
 export 'book_card.dart';
+export 'book_cover.dart';
 export 'book_placeholder.dart';
 export 'credit_badge.dart';
 export 'custom_text_field.dart';

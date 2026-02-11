@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../domain/entities/entities.dart';
 import '../theme/theme.dart';
-import 'book_placeholder.dart';
+import 'book_cover.dart';
 
 /// Orientação do card de livro
 enum BookCardOrientation { vertical, horizontal }
@@ -53,7 +53,8 @@ class _VerticalBookCard extends StatelessWidget {
           children: [
             // Book cover
             Container(
-              height: 168,
+              width: 140,
+              height: 210,
               decoration: BoxDecoration(
                 borderRadius: AppDimensions.borderRadiusMD,
                 boxShadow: [
@@ -66,7 +67,12 @@ class _VerticalBookCard extends StatelessWidget {
               ),
               child: Stack(
                 children: [
-                  BookPlaceholder(width: 140, height: 210, text: book.title),
+                  BookCover(
+                    coverUrl: book.coverUrl,
+                    width: 140,
+                    height: 210,
+                    fallbackText: book.title,
+                  ),
                   if (distance != null)
                     Positioned(
                       top: AppSpacing.sm,
@@ -140,7 +146,13 @@ class _HorizontalBookCard extends StatelessWidget {
                   ),
                 ],
               ),
-              child: BookPlaceholder(width: 60, height: 90, text: book.title),
+              child: BookCover(
+                coverUrl: book.coverUrl,
+                width: 60,
+                height: 90,
+                fallbackText: book.title,
+                borderRadius: AppDimensions.borderRadiusSM,
+              ),
             ),
             AppSpacing.horizontalMD,
 
