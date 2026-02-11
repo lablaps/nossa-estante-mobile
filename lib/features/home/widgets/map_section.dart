@@ -27,23 +27,20 @@ class MapSection extends StatelessWidget {
       onTap: onMapTap,
       child: Container(
         height: 320,
-        margin: AppSpacing.marginMapSection,
+        margin: const EdgeInsets.only(top: AppSpacing.md),
         child: Stack(
           children: [
-            // Map background (placeholder)
             const MapPlaceholder(width: double.infinity, height: 320),
 
-            // Map pins com capas de livros
             ..._buildBookPins(books),
 
-            // Floating action button - Explorar área
+            // Botões de ação
             Positioned(
               bottom: AppSpacing.md,
               right: AppSpacing.md,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  // Location button
                   Container(
                     width: 48,
                     height: 48,
@@ -62,7 +59,6 @@ class MapSection extends StatelessWidget {
                     child: Icon(Icons.my_location, color: context.textColor),
                   ),
                   AppSpacing.verticalSM,
-                  // Explore button
                   Container(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 16,
@@ -73,7 +69,9 @@ class MapSection extends StatelessWidget {
                       borderRadius: AppDimensions.borderRadiusMD,
                       boxShadow: [
                         BoxShadow(
-                          color: AppColors.primary.withOpacity(0.3),
+                          color: AppColors.primary.withOpacity(
+                            AppDimensions.opacityMedium,
+                          ),
                           blurRadius: 12,
                           offset: const Offset(0, 4),
                         ),
@@ -102,7 +100,6 @@ class MapSection extends StatelessWidget {
               ),
             ),
 
-            // Info badge com dados recebidos
             Positioned(
               bottom: AppSpacing.md,
               left: AppSpacing.md,
@@ -121,7 +118,7 @@ class MapSection extends StatelessWidget {
   List<Widget> _buildBookPins(List<Book> books) {
     if (books.isEmpty) return [];
 
-    // Posições simuladas (em produção, seriam calculadas por coordenadas)
+    // Posições simuladas para demo
     final positions = [
       const Offset(160, 96),
       const Offset(280, 192),
@@ -129,7 +126,6 @@ class MapSection extends StatelessWidget {
       const Offset(200, 160),
     ];
 
-    // Delays diferentes para animação escalonada
     final delays = [0, 200, 400, 600];
 
     return books.take(positions.length).toList().asMap().entries.map((entry) {

@@ -29,7 +29,6 @@ class BookCover extends StatelessWidget {
       return BookPlaceholder(width: width, height: height, text: fallbackText);
     }
 
-    // Renderiza imagem real com fallback em caso de erro
     return ClipRRect(
       borderRadius: borderRadius ?? AppDimensions.borderRadiusMD,
       child: Image.network(

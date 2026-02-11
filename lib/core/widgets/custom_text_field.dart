@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../theme/app_colors.dart';
+import '../theme/app_dimensions.dart';
 import '../theme/app_spacing.dart';
 import '../theme/theme_extensions.dart';
 
@@ -50,7 +51,7 @@ class CustomTextField extends StatelessWidget {
         ],
         Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: AppDimensions.borderRadiusMD,
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(0.02),
@@ -75,26 +76,26 @@ class CustomTextField extends StatelessWidget {
               filled: true,
               fillColor: context.inputBackground,
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: AppDimensions.borderRadiusMD,
                 borderSide: BorderSide(color: context.borderColor),
               ),
               enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: AppDimensions.borderRadiusMD,
                 borderSide: BorderSide(color: context.borderColor),
               ),
               focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: AppDimensions.borderRadiusMD,
                 borderSide: const BorderSide(
                   color: AppColors.primary,
                   width: 1.5,
                 ),
               ),
               errorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: AppDimensions.borderRadiusMD,
                 borderSide: const BorderSide(color: Colors.red),
               ),
               focusedErrorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: AppDimensions.borderRadiusMD,
                 borderSide: const BorderSide(color: Colors.red, width: 1.5),
               ),
               prefixIcon: prefixIcon != null

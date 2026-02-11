@@ -37,10 +37,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
       body: SafeArea(
         child: Column(
           children: [
-            // Header: Skip Button
             _buildHeader(),
 
-            // Main Content: PageView
             Expanded(
               child: PageView(
                 controller: _controller.pageController,
@@ -53,7 +51,6 @@ class _OnboardingPageState extends State<OnboardingPage> {
               ),
             ),
 
-            // Footer: Navigation Controls
             _buildFooter(),
           ],
         ),
@@ -61,7 +58,6 @@ class _OnboardingPageState extends State<OnboardingPage> {
     );
   }
 
-  /// Header com botão Skip
   Widget _buildHeader() {
     // Não exibe o Skip na última página
     if (_controller.isLastPage) {
@@ -97,7 +93,6 @@ class _OnboardingPageState extends State<OnboardingPage> {
     );
   }
 
-  /// Footer com indicadores e botão de navegação
   Widget _buildFooter() {
     return Padding(
       padding: EdgeInsets.fromLTRB(
@@ -109,13 +104,11 @@ class _OnboardingPageState extends State<OnboardingPage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          // Page Indicators
           PageIndicator(
             currentIndex: _controller.currentPage,
             pageCount: _controller.totalPages,
           ),
 
-          // Next/Get Started Button
           if (_controller.isLastPage)
             const SizedBox.shrink()
           else
@@ -128,7 +121,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
     );
   }
 
-  /// Tela 1: Discover Books Near You
+  /// Tela 1 do onboarding
   Widget _buildPage1() {
     return _OnboardingPageContent(
       imagePlaceholder: _buildImagePlaceholder(
@@ -136,7 +129,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
         child: Icon(
           Icons.map_outlined,
           size: 120,
-          color: AppColors.primary.withOpacity(0.3),
+          color: AppColors.primary.withOpacity(AppDimensions.opacityMedium),
         ),
       ),
       title: const _OnboardingTitle(
@@ -148,7 +141,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
     );
   }
 
-  /// Tela 2: Scan and Register Books
+  /// Tela 2 do onboarding
   Widget _buildPage2() {
     return _OnboardingPageContent(
       imagePlaceholder: _buildImagePlaceholder(
@@ -156,7 +149,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
         child: Icon(
           Icons.qr_code_scanner_outlined,
           size: 120,
-          color: AppColors.primary.withOpacity(0.3),
+          color: AppColors.primary.withOpacity(AppDimensions.opacityMedium),
         ),
       ),
       title: const _OnboardingTitle(mainText: 'Escaneie e Cadastre Livros'),
@@ -165,7 +158,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
     );
   }
 
-  /// Tela 3: Exchange with Confidence
+  /// Tela 3 do onboarding
   Widget _buildPage3() {
     return _OnboardingPageContent(
       imagePlaceholder: _buildImagePlaceholder(
@@ -173,7 +166,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
         child: Icon(
           Icons.people_outline,
           size: 120,
-          color: AppColors.primary.withOpacity(0.3),
+          color: AppColors.primary.withOpacity(AppDimensions.opacityMedium),
         ),
       ),
       title: const _OnboardingTitle(
@@ -184,7 +177,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
     );
   }
 
-  /// Tela 4: Earn Credits by Trading
+  /// Tela 4 do onboarding
   Widget _buildPage4() {
     return _OnboardingPageContent(
       imagePlaceholder: _buildImagePlaceholder(
@@ -192,7 +185,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
         child: Icon(
           Icons.stars,
           size: 120,
-          color: AppColors.primary.withOpacity(0.3),
+          color: AppColors.primary.withOpacity(AppDimensions.opacityMedium),
         ),
       ),
       title: const _OnboardingTitle(mainText: 'Ganhe Créditos Trocando'),
@@ -215,7 +208,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
       width: double.infinity,
       decoration: BoxDecoration(
         color: AppColors.primary.withOpacity(0.05),
-        borderRadius: BorderRadius.circular(AppDimensions.radiusXL),
+        borderRadius: AppDimensions.borderRadiusXL,
       ),
       child: Center(child: child),
     );
@@ -262,7 +255,6 @@ class _OnboardingPageContent extends StatelessWidget {
             ).copyWith(height: 1.5, color: context.textMuted),
           ),
 
-          // Action Button (only on last page)
           if (actionButton != null) ...[AppSpacing.verticalXXL, actionButton!],
 
           AppSpacing.verticalLG,
@@ -272,7 +264,7 @@ class _OnboardingPageContent extends StatelessWidget {
   }
 }
 
-/// Widget de título do onboarding
+/// Título do onboarding
 class _OnboardingTitle extends StatelessWidget {
   final String mainText;
   final String? highlightText;

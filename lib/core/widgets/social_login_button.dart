@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../theme/app_dimensions.dart';
 import '../theme/theme_extensions.dart';
 
 class SocialLoginButton extends StatelessWidget {
@@ -20,7 +21,7 @@ class SocialLoginButton extends StatelessWidget {
       height: 56,
       decoration: BoxDecoration(
         color: context.inputBackground,
-        borderRadius: BorderRadius.circular(28),
+        borderRadius: AppDimensions.borderRadiusXL,
         border: Border.all(color: context.borderColor),
       ),
       child: IconButton(

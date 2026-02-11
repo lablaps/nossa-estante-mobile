@@ -1,6 +1,7 @@
 /// Exporta todos os widgets reutilizáveis do core
 library;
 
+export 'app_card.dart';
 export 'auth_header.dart';
 export 'book_card.dart';
 export 'book_cover.dart';

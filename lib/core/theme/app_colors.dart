@@ -35,29 +35,19 @@ class AppColors {
   static const Color white = Color(0xFFFFFFFF);
   static const Color black = Color(0xFF000000);
 
-  // Cores de sombra (semânticas)
-  static const Color shadowLight = Color(0x0D000000); // black with opacity 0.05
-  static const Color shadowMedium = Color(0x1A000000); // black with opacity 0.1
-  static const Color shadowDark = Color(0x26000000); // black with opacity 0.15
-  static const Color shadowDarker = Color(0x33000000); // black with opacity 0.2
+  // Cores de sombra
+  static const Color shadowLight = Color(0x0D000000);
+  static const Color shadowMedium = Color(0x1A000000);
+  static const Color shadowDark = Color(0x26000000);
+  static const Color shadowDarker = Color(0x33000000);
 
-  // Cores de overlay/badge
-  static const Color overlayDark = Color(0x99000000); // black with opacity 0.6
-  static const Color overlayLight = Color(
-    0x08000000,
-  ); // black with opacity 0.03
-  static const Color badgeBackground = Color(
-    0xE6FFFFFF,
-  ); // white with opacity 0.9
-  static const Color surfaceElevated = Color(
-    0xE6000000,
-  ); // for elevated surfaces
+  // Cores de overlay
+  static const Color overlayDark = Color(0x99000000);
+  static const Color overlayLight = Color(0x08000000);
+  static const Color badgeBackground = Color(0xE6FFFFFF);
+  static const Color surfaceElevated = Color(0xE6000000);
 
-  // Cores de borda semi-transparente
-  static const Color borderTopLight = Color(
-    0x80FFFFFF,
-  ); // white with opacity 0.5
-  static const Color borderTopDark = Color(
-    0x0DFFFFFF,
-  ); // white with opacity 0.05
+  // Cores de borda
+  static const Color borderTopLight = Color(0x80FFFFFF);
+  static const Color borderTopDark = Color(0x0DFFFFFF);
 }

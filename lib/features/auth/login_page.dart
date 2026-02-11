@@ -31,7 +31,7 @@ class _LoginPageState extends State<LoginPage> {
       );
 
       if (mounted && success) {
-        // Navega para o AppShell (não permite voltar para login)
+        // Navega para o AppShell
         Navigator.pushReplacementNamed(context, '/home');
       } else if (mounted && controller.errorMessage != null) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -94,7 +94,6 @@ class _LoginPageState extends State<LoginPage> {
             padding: AppSpacing.paddingForm,
             child: Column(
               children: [
-                // Campo Email
                 CustomTextField(
                   labelText: 'Email',
                   hintText: 'Digite seu email',
@@ -113,7 +112,6 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 AppSpacing.verticalLG,
 
-                // Campo Senha
                 CustomTextField(
                   labelText: 'Senha',
                   hintText: 'Digite sua senha',
@@ -138,7 +136,6 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 AppSpacing.verticalSM,
 
-                // Esqueceu a senha
                 Align(
                   alignment: Alignment.centerRight,
                   child: TextButton(
@@ -160,7 +157,6 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 AppSpacing.verticalSM,
 
-                // Botão Entrar
                 PrimaryButton(
                   text: 'Entrar',
                   onPressed: () => _handleLogin(controller),

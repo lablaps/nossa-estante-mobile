@@ -78,7 +78,10 @@ class _VerticalBookCard extends StatelessWidget {
                       top: AppSpacing.sm,
                       right: AppSpacing.sm,
                       child: Container(
-                        padding: AppSpacing.paddingDistanceBadge,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: AppSpacing.sm,
+                          vertical: AppSpacing.xs,
+                        ),
                         decoration: BoxDecoration(
                           color: AppColors.overlayDark,
                           borderRadius: AppDimensions.borderRadiusSM,

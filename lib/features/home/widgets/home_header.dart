@@ -1,25 +1,17 @@
 import 'package:flutter/material.dart';
 import '../../../core/domain/entities/entities.dart';
-import '../../../core/mocks/mocks.dart';
 import '../../../core/theme/theme.dart';
 import '../../../core/widgets/widgets.dart';
 
-/// Header da página principal do app
-///
-/// Exibe informações do usuário (avatar, nome, créditos)
-/// e título "Nossa Estante" com botão de notificações.
 class HomeHeader extends StatelessWidget {
-  /// Callback chamado ao tocar no perfil do usuário
+  final User user;
   final VoidCallback? onProfileTap;
-
-  /// Callback chamado ao tocar nos créditos
   final VoidCallback? onCreditsTap;
-
-  /// Callback chamado ao tocar nas notificações
   final VoidCallback? onNotificationsTap;
 
   const HomeHeader({
     super.key,
+    required this.user,
     this.onProfileTap,
     this.onCreditsTap,
     this.onNotificationsTap,
@@ -27,23 +19,17 @@ class HomeHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Obtém dados do usuário atual
-    final currentUser = MockUsers.currentUser;
-
     return Container(
       padding: AppSpacing.paddingPage,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Linha superior: Info do usuário + Badge de créditos
           _UserInfoRow(
-            user: currentUser,
+            user: user,
             onProfileTap: onProfileTap,
             onCreditsTap: onCreditsTap,
           ),
           AppSpacing.verticalMD,
-
-          // Linha inferior: Título + Notificações
           _TitleRow(onNotificationsTap: onNotificationsTap),
         ],
       ),
@@ -51,7 +37,6 @@ class HomeHeader extends StatelessWidget {
   }
 }
 
-/// Linha com informações do usuário e badge de créditos
 class _UserInfoRow extends StatelessWidget {
   final User user;
   final VoidCallback? onProfileTap;
@@ -68,19 +53,16 @@ class _UserInfoRow extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        // Avatar + Nome do usuário
         Expanded(
           child: _UserProfile(user: user, onTap: onProfileTap),
         ),
         AppSpacing.horizontalSM,
-        // Badge de créditos
         CreditBadge(credits: user.credits, onTap: onCreditsTap),
       ],
     );
   }
 }
 
-/// Avatar e nome do usuário
 class _UserProfile extends StatelessWidget {
   final User user;
   final VoidCallback? onTap;
@@ -95,11 +77,9 @@ class _UserProfile extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          // Avatar do usuário
           _UserAvatar(avatarUrl: user.avatarUrl),
           AppSpacing.horizontalSM,
           AppSpacing.horizontalXS,
-          // Nome e saudação
           Flexible(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -124,14 +104,12 @@ class _UserProfile extends StatelessWidget {
     );
   }
 
-  /// Extrai o primeiro nome do usuário
   String _getFirstName(String fullName) {
     final parts = fullName.trim().split(' ');
     return parts.isNotEmpty ? parts[0] : fullName;
   }
 }
 
-/// Avatar circular do usuário
 class _UserAvatar extends StatelessWidget {
   final String? avatarUrl;
 
@@ -143,7 +121,7 @@ class _UserAvatar extends StatelessWidget {
       width: AppDimensions.avatarMedium,
       height: AppDimensions.avatarMedium,
       decoration: BoxDecoration(
-        color: AppColors.primary.withOpacity(AppDimensions.opacityMediumLow),
+        color: AppColors.primary.withOpacity(AppDimensions.opacityLow),
         shape: BoxShape.circle,
         border: Border.all(
           color: AppColors.primary.withOpacity(AppDimensions.opacityMedium),
@@ -171,7 +149,6 @@ class _UserAvatar extends StatelessWidget {
   }
 }
 
-/// Linha com título e botão de notificações
 class _TitleRow extends StatelessWidget {
   final VoidCallback? onNotificationsTap;
 
@@ -182,9 +159,7 @@ class _TitleRow extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        // Título principal
         Text('Nossa Estante', style: AppTextStyles.h2(context)),
-        // Botão de notificações
         IconButton(
           onPressed: onNotificationsTap,
           icon: Icon(Icons.notifications_outlined, color: context.textColor),

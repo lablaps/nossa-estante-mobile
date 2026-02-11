@@ -15,9 +15,9 @@ class MapInfoBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: AppSpacing.paddingMapInfo,
+      padding: AppSpacing.paddingBadge,
       decoration: BoxDecoration(
-        color: context.surfaceColor.withOpacity(AppDimensions.opacityVeryHigh),
+        color: context.surfaceColor.withOpacity(0.9),
         borderRadius: AppDimensions.borderRadiusMD,
         border: Border.all(color: context.borderColor),
         boxShadow: [

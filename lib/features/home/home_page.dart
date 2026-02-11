@@ -35,7 +35,6 @@ class _HomeViewState extends State<_HomeView> {
 
     final controller = context.watch<HomeController>();
 
-    // Escuta navegações pendentes e executa
     if (controller.pendingNavigation != null) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         final event = controller.pendingNavigation;
@@ -57,17 +56,15 @@ class _HomeViewState extends State<_HomeView> {
         bottom: false,
         child: CustomScrollView(
           slivers: [
-            // Header
             SliverToBoxAdapter(
               child: HomeHeader(
+                user: controller.currentUser,
                 onNotificationsTap: controller.onNotificationTap,
               ),
             ),
 
-            // Search Bar
             const SliverToBoxAdapter(child: HomeSearchBar()),
 
-            // Map Section
             SliverToBoxAdapter(
               child: MapSection(
                 books: controller.nearbyBooks,
@@ -76,13 +73,10 @@ class _HomeViewState extends State<_HomeView> {
               ),
             ),
 
-            // Books Near You
             const SliverToBoxAdapter(child: NearbyBooksSection()),
 
-            // Community Activity
             const SliverToBoxAdapter(child: CommunityActivitySection()),
 
-            // Bottom padding for navigation bar
             SliverToBoxAdapter(
               child: SizedBox(height: AppSpacing.bottomNavPadding),
             ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'app_colors.dart';
+import 'app_dimensions.dart';
 
 /// Tema do aplicativo Nossa Estante
 class AppTheme {
@@ -87,7 +88,7 @@ class AppTheme {
         elevation: 8,
         shadowColor: AppColors.primary.withOpacity(0.25),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(9999),
+          borderRadius: AppDimensions.borderRadiusFull,
         ),
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'app_colors.dart';
 
 /// Dimensões padronizadas do aplicativo Nossa Estante
 
@@ -41,6 +42,9 @@ class AppDimensions {
 
   /// BorderRadius grande (24px)
   static final BorderRadius borderRadiusLG = BorderRadius.circular(radiusLG);
+
+  /// BorderRadius extra grande (28px)
+  static final BorderRadius borderRadiusXL = BorderRadius.circular(radiusXL);
 
   /// BorderRadius circular completo (9999px)
   static final BorderRadius borderRadiusFull = BorderRadius.circular(
@@ -123,24 +127,62 @@ class AppDimensions {
 
   // ========== OPACIDADES ==========
 
-  /// Opacidade muito baixa: 0.05 (5%)
-  static const double opacityVeryLow = 0.05;
-
   /// Opacidade baixa: 0.1 (10%)
+  /// Uso: Backgrounds sutis, overlays leves
   static const double opacityLow = 0.1;
 
-  /// Opacidade média-baixa: 0.2 (20%)
-  static const double opacityMediumLow = 0.2;
-
   /// Opacidade média: 0.3 (30%)
+  /// Uso: Shadows, borders, elementos secundários
   static const double opacityMedium = 0.3;
 
-  /// Opacidade média-alta: 0.4 (40%)
-  static const double opacityMediumHigh = 0.4;
-
   /// Opacidade alta: 0.6 (60%)
+  /// Uso: Textos desabilitados, placeholders
   static const double opacityHigh = 0.6;
 
-  /// Opacidade muito alta: 0.9 (90%)
-  static const double opacityVeryHigh = 0.9;
+  // ========== BOX SHADOWS PRÉ-DEFINIDAS ==========
+
+  /// Sombra para cards e containers elevados
+  static final List<BoxShadow> shadowCard = [
+    BoxShadow(
+      color: AppColors.overlayLight,
+      blurRadius: 4,
+      offset: const Offset(0, 2),
+    ),
+  ];
+
+  /// Sombra para botões e elementos interativos
+  static final List<BoxShadow> shadowButton = [
+    BoxShadow(
+      color: AppColors.shadowDark,
+      blurRadius: 8,
+      offset: const Offset(0, 4),
+    ),
+  ];
+
+  /// Sombra para elementos flutuantes (FAB, bottom sheets)
+  static final List<BoxShadow> shadowFloating = [
+    BoxShadow(
+      color: AppColors.shadowMedium,
+      blurRadius: 8,
+      offset: const Offset(0, 2),
+    ),
+  ];
+
+  /// Sombra elevada para seções destacadas
+  static final List<BoxShadow> shadowElevated = [
+    BoxShadow(
+      color: AppColors.shadowLight,
+      blurRadius: 20,
+      offset: const Offset(0, -5),
+    ),
+  ];
+
+  /// Sombra com glow (para elementos primários)
+  static List<BoxShadow> shadowGlow(Color color) => [
+    BoxShadow(
+      color: color.withOpacity(opacityMedium),
+      blurRadius: 12,
+      offset: const Offset(0, 4),
+    ),
+  ];
 }

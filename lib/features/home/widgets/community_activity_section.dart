@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/domain/entities/entities.dart';
-import '../../../core/mocks/mocks.dart';
 import '../../../core/theme/theme.dart';
+import '../../../core/utils/distance_formatter.dart';
 import '../../../core/widgets/widgets.dart';
 import '../home_controller.dart';
 
@@ -26,14 +26,14 @@ class CommunityActivitySection extends StatelessWidget {
               if (controller.isLoading)
                 Center(
                   child: Padding(
-                    padding: AppSpacing.paddingAllLG,
+                    padding: const EdgeInsets.all(AppSpacing.lg),
                     child: CircularProgressIndicator(color: AppColors.primary),
                   ),
                 )
               else if (controller.communityActivities.isEmpty)
                 Center(
                   child: Padding(
-                    padding: AppSpacing.paddingAllLG,
+                    padding: const EdgeInsets.all(AppSpacing.lg),
                     child: Text(
                       'Nenhuma atividade recente',
                       style: AppTextStyles.bodyMedium(
@@ -64,8 +64,7 @@ class _ActivityCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Conversão domínio → visual
-    final activityData = _getActivityData(exchange);
+    final activityData = exchange.getVisualData();
 
     return GestureDetector(
       onTap: () {
@@ -73,7 +72,7 @@ class _ActivityCard extends StatelessWidget {
         controller.onActivityTap(exchange);
       },
       child: Container(
-        margin: AppSpacing.marginActivityCard,
+        margin: const EdgeInsets.only(bottom: 12.0),
         padding: AppSpacing.paddingCard,
         decoration: BoxDecoration(
           color: context.surfaceColor,
@@ -94,7 +93,7 @@ class _ActivityCard extends StatelessWidget {
               height: 40,
               decoration: BoxDecoration(
                 color: activityData.color.withOpacity(
-                  AppDimensions.opacityMediumLow,
+                  AppDimensions.opacityLow,
                 ),
                 shape: BoxShape.circle,
               ),
@@ -116,7 +115,7 @@ class _ActivityCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 2),
                   Text(
-                    '${exchange.getTimeAgo()} • ${_formatLocation(exchange)}',
+                    '${exchange.getTimeAgo()} • ${_formatLocation(context, exchange)}',
                     style: AppTextStyles.bodySmall(
                       context,
                     ).copyWith(color: context.textMuted),
@@ -130,64 +129,16 @@ class _ActivityCard extends StatelessWidget {
     );
   }
 
-  /// Determina dados visuais baseado no status da troca
-  _ActivityData _getActivityData(Exchange exchange) {
-    switch (exchange.status) {
-      case ExchangeStatus.completed:
-        return _ActivityData(
-          icon: Icons.swap_horiz,
-          color: const Color(0xFF13EC5B),
-          text:
-              '${exchange.requester.name} trocou um livro com ${exchange.owner.name}',
-        );
-      case ExchangeStatus.approved:
-        return _ActivityData(
-          icon: Icons.check_circle,
-          color: Colors.blue,
-          text:
-              '${exchange.requester.name} vai trocar com ${exchange.owner.name}',
-        );
-      case ExchangeStatus.pending:
-        return _ActivityData(
-          icon: Icons.pending,
-          color: Colors.orange,
-          text: '${exchange.requester.name} solicitou "${exchange.book.title}"',
-        );
-      case ExchangeStatus.cancelled:
-        return _ActivityData(
-          icon: Icons.cancel,
-          color: Colors.grey,
-          text: 'Troca de "${exchange.book.title}" cancelada',
-        );
-    }
-  }
-
   /// Formata localização baseado na distância
-  String _formatLocation(Exchange exchange) {
-    final currentUserLocation = MockUsers.currentUser.location;
+  String _formatLocation(BuildContext context, Exchange exchange) {
+    final controller = context.read<HomeController>();
+    final currentUserLocation = controller.currentUser.location;
     final ownerLocation = exchange.owner.location;
 
-    if (currentUserLocation == null || ownerLocation == null) {
-      return exchange.meetingLocation ?? 'Local não definido';
-    }
-
-    final distanceKm = currentUserLocation.distanceTo(ownerLocation);
-
-    if (distanceKm < 1) {
-      return 'Perto';
-    } else if (distanceKm < 5) {
-      return '${distanceKm.toStringAsFixed(1)}km de distância';
-    } else {
-      return 'Longe';
-    }
+    return DistanceFormatter.formatWithDescription(
+      currentUserLocation,
+      ownerLocation,
+      fallback: exchange.meetingLocation ?? 'Local não definido',
+    );
   }
-}
-
-/// Dados visuais de uma atividade
-class _ActivityData {
-  final IconData icon;
-  final Color color;
-  final String text;
-
-  _ActivityData({required this.icon, required this.color, required this.text});
 }

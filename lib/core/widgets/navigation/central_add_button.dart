@@ -34,7 +34,7 @@ class CentralAddButton extends StatelessWidget {
                 boxShadow: [
                   BoxShadow(
                     color: AppColors.primary.withOpacity(
-                      AppDimensions.opacityMediumHigh,
+                      AppDimensions.opacityMedium,
                     ),
                     blurRadius: AppDimensions.elevationVeryHigh,
                     offset: Offset(0, AppSpacing.xs),

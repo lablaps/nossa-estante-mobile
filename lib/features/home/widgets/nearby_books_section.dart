@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../core/domain/entities/entities.dart';
-import '../../../core/mocks/mocks.dart';
 import '../../../core/theme/theme.dart';
+import '../../../core/utils/distance_formatter.dart';
 import '../../../core/widgets/widgets.dart';
 import '../home_controller.dart';
 
@@ -15,8 +14,8 @@ class NearbyBooksSection extends StatelessWidget {
     return Consumer<HomeController>(
       builder: (context, controller, _) {
         return Container(
-          margin: AppSpacing.marginBooksSection,
-          padding: AppSpacing.paddingBooksSection,
+          margin: const EdgeInsets.only(top: AppSpacing.sm),
+          padding: const EdgeInsets.symmetric(vertical: AppSpacing.lg),
           decoration: BoxDecoration(
             color: context.backgroundColor,
             borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
@@ -37,7 +36,6 @@ class NearbyBooksSection extends StatelessWidget {
           ),
           child: Column(
             children: [
-              // Section header
               SectionHeader(
                 title: 'Livros Perto de Você',
                 icon: Icons.location_on,
@@ -45,7 +43,6 @@ class NearbyBooksSection extends StatelessWidget {
               ),
               AppSpacing.verticalMD,
 
-              // Horizontal book list
               SizedBox(
                 height: 290,
                 child: controller.isLoading
@@ -70,7 +67,10 @@ class NearbyBooksSection extends StatelessWidget {
                         separatorBuilder: (_, __) => AppSpacing.horizontalMD,
                         itemBuilder: (context, index) {
                           final book = controller.nearbyBooks[index];
-                          final distance = _formatDistance(book);
+                          final distance = DistanceFormatter.format(
+                            controller.currentUser.location,
+                            book.owner.location,
+                          );
 
                           return BookCard(
                             book: book,
@@ -85,22 +85,5 @@ class NearbyBooksSection extends StatelessWidget {
         );
       },
     );
-  }
-
-  /// Formata distância baseado na localização do usuário
-  String _formatDistance(Book book) {
-    final currentUserLocation = MockUsers.currentUser.location;
-
-    if (currentUserLocation == null || book.owner.location == null) {
-      return 'Longe';
-    }
-
-    final distanceKm = currentUserLocation.distanceTo(book.owner.location!);
-
-    if (distanceKm < 1) {
-      return '${(distanceKm * 1000).round()}m';
-    } else {
-      return '${distanceKm.toStringAsFixed(1)}km';
-    }
   }
 }

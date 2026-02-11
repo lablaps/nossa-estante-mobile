@@ -50,7 +50,7 @@ class _SignupPageState extends State<SignupPage> {
       );
 
       if (mounted && success) {
-        // Navega para o AppShell (não permite voltar para cadastro)
+        // Navega para o AppShell
         Navigator.pushReplacementNamed(context, '/home');
       } else if (mounted && controller.errorMessage != null) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -155,7 +155,6 @@ class _SignupPageState extends State<SignupPage> {
           key: _formKey,
           child: Column(
             children: [
-              // Campo Nome Completo
               CustomTextField(
                 hintText: 'Nome completo',
                 prefixIcon: Icons.person_outline_rounded,
@@ -173,7 +172,6 @@ class _SignupPageState extends State<SignupPage> {
               ),
               AppSpacing.verticalMD,
 
-              // Campo Email
               CustomTextField(
                 hintText: 'Email',
                 prefixIcon: Icons.mail_outline_rounded,
@@ -191,7 +189,6 @@ class _SignupPageState extends State<SignupPage> {
               ),
               AppSpacing.verticalMD,
 
-              // Campo Senha
               CustomTextField(
                 hintText: 'Senha',
                 prefixIcon: Icons.lock_outline_rounded,
@@ -218,7 +215,6 @@ class _SignupPageState extends State<SignupPage> {
               ),
               AppSpacing.verticalMD,
 
-              // Campo Confirmar Senha
               CustomTextField(
                 hintText: 'Confirmar senha',
                 prefixIcon: Icons.lock_reset_rounded,
@@ -245,7 +241,6 @@ class _SignupPageState extends State<SignupPage> {
               ),
               AppSpacing.verticalMD,
 
-              // Checkbox Termos
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -304,7 +299,6 @@ class _SignupPageState extends State<SignupPage> {
               ),
               AppSpacing.verticalLG,
 
-              // Botão Criar Conta
               PrimaryButton(
                 text: 'Criar conta',
                 onPressed: () => _handleSignup(controller),

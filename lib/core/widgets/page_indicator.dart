@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../theme/app_colors.dart';
+import '../theme/app_dimensions.dart';
 import '../theme/app_spacing.dart';
 import '../theme/theme_extensions.dart';
 
@@ -29,7 +30,7 @@ class PageIndicator extends StatelessWidget {
             color: isActive
                 ? AppColors.primary
                 : (context.isDark ? AppColors.slate800 : AppColors.slate200),
-            borderRadius: BorderRadius.circular(9999),
+            borderRadius: AppDimensions.borderRadiusFull,
           ),
         );
       }),

@@ -6,7 +6,6 @@ import 'mock_books.dart';
 class MockExchanges {
   /// Lista de trocas mockadas
   static final List<Exchange> exchanges = [
-    // Troca recente - Ana trocou com Miguel
     Exchange(
       id: 'exchange-001',
       requester: MockUsers.users[0], // Ana Silva
@@ -17,7 +16,6 @@ class MockExchanges {
       completedAt: DateTime.now().subtract(const Duration(minutes: 5)),
       meetingLocation: 'Shopping Pinheiros',
     ),
-    // Troca recente - Lucas adicionou livros (simulada como exchange)
     Exchange(
       id: 'exchange-002',
       requester: MockUsers.currentUser,
@@ -27,7 +25,6 @@ class MockExchanges {
       createdAt: DateTime.now().subtract(const Duration(hours: 1)),
       meetingLocation: 'Próximo ao metrô Consolação',
     ),
-    // Troca em andamento
     Exchange(
       id: 'exchange-003',
       requester: MockUsers.users[3], // Julia Costa
@@ -37,7 +34,6 @@ class MockExchanges {
       createdAt: DateTime.now().subtract(const Duration(hours: 3)),
       meetingLocation: 'Café na Paulista',
     ),
-    // Troca antiga - completada
     Exchange(
       id: 'exchange-004',
       requester: MockUsers.users[4], // Pedro Almeida
@@ -48,7 +44,6 @@ class MockExchanges {
       completedAt: DateTime.now().subtract(const Duration(days: 1)),
       meetingLocation: 'Parque Ibirapuera',
     ),
-    // Troca cancelada
     Exchange(
       id: 'exchange-005',
       requester: MockUsers.users[1], // Miguel Santos

@@ -20,7 +20,10 @@ class DistanceIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: AppSpacing.paddingDistanceBadge,
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.sm,
+        vertical: AppSpacing.xs,
+      ),
       decoration: BoxDecoration(
         color: backgroundColor ?? AppColors.overlayDark,
         borderRadius: AppDimensions.borderRadiusSM,

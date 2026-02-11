@@ -16,7 +16,6 @@ class HomeSearchBar extends StatelessWidget {
       ),
       child: Column(
         children: [
-          // Search input
           Container(
             height: 48,
             decoration: BoxDecoration(
@@ -34,7 +33,7 @@ class HomeSearchBar extends StatelessWidget {
             child: Row(
               children: [
                 Padding(
-                  padding: AppSpacing.paddingSearchIcon,
+                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
                   child: Icon(Icons.search, color: context.textMuted),
                 ),
                 Expanded(
@@ -53,7 +52,7 @@ class HomeSearchBar extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  padding: AppSpacing.paddingSearchIcon,
+                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
                   decoration: BoxDecoration(
                     border: Border(
                       left: BorderSide(color: context.borderColor),
@@ -66,7 +65,6 @@ class HomeSearchBar extends StatelessWidget {
           ),
           AppSpacing.verticalSM,
 
-          // Filter chips
           Consumer<HomeController>(
             builder: (context, controller, _) {
               return SizedBox(
@@ -82,7 +80,10 @@ class HomeSearchBar extends StatelessWidget {
                     return GestureDetector(
                       onTap: () => controller.setFilter(filter),
                       child: Container(
-                        padding: AppSpacing.paddingChip,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: AppSpacing.md,
+                          vertical: AppSpacing.sm,
+                        ),
                         decoration: BoxDecoration(
                           color: isSelected
                               ? AppColors.primary

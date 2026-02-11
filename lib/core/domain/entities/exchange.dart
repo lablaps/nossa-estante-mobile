@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'book.dart';
 import 'user.dart';
 
@@ -67,6 +68,36 @@ class Exchange {
       return '$weeks semana${weeks > 1 ? 's' : ''} atrás';
     }
   }
+
+  /// Retorna dados visuais para exibição da atividade
+  ActivityVisualData getVisualData() {
+    switch (status) {
+      case ExchangeStatus.completed:
+        return ActivityVisualData(
+          icon: Icons.swap_horiz,
+          color: const Color(0xFF13EC5B),
+          text: '$requester.name trocou um livro com ${owner.name}',
+        );
+      case ExchangeStatus.approved:
+        return ActivityVisualData(
+          icon: Icons.check_circle,
+          color: Colors.blue,
+          text: '${requester.name} vai trocar com ${owner.name}',
+        );
+      case ExchangeStatus.pending:
+        return ActivityVisualData(
+          icon: Icons.pending,
+          color: Colors.orange,
+          text: '${requester.name} solicitou "${book.title}"',
+        );
+      case ExchangeStatus.cancelled:
+        return ActivityVisualData(
+          icon: Icons.cancel,
+          color: Colors.grey,
+          text: 'Troca de "${book.title}" cancelada',
+        );
+    }
+  }
 }
 
 /// Status da troca
@@ -75,4 +106,17 @@ enum ExchangeStatus {
   approved, // Aprovada, aguardando encontro
   completed, // Troca realizada com sucesso
   cancelled, // Cancelada por alguma das partes
+}
+
+/// Dados visuais de uma atividade
+class ActivityVisualData {
+  final IconData icon;
+  final Color color;
+  final String text;
+
+  ActivityVisualData({
+    required this.icon,
+    required this.color,
+    required this.text,
+  });
 }

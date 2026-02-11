@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../core/domain/entities/entities.dart';
+import '../../core/mocks/mocks.dart';
 import 'home_repository.dart';
 
 /// Evento de navegação emitido pelo controller
@@ -29,18 +30,17 @@ class HomeController extends ChangeNotifier {
   String? _errorMessage;
   NavigationEvent? _pendingNavigation;
 
-  // Getters - Expõem dados de domínio
   String get selectedFilter => _selectedFilter;
   List<Book> get nearbyBooks => _nearbyBooks;
   List<Exchange> get communityActivities => _communityActivities;
   bool get isLoading => _isLoading;
   String? get errorMessage => _errorMessage;
   NavigationEvent? get pendingNavigation => _pendingNavigation;
+  User get currentUser => MockUsers.currentUser;
 
   /// Conta livros dentro de um raio de 5km da localização atual do usuário
   int get totalBooksInRadius {
-    // TODO: Substituir por localização real do usuário quando disponível
-    // Por ora, retorna o total de livros (placeholder)
+    // TODO: Usar localização real do usuário
     return _nearbyBooks.length;
   }
 
@@ -71,8 +71,6 @@ class HomeController extends ChangeNotifier {
       notifyListeners();
     }
   }
-
-  // --- Handlers (ações da UI) ---
 
   /// Limpa navegação pendente (chamado após navegação ser executada)
   void clearNavigation() {
@@ -114,7 +112,6 @@ class HomeController extends ChangeNotifier {
     if (_selectedFilter != filter) {
       _selectedFilter = filter;
       notifyListeners();
-      // Futuramente: recarregar dados baseado no filtro
     }
   }
 
