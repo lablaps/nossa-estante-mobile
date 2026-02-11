@@ -4,6 +4,7 @@ import '../../core/theme/theme.dart';
 import '../../core/widgets/widgets.dart';
 import 'auth_controller.dart';
 
+// Tela de login
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -15,6 +16,28 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+
+  // Observa eventos de navegação do controller
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    final controller = context.watch<AuthController>();
+
+    if (controller.pendingNavigation != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        final event = controller.pendingNavigation;
+        if (event != null && mounted) {
+          Navigator.pushReplacementNamed(
+            context,
+            event.route,
+            arguments: event.arguments,
+          );
+          controller.clearNavigation();
+        }
+      });
+    }
+  }
 
   @override
   void dispose() {
@@ -30,14 +53,11 @@ class _LoginPageState extends State<LoginPage> {
         password: _passwordController.text,
       );
 
-      if (mounted && success) {
-        // Navega para o AppShell
-        Navigator.pushReplacementNamed(context, '/home');
-      } else if (mounted && controller.errorMessage != null) {
+      if (mounted && !success && controller.errorMessage != null) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(controller.errorMessage!),
-            backgroundColor: Colors.red,
+            backgroundColor: AppColors.primaryDark,
           ),
         );
       }
@@ -65,6 +85,7 @@ class _LoginPageState extends State<LoginPage> {
                 child: IntrinsicHeight(
                   child: Column(
                     children: [
+                      // Header
                       const AuthHeader(
                         title: 'Bem-vindo de volta',
                         subtitle: 'Faça login para continuar trocando livros',
@@ -136,11 +157,11 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 AppSpacing.verticalSM,
 
+                // Link esqueci a senha
                 Align(
                   alignment: Alignment.centerRight,
                   child: TextButton(
                     onPressed: () {
-                      // TODO: Implementar recuperação de senha
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
                           content: Text('Funcionalidade em desenvolvimento'),
@@ -203,66 +224,59 @@ class _LoginPageState extends State<LoginPage> {
           SocialLoginButton(
             icon: Icons.g_mobiledata_rounded,
             tooltip: 'Continuar com Google',
-            onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Login com Google em desenvolvimento'),
-                ),
-              );
-            },
+            onPressed: () {},
           ),
           const SizedBox(width: AppSpacing.md),
           SocialLoginButton(
             icon: Icons.apple_rounded,
             tooltip: 'Continuar com Apple',
-            onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Login com Apple em desenvolvimento'),
-                ),
-              );
-            },
+            onPressed: () {},
           ),
         ],
       ),
     );
   }
 
+  // Rodapé com link para cadastro
   Widget _buildFooter() {
-    return Container(
-      margin: const EdgeInsets.only(top: AppSpacing.xl),
-      padding: const EdgeInsets.symmetric(vertical: AppSpacing.xl),
-      decoration: BoxDecoration(
-        color: context.backgroundColor.withOpacity(
-          AppDimensions.opacityMediumHigh,
-        ),
-        border: Border(top: BorderSide(color: context.overlay)),
-      ),
-      child: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Não tem uma conta? ',
-              style: AppTextStyles.bodyLarge(
-                context,
-              ).copyWith(color: context.textMuted),
+    return Consumer<AuthController>(
+      builder: (context, controller, _) {
+        return Container(
+          margin: const EdgeInsets.only(top: AppSpacing.xl),
+          padding: const EdgeInsets.symmetric(vertical: AppSpacing.xl),
+          decoration: BoxDecoration(
+            color: context.backgroundColor.withOpacity(
+              AppDimensions.opacityMediumHigh,
             ),
-            GestureDetector(
-              onTap: () {
-                Navigator.pushNamed(context, '/signup');
-              },
-              child: Text(
-                'Cadastre-se',
-                style: AppTextStyles.bodyLarge(context).copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.primary,
+            border: Border(top: BorderSide(color: context.overlay)),
+          ),
+          child: Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Não tem uma conta? ',
+                  style: AppTextStyles.bodyLarge(
+                    context,
+                  ).copyWith(color: context.textMuted),
                 ),
-              ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/signup');
+                  },
+                  child: Text(
+                    'Cadastre-se',
+                    style: AppTextStyles.bodyLarge(context).copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.primary,
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }

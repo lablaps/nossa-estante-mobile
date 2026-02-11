@@ -5,10 +5,7 @@ import '../../../core/widgets/widgets.dart';
 import 'animated_book_pin.dart';
 import 'map_info_badge.dart';
 
-/// Seção do mapa mostrando livros próximos
-///
-/// Widget puramente visual que recebe dados prontos por parâmetro.
-/// Pronto para substituição por Google Maps/Mapbox sem refatoração externa.
+// Preview do mapa
 class MapSection extends StatelessWidget {
   final List<Book> books;
   final int totalInRadius;
@@ -34,7 +31,7 @@ class MapSection extends StatelessWidget {
 
             ..._buildBookPins(books),
 
-            // Botões de ação
+            // Botão de localização e explorar
             Positioned(
               bottom: AppSpacing.md,
               right: AppSpacing.md,
@@ -111,10 +108,7 @@ class MapSection extends StatelessWidget {
     );
   }
 
-  /// Constrói pins no mapa baseado em livros recebidos
-  ///
-  /// Conversão puramente visual: domínio → posição fake.
-  /// Em produção, posições seriam calculadas por coordenadas reais do livro.
+  // Renderiza pins dos livros no mapa
   List<Widget> _buildBookPins(List<Book> books) {
     if (books.isEmpty) return [];
 

@@ -3,9 +3,7 @@ import '../../../core/domain/entities/entities.dart';
 import '../../../core/theme/theme.dart';
 import '../../../core/widgets/widgets.dart';
 
-/// Seção de livros próximos da home
-///
-/// Widget puramente visual que recebe dados prontos por parâmetro.
+// Seção de livros próximos
 class NearbyBooksSection extends StatelessWidget {
   final List<Book> nearbyBooks;
   final User currentUser;

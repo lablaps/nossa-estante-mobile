@@ -1,17 +1,9 @@
 import 'package:flutter/material.dart';
 import '../../core/domain/entities/entities.dart';
+import '../../core/domain/navigation_event.dart';
 import '../../core/mocks/mocks.dart';
 import 'explore_repository.dart';
 
-/// Evento de navegação emitido pelo controller
-class NavigationEvent {
-  final String route;
-  final Object? arguments;
-
-  NavigationEvent(this.route, {this.arguments});
-}
-
-/// Modelo para coleção curada
 class CuratedCollection {
   final String id;
   final String title;

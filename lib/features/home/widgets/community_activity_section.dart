@@ -4,9 +4,7 @@ import '../../../core/theme/theme.dart';
 import '../../../core/utils/distance_formatter.dart';
 import '../../../core/widgets/widgets.dart';
 
-/// Seção de atividades da comunidade
-///
-/// Widget puramente visual que recebe dados prontos por parâmetro.
+// Atividades da comunidade
 class CommunityActivitySection extends StatelessWidget {
   final List<Exchange> communityActivities;
   final User currentUser;
@@ -65,9 +63,6 @@ class CommunityActivitySection extends StatelessWidget {
   }
 }
 
-/// Card de atividade individual
-///
-/// Recebe [Exchange] e determina ícone, cor e texto baseado no status
 class _ActivityCard extends StatelessWidget {
   final Exchange exchange;
   final User currentUser;
@@ -141,7 +136,6 @@ class _ActivityCard extends StatelessWidget {
     );
   }
 
-  /// Formata localização baseado na distância
   String _formatLocation(Exchange exchange) {
     final currentUserLocation = currentUser.location;
     final ownerLocation = exchange.owner.location;

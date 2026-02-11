@@ -75,25 +75,25 @@ class Exchange {
       case ExchangeStatus.completed:
         return ActivityVisualData(
           icon: Icons.swap_horiz,
-          color: const Color(0xFF13EC5B),
-          text: '$requester.name trocou um livro com ${owner.name}',
+          color: const Color(0xFF13EC5B), // AppColors.primary
+          text: '${requester.name} trocou um livro com ${owner.name}',
         );
       case ExchangeStatus.approved:
         return ActivityVisualData(
           icon: Icons.check_circle,
-          color: Colors.blue,
+          color: const Color(0xFF0EA5E9), // Azul
           text: '${requester.name} vai trocar com ${owner.name}',
         );
       case ExchangeStatus.pending:
         return ActivityVisualData(
           icon: Icons.pending,
-          color: Colors.orange,
+          color: const Color(0xFFF59E0B), // Laranja
           text: '${requester.name} solicitou "${book.title}"',
         );
       case ExchangeStatus.cancelled:
         return ActivityVisualData(
           icon: Icons.cancel,
-          color: Colors.grey,
+          color: const Color(0xFF64748B), // Cinza
           text: 'Troca de "${book.title}" cancelada',
         );
     }

@@ -4,6 +4,7 @@ import '../../core/theme/theme.dart';
 import '../../core/widgets/widgets.dart';
 import 'auth_controller.dart';
 
+// Tela de cadastro
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
 
@@ -19,6 +20,28 @@ class _SignupPageState extends State<SignupPage> {
   final _confirmPasswordController = TextEditingController();
   bool _acceptedTerms = false;
 
+  // Observa eventos de navegação do controller
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    final controller = context.watch<AuthController>();
+
+    if (controller.pendingNavigation != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        final event = controller.pendingNavigation;
+        if (event != null && mounted) {
+          Navigator.pushReplacementNamed(
+            context,
+            event.route,
+            arguments: event.arguments,
+          );
+          controller.clearNavigation();
+        }
+      });
+    }
+  }
+
   @override
   void dispose() {
     _nameController.dispose();
@@ -31,11 +54,11 @@ class _SignupPageState extends State<SignupPage> {
   Future<void> _handleSignup(AuthController controller) async {
     if (!_acceptedTerms) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text(
+        SnackBar(
+          content: const Text(
             'Você precisa aceitar os Termos de Uso e Política de Privacidade',
           ),
-          backgroundColor: Colors.orange,
+          backgroundColor: AppColors.primaryDark,
         ),
       );
       return;
@@ -49,14 +72,11 @@ class _SignupPageState extends State<SignupPage> {
         confirmPassword: _confirmPasswordController.text,
       );
 
-      if (mounted && success) {
-        // Navega para o AppShell
-        Navigator.pushReplacementNamed(context, '/home');
-      } else if (mounted && controller.errorMessage != null) {
+      if (mounted && !success && controller.errorMessage != null) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(controller.errorMessage!),
-            backgroundColor: Colors.red,
+            backgroundColor: AppColors.primaryDark,
           ),
         );
       }
@@ -93,6 +113,7 @@ class _SignupPageState extends State<SignupPage> {
                         padding: AppSpacing.paddingPage,
                         child: Column(
                           children: [
+                            // Header
                             const AuthHeader(
                               title: 'Criar conta',
                               subtitle:
@@ -311,6 +332,7 @@ class _SignupPageState extends State<SignupPage> {
     );
   }
 
+  // Rodapé com link para login
   Widget _buildFooter() {
     return Center(
       child: Row(

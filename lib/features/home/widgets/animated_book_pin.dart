@@ -3,7 +3,7 @@ import '../../../core/domain/entities/entities.dart';
 import '../../../core/theme/theme.dart';
 import '../../../core/widgets/widgets.dart';
 
-/// Pin animado com capa do livro
+// Pin animado no mapa
 class AnimatedBookPin extends StatefulWidget {
   final Book book;
   final Duration delay;
@@ -56,7 +56,7 @@ class _AnimatedBookPinState extends State<AnimatedBookPin>
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          // Pin com capa do livro
+          // Círculo com capa
           Container(
             width: 44,
             height: 44,
@@ -66,7 +66,9 @@ class _AnimatedBookPinState extends State<AnimatedBookPin>
               border: Border.all(color: AppColors.primary, width: 3),
               boxShadow: [
                 BoxShadow(
-                  color: AppColors.primary.withOpacity(AppDimensions.opacityMedium),
+                  color: AppColors.primary.withOpacity(
+                    AppDimensions.opacityMedium,
+                  ),
                   blurRadius: 8,
                   spreadRadius: 2,
                   offset: const Offset(0, 2),
@@ -83,7 +85,7 @@ class _AnimatedBookPinState extends State<AnimatedBookPin>
               ),
             ),
           ),
-          // Seta apontando para baixo
+          // Seta
           CustomPaint(
             size: const Size(14, 10),
             painter: _TrianglePainter(AppColors.primary),
@@ -94,7 +96,6 @@ class _AnimatedBookPinState extends State<AnimatedBookPin>
   }
 }
 
-/// Painter para o triângulo do pin do mapa
 class _TrianglePainter extends CustomPainter {
   final Color color;
 

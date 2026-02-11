@@ -1,20 +1,9 @@
 import 'package:flutter/material.dart';
 import '../../core/domain/entities/entities.dart';
+import '../../core/domain/navigation_event.dart';
 import '../../core/mocks/mocks.dart';
 import 'home_repository.dart';
 
-/// Evento de navegação emitido pelo controller
-class NavigationEvent {
-  final String route;
-  final Object? arguments;
-
-  NavigationEvent(this.route, {this.arguments});
-}
-
-/// Controller para gerenciar o estado da Home
-///
-/// Ponto único de acesso aos dados.
-/// Expõe entidades de domínio e handlers para a UI.
 class HomeController extends ChangeNotifier {
   final HomeRepository _repository;
 

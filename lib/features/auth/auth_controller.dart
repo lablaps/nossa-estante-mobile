@@ -1,41 +1,43 @@
 import 'package:flutter/material.dart';
+import '../../core/domain/navigation_event.dart';
 
-/// Controller para gerenciar o estado das telas de autenticação
 class AuthController extends ChangeNotifier {
   bool _isLoading = false;
   bool _isPasswordVisible = false;
   bool _isConfirmPasswordVisible = false;
   String? _errorMessage;
+  NavigationEvent? _pendingNavigation;
 
   bool get isLoading => _isLoading;
   bool get isPasswordVisible => _isPasswordVisible;
   bool get isConfirmPasswordVisible => _isConfirmPasswordVisible;
   String? get errorMessage => _errorMessage;
+  NavigationEvent? get pendingNavigation => _pendingNavigation;
 
-  /// Alterna visibilidade da senha
+  void clearNavigation() {
+    _pendingNavigation = null;
+  }
+
   void togglePasswordVisibility() {
     _isPasswordVisible = !_isPasswordVisible;
     notifyListeners();
   }
 
-  /// Alterna visibilidade da confirmação de senha
   void toggleConfirmPasswordVisibility() {
     _isConfirmPasswordVisible = !_isConfirmPasswordVisible;
     notifyListeners();
   }
 
-  /// Simula login mockado
   Future<bool> login({required String email, required String password}) async {
     _isLoading = true;
     _errorMessage = null;
     notifyListeners();
 
-    // Simula delay de API
     await Future.delayed(const Duration(seconds: 2));
 
-    // Mock: qualquer email/senha funciona
     if (email.isNotEmpty && password.isNotEmpty) {
       _isLoading = false;
+      _pendingNavigation = NavigationEvent('/home');
       notifyListeners();
       return true;
     } else {
@@ -57,10 +59,7 @@ class AuthController extends ChangeNotifier {
     _errorMessage = null;
     notifyListeners();
 
-    // Simula delay de API
     await Future.delayed(const Duration(seconds: 2));
-
-    // Validações básicas
     if (name.isEmpty || email.isEmpty || password.isEmpty) {
       _errorMessage = 'Todos os campos são obrigatórios';
       _isLoading = false;
@@ -82,24 +81,23 @@ class AuthController extends ChangeNotifier {
       return false;
     }
 
-    // Mock: cadastro sempre funciona se passar validações
     _isLoading = false;
+    _pendingNavigation = NavigationEvent('/home');
     notifyListeners();
     return true;
   }
 
-  /// Limpa mensagem de erro
   void clearError() {
     _errorMessage = null;
     notifyListeners();
   }
 
-  /// Reset do estado
   void reset() {
     _isLoading = false;
     _isPasswordVisible = false;
     _isConfirmPasswordVisible = false;
     _errorMessage = null;
+    _pendingNavigation = null;
     notifyListeners();
   }
 }
