@@ -3,9 +3,7 @@ import '../../../core/domain/entities/entities.dart';
 import '../../../core/theme/theme.dart';
 import '../../../core/widgets/widgets.dart';
 
-/// Card de livro para My Shelf com badge de status e condição
-///
-/// Refatorado para usar StatusBadge e ConditionBadge do core/widgets.
+/// Card de livro da estante
 class ShelfBookCard extends StatelessWidget {
   final Book book;
   final VoidCallback? onTap;
@@ -26,13 +24,12 @@ class ShelfBookCard extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Book cover with badge
+          // Capa com badge de status
           Expanded(
             child: AspectRatio(
               aspectRatio: 2 / 3,
               child: Stack(
                 children: [
-                  // Cover
                   Container(
                     decoration: BoxDecoration(
                       borderRadius: AppDimensions.borderRadiusMD,
@@ -90,7 +87,6 @@ class ShelfBookCard extends StatelessWidget {
 
           const SizedBox(height: 8),
 
-          // Title
           Text(
             book.title,
             style: AppTextStyles.bodySmall(
@@ -102,7 +98,6 @@ class ShelfBookCard extends StatelessWidget {
 
           const SizedBox(height: 2),
 
-          // Author
           Text(
             book.author,
             style: AppTextStyles.caption(
@@ -114,7 +109,6 @@ class ShelfBookCard extends StatelessWidget {
 
           const SizedBox(height: 4),
 
-          // Condition badge
           ConditionBadge(condition: book.condition),
         ],
       ),

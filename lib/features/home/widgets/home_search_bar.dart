@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../../../core/theme/theme.dart';
-import '../home_controller.dart';
 
 /// Barra de busca com filtros da home
+///
+/// Widget puramente visual que recebe dados prontos por parâmetro.
 class HomeSearchBar extends StatelessWidget {
-  const HomeSearchBar({super.key});
+  final List<String> filters;
+  final String selectedFilter;
+  final ValueChanged<String>? onFilterSelected;
+
+  const HomeSearchBar({
+    super.key,
+    required this.filters,
+    required this.selectedFilter,
+    this.onFilterSelected,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +42,9 @@ class HomeSearchBar extends StatelessWidget {
             child: Row(
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.sm,
+                  ),
                   child: Icon(Icons.search, color: context.textMuted),
                 ),
                 Expanded(
@@ -52,7 +63,9 @@ class HomeSearchBar extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.sm,
+                  ),
                   decoration: BoxDecoration(
                     border: Border(
                       left: BorderSide(color: context.borderColor),
@@ -64,54 +77,49 @@ class HomeSearchBar extends StatelessWidget {
             ),
           ),
           AppSpacing.verticalSM,
+          SizedBox(
+            height: 36,
+            child: ListView.separated(
+              scrollDirection: Axis.horizontal,
+              itemCount: filters.length,
+              separatorBuilder: (_, __) => AppSpacing.horizontalSM,
+              itemBuilder: (context, index) {
+                final filter = filters[index];
+                final isSelected = selectedFilter == filter;
 
-          Consumer<HomeController>(
-            builder: (context, controller, _) {
-              return SizedBox(
-                height: 36,
-                child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: controller.filters.length,
-                  separatorBuilder: (_, __) => AppSpacing.horizontalSM,
-                  itemBuilder: (context, index) {
-                    final filter = controller.filters[index];
-                    final isSelected = controller.selectedFilter == filter;
-
-                    return GestureDetector(
-                      onTap: () => controller.setFilter(filter),
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: AppSpacing.md,
-                          vertical: AppSpacing.sm,
-                        ),
-                        decoration: BoxDecoration(
-                          color: isSelected
-                              ? AppColors.primary
-                              : context.surfaceColor,
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(
-                            color: isSelected
-                                ? Colors.transparent
-                                : context.borderColor,
-                          ),
-                        ),
-                        child: Text(
-                          filter,
-                          style: AppTextStyles.labelMedium(context).copyWith(
-                            fontWeight: isSelected
-                                ? FontWeight.bold
-                                : FontWeight.w500,
-                            color: isSelected
-                                ? AppColors.black
-                                : context.textMuted,
-                          ),
-                        ),
+                return GestureDetector(
+                  onTap: onFilterSelected != null
+                      ? () => onFilterSelected!(filter)
+                      : null,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: AppSpacing.md,
+                      vertical: AppSpacing.sm,
+                    ),
+                    decoration: BoxDecoration(
+                      color: isSelected
+                          ? AppColors.primary
+                          : context.surfaceColor,
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(
+                        color: isSelected
+                            ? AppColors.transparent
+                            : context.borderColor,
                       ),
-                    );
-                  },
-                ),
-              );
-            },
+                    ),
+                    child: Text(
+                      filter,
+                      style: AppTextStyles.labelMedium(context).copyWith(
+                        fontWeight: isSelected
+                            ? FontWeight.bold
+                            : FontWeight.w500,
+                        color: isSelected ? AppColors.black : context.textMuted,
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
           ),
         ],
       ),

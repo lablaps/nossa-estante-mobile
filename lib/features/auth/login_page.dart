@@ -172,12 +172,15 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _buildDivider() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 24),
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.xl,
+        vertical: AppSpacing.lg,
+      ),
       child: Row(
         children: [
           Expanded(child: Container(height: 1, color: context.borderColor)),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
             child: Text(
               'Ou continue com',
               style: AppTextStyles.bodyMedium(
@@ -193,7 +196,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _buildSocialLogin() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
+      padding: AppSpacing.paddingHorizontal,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -230,7 +233,9 @@ class _LoginPageState extends State<LoginPage> {
       margin: const EdgeInsets.only(top: AppSpacing.xl),
       padding: const EdgeInsets.symmetric(vertical: AppSpacing.xl),
       decoration: BoxDecoration(
-        color: context.backgroundColor.withOpacity(0.5),
+        color: context.backgroundColor.withOpacity(
+          AppDimensions.opacityMediumHigh,
+        ),
         border: Border(top: BorderSide(color: context.overlay)),
       ),
       child: Center(

@@ -54,7 +54,7 @@ class CustomTextField extends StatelessWidget {
             borderRadius: AppDimensions.borderRadiusMD,
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.02),
+                color: AppColors.black.withOpacity(0.02),
                 blurRadius: 4,
                 offset: const Offset(0, 2),
               ),
@@ -72,7 +72,9 @@ class CustomTextField extends StatelessWidget {
             ).textTheme.bodyLarge?.copyWith(color: context.textColor),
             decoration: InputDecoration(
               hintText: hintText,
-              hintStyle: TextStyle(color: context.textMuted.withOpacity(0.6)),
+              hintStyle: TextStyle(
+                color: context.textMuted.withOpacity(AppDimensions.opacityHigh),
+              ),
               filled: true,
               fillColor: context.inputBackground,
               border: OutlineInputBorder(

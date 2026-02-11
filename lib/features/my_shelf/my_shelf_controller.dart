@@ -11,26 +11,19 @@ class NavigationEvent {
   NavigationEvent(this.route, {this.arguments});
 }
 
-/// Enum para filtros da estante
-enum ShelfFilter {
-  all,
-  available,
-  inExchange,
-  pending,
-}
+enum ShelfFilter { all, available, inExchange, pending }
 
-/// Extensão para ShelfFilter
 extension ShelfFilterExtension on ShelfFilter {
   String get label {
     switch (this) {
       case ShelfFilter.all:
-        return 'All Books';
+        return 'Todos os Livros';
       case ShelfFilter.available:
-        return 'Available';
+        return 'Disponível';
       case ShelfFilter.inExchange:
-        return 'In Exchange';
+        return 'Em Troca';
       case ShelfFilter.pending:
-        return 'Pending';
+        return 'Pendente';
     }
   }
 
@@ -48,15 +41,14 @@ extension ShelfFilterExtension on ShelfFilter {
   }
 }
 
-/// Controller para gerenciar o estado da página My Shelf
+/// Controller da estante do usuário
 ///
-/// Ponto único de acesso aos dados do usuário.
-/// Expõe entidades de domínio e handlers para a UI.
+/// Gerencia livros pessoais e filtragem por status
 class MyShelfController extends ChangeNotifier {
   final MyShelfRepository _repository;
 
   MyShelfController({required MyShelfRepository repository})
-      : _repository = repository {
+    : _repository = repository {
     _loadData();
   }
 
@@ -74,10 +66,8 @@ class MyShelfController extends ChangeNotifier {
   User get currentUser => MockUsers.currentUser;
   bool get isEmpty => !_isLoading && _myBooks.isEmpty;
 
-  /// Lista de filtros disponíveis
   final List<ShelfFilter> filters = ShelfFilter.values;
 
-  /// Carrega dados iniciais
   Future<void> _loadData() async {
     _isLoading = true;
     _errorMessage = null;
@@ -94,18 +84,15 @@ class MyShelfController extends ChangeNotifier {
     }
   }
 
-  /// Limpa navegação pendente (chamado após navegação ser executada)
   void clearNavigation() {
     _pendingNavigation = null;
   }
 
-  /// Handler: Quando usuário toca em um livro
   void onBookTap(Book book) {
     _pendingNavigation = NavigationEvent('/book-details', arguments: book);
     notifyListeners();
   }
 
-  /// Handler: Quando usuário seleciona um filtro
   Future<void> onFilterSelected(ShelfFilter filter) async {
     if (_selectedFilter != filter) {
       _selectedFilter = filter;
@@ -125,13 +112,11 @@ class MyShelfController extends ChangeNotifier {
     }
   }
 
-  /// Handler: Quando usuário toca no botão adicionar livro
   void onAddBookTap() {
     _pendingNavigation = NavigationEvent('/add-book');
     notifyListeners();
   }
 
-  /// Recarrega os dados
   Future<void> refresh() async {
     await _loadData();
   }

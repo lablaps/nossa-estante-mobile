@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'app_colors.dart';
+import 'app_dimensions.dart';
 
 /// Extensões convenientes para acesso rápido a propriedades do tema
 
@@ -42,20 +43,24 @@ extension ThemeX on BuildContext {
   // ========== OVERLAYS E SOMBRAS ==========
 
   /// Overlay suave para bordas e divisórias (adapta ao tema)
-  Color get overlay => (isDark ? Colors.white : Colors.black).withOpacity(0.05);
+  Color get overlay => (isDark ? AppColors.white : AppColors.black).withOpacity(
+    AppDimensions.opacityVeryLow,
+  );
 
   /// Overlay médio (adapta ao tema)
-  Color get overlayMedium =>
-      (isDark ? Colors.white : Colors.black).withOpacity(0.1);
+  Color get overlayMedium => (isDark ? AppColors.white : AppColors.black)
+      .withOpacity(AppDimensions.opacityLow);
 
   /// Sombra padrão
-  Color get shadow => Colors.black.withOpacity(0.1);
+  Color get shadow => AppColors.black.withOpacity(AppDimensions.opacityLow);
 
   /// Sombra suave
-  Color get shadowSoft => Colors.black.withOpacity(0.05);
+  Color get shadowSoft =>
+      AppColors.black.withOpacity(AppDimensions.opacityVeryLow);
 
   /// Sombra forte
-  Color get shadowStrong => Colors.black.withOpacity(0.2);
+  Color get shadowStrong =>
+      AppColors.black.withOpacity(AppDimensions.opacityMediumLow);
 
   // ========== CORES PRIMÁRIAS ==========
 

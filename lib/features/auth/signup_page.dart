@@ -127,7 +127,7 @@ class _SignupPageState extends State<SignupPage> {
             width: 256,
             height: 256,
             decoration: BoxDecoration(
-              color: AppColors.primary.withOpacity(0.1),
+              color: AppColors.primary.withOpacity(AppDimensions.opacityLow),
               shape: BoxShape.circle,
             ),
           ),

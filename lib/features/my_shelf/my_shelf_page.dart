@@ -66,10 +66,10 @@ class _MyShelfViewState extends State<_MyShelfView> {
         bottom: false,
         child: CustomScrollView(
           slivers: [
-            // Header
+            // Header da estante
             const SliverToBoxAdapter(child: ShelfHeader()),
 
-            // Search Bar
+            // Barra de busca
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
@@ -77,7 +77,7 @@ class _MyShelfViewState extends State<_MyShelfView> {
                   children: [
                     Expanded(
                       child: CustomTextField(
-                        hintText: 'Search my books',
+                        hintText: 'Buscar meus livros',
                         prefixIcon: Icons.search,
                         onChanged: (value) {
                           // TODO: Implementar busca
@@ -98,7 +98,7 @@ class _MyShelfViewState extends State<_MyShelfView> {
 
             const SliverToBoxAdapter(child: AppSpacing.verticalMD),
 
-            // Filter Chips
+            // Filtros de status
             SliverToBoxAdapter(
               child: ShelfFilterChips(
                 selectedFilter: controller.selectedFilter,
@@ -108,7 +108,7 @@ class _MyShelfViewState extends State<_MyShelfView> {
 
             const SliverToBoxAdapter(child: AppSpacing.verticalMD),
 
-            // Content
+            // Grade de livros do usuário
             if (controller.isEmpty)
               EmptyState(
                 icon: Icons.auto_stories_outlined,
@@ -139,7 +139,6 @@ class _MyShelfViewState extends State<_MyShelfView> {
                 ),
               ),
 
-            // Bottom spacing for bottom navigation
             const SliverToBoxAdapter(child: SizedBox(height: 100)),
           ],
         ),

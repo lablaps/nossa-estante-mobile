@@ -29,7 +29,7 @@ class BookPlaceholder extends StatelessWidget {
             Icon(
               Icons.menu_book_rounded,
               size: (width ?? 140) * 0.3,
-              color: Colors.white.withOpacity(0.9),
+              color: AppColors.white.withOpacity(AppDimensions.opacityVeryHigh),
             ),
             if (text != null) ...[
               AppSpacing.verticalSM,
@@ -37,9 +37,11 @@ class BookPlaceholder extends StatelessWidget {
                 padding: EdgeInsets.all(AppSpacing.xs),
                 child: Text(
                   text!,
-                  style: AppTextStyles.caption(
-                    context,
-                  ).copyWith(color: Colors.white.withOpacity(0.9)),
+                  style: AppTextStyles.caption(context).copyWith(
+                    color: AppColors.white.withOpacity(
+                      AppDimensions.opacityVeryHigh,
+                    ),
+                  ),
                   textAlign: TextAlign.center,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,

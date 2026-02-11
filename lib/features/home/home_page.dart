@@ -63,7 +63,13 @@ class _HomeViewState extends State<_HomeView> {
               ),
             ),
 
-            const SliverToBoxAdapter(child: HomeSearchBar()),
+            SliverToBoxAdapter(
+              child: HomeSearchBar(
+                filters: controller.filters,
+                selectedFilter: controller.selectedFilter,
+                onFilterSelected: controller.setFilter,
+              ),
+            ),
 
             SliverToBoxAdapter(
               child: MapSection(
@@ -73,9 +79,24 @@ class _HomeViewState extends State<_HomeView> {
               ),
             ),
 
-            const SliverToBoxAdapter(child: NearbyBooksSection()),
+            SliverToBoxAdapter(
+              child: NearbyBooksSection(
+                nearbyBooks: controller.nearbyBooks,
+                currentUser: controller.currentUser,
+                isLoading: controller.isLoading,
+                onViewAll: controller.onViewAllNearby,
+                onBookTap: controller.onBookTap,
+              ),
+            ),
 
-            const SliverToBoxAdapter(child: CommunityActivitySection()),
+            SliverToBoxAdapter(
+              child: CommunityActivitySection(
+                communityActivities: controller.communityActivities,
+                currentUser: controller.currentUser,
+                isLoading: controller.isLoading,
+                onActivityTap: controller.onActivityTap,
+              ),
+            ),
 
             SliverToBoxAdapter(
               child: SizedBox(height: AppSpacing.bottomNavPadding),

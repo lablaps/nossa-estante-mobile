@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../core/widgets/widgets.dart';
 import '../my_shelf_controller.dart';
 
-/// Chips de filtro para My Shelf usando FilterChips genérico
+/// Filtros de status da estante
 class ShelfFilterChips extends StatelessWidget {
   final ShelfFilter selectedFilter;
   final ValueChanged<ShelfFilter> onFilterSelected;

@@ -1,55 +1,66 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../../../core/domain/entities/entities.dart';
 import '../../../core/theme/theme.dart';
 import '../../../core/utils/distance_formatter.dart';
 import '../../../core/widgets/widgets.dart';
-import '../home_controller.dart';
 
 /// Seção de atividades da comunidade
 ///
-/// Recebe [Exchange] de domínio e faz conversão visual
+/// Widget puramente visual que recebe dados prontos por parâmetro.
 class CommunityActivitySection extends StatelessWidget {
-  const CommunityActivitySection({super.key});
+  final List<Exchange> communityActivities;
+  final User currentUser;
+  final bool isLoading;
+  final ValueChanged<Exchange>? onActivityTap;
+
+  const CommunityActivitySection({
+    super.key,
+    required this.communityActivities,
+    required this.currentUser,
+    required this.isLoading,
+    this.onActivityTap,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<HomeController>(
-      builder: (context, controller, _) {
-        return Padding(
-          padding: AppSpacing.paddingPage,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SectionHeader(title: 'Atividade da Comunidade'),
-              AppSpacing.verticalMD,
-              if (controller.isLoading)
-                Center(
-                  child: Padding(
-                    padding: const EdgeInsets.all(AppSpacing.lg),
-                    child: CircularProgressIndicator(color: AppColors.primary),
-                  ),
-                )
-              else if (controller.communityActivities.isEmpty)
-                Center(
-                  child: Padding(
-                    padding: const EdgeInsets.all(AppSpacing.lg),
-                    child: Text(
-                      'Nenhuma atividade recente',
-                      style: AppTextStyles.bodyMedium(
-                        context,
-                      ).copyWith(color: context.textMuted),
-                    ),
-                  ),
-                )
-              else
-                ...controller.communityActivities.map((exchange) {
-                  return _ActivityCard(exchange: exchange);
-                }),
-            ],
-          ),
-        );
-      },
+    return Padding(
+      padding: AppSpacing.paddingPage,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SectionHeader(title: 'Atividade da Comunidade'),
+          AppSpacing.verticalMD,
+          if (isLoading)
+            const Center(
+              child: Padding(
+                padding: EdgeInsets.all(AppSpacing.lg),
+                child: CircularProgressIndicator(color: AppColors.primary),
+              ),
+            )
+          else if (communityActivities.isEmpty)
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.all(AppSpacing.lg),
+                child: Text(
+                  'Nenhuma atividade recente',
+                  style: AppTextStyles.bodyMedium(
+                    context,
+                  ).copyWith(color: context.textMuted),
+                ),
+              ),
+            )
+          else
+            ...communityActivities.map((exchange) {
+              return _ActivityCard(
+                exchange: exchange,
+                currentUser: currentUser,
+                onTap: onActivityTap != null
+                    ? () => onActivityTap!(exchange)
+                    : null,
+              );
+            }),
+        ],
+      ),
     );
   }
 }
@@ -59,20 +70,23 @@ class CommunityActivitySection extends StatelessWidget {
 /// Recebe [Exchange] e determina ícone, cor e texto baseado no status
 class _ActivityCard extends StatelessWidget {
   final Exchange exchange;
+  final User currentUser;
+  final VoidCallback? onTap;
 
-  const _ActivityCard({required this.exchange});
+  const _ActivityCard({
+    required this.exchange,
+    required this.currentUser,
+    this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
     final activityData = exchange.getVisualData();
 
     return GestureDetector(
-      onTap: () {
-        final controller = context.read<HomeController>();
-        controller.onActivityTap(exchange);
-      },
+      onTap: onTap,
       child: Container(
-        margin: const EdgeInsets.only(bottom: 12.0),
+        margin: const EdgeInsets.only(bottom: AppSpacing.sm),
         padding: AppSpacing.paddingCard,
         decoration: BoxDecoration(
           color: context.surfaceColor,
@@ -92,9 +106,7 @@ class _ActivityCard extends StatelessWidget {
               width: 40,
               height: 40,
               decoration: BoxDecoration(
-                color: activityData.color.withOpacity(
-                  AppDimensions.opacityLow,
-                ),
+                color: activityData.color.withOpacity(AppDimensions.opacityLow),
                 shape: BoxShape.circle,
               ),
               child: Icon(
@@ -115,7 +127,7 @@ class _ActivityCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 2),
                   Text(
-                    '${exchange.getTimeAgo()} • ${_formatLocation(context, exchange)}',
+                    '${exchange.getTimeAgo()} • ${_formatLocation(exchange)}',
                     style: AppTextStyles.bodySmall(
                       context,
                     ).copyWith(color: context.textMuted),
@@ -130,9 +142,8 @@ class _ActivityCard extends StatelessWidget {
   }
 
   /// Formata localização baseado na distância
-  String _formatLocation(BuildContext context, Exchange exchange) {
-    final controller = context.read<HomeController>();
-    final currentUserLocation = controller.currentUser.location;
+  String _formatLocation(Exchange exchange) {
+    final currentUserLocation = currentUser.location;
     final ownerLocation = exchange.owner.location;
 
     return DistanceFormatter.formatWithDescription(

@@ -77,13 +77,13 @@ extension BookConditionExtension on BookCondition {
   String get label {
     switch (this) {
       case BookCondition.new_:
-        return 'New';
+        return 'Novo';
       case BookCondition.likeNew:
-        return 'Like New';
+        return 'Como Novo';
       case BookCondition.good:
-        return 'Good';
+        return 'Bom';
       case BookCondition.fair:
-        return 'Fair';
+        return 'Aceitável';
     }
   }
 }
@@ -93,11 +93,11 @@ extension BookStatusExtension on BookStatus {
   String get label {
     switch (this) {
       case BookStatus.available:
-        return 'Available';
+        return 'Disponível';
       case BookStatus.inExchange:
-        return 'In Exchange';
+        return 'Em Troca';
       case BookStatus.unavailable:
-        return 'Pending';
+        return 'Pendente';
     }
   }
 }

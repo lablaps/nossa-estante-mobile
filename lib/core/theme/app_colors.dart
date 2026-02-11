@@ -34,6 +34,7 @@ class AppColors {
   // Cores auxiliares
   static const Color white = Color(0xFFFFFFFF);
   static const Color black = Color(0xFF000000);
+  static const Color transparent = Colors.transparent;
 
   // Cores de sombra
   static const Color shadowLight = Color(0x0D000000);

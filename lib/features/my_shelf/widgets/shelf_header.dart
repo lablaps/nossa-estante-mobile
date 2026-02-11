@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../core/theme/theme.dart';
 
-/// Header da página My Shelf com título e ícone de notificações
+/// Header da estante do usuário
 class ShelfHeader extends StatelessWidget {
   const ShelfHeader({super.key});
 
@@ -18,10 +18,10 @@ class ShelfHeader extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            'My Shelf',
-            style: AppTextStyles.h2(context).copyWith(
-              fontWeight: FontWeight.w800,
-            ),
+            'Minha Estante',
+            style: AppTextStyles.h2(
+              context,
+            ).copyWith(fontWeight: FontWeight.w800),
           ),
           IconButton(
             onPressed: () {

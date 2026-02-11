@@ -127,17 +127,33 @@ class AppDimensions {
 
   // ========== OPACIDADES ==========
 
+  /// Opacidade muito baixa: 0.05 (5%)
+  /// Uso: Overlays sutis, backgrounds muito leves
+  static const double opacityVeryLow = 0.05;
+
   /// Opacidade baixa: 0.1 (10%)
   /// Uso: Backgrounds sutis, overlays leves
   static const double opacityLow = 0.1;
+
+  /// Opacidade média-baixa: 0.2 (20%)
+  /// Uso: Shadows leves, borders suaves
+  static const double opacityMediumLow = 0.2;
 
   /// Opacidade média: 0.3 (30%)
   /// Uso: Shadows, borders, elementos secundários
   static const double opacityMedium = 0.3;
 
+  /// Opacidade média-alta: 0.5 (50%)
+  /// Uso: Elementos desabilitados, overlays médios
+  static const double opacityMediumHigh = 0.5;
+
   /// Opacidade alta: 0.6 (60%)
   /// Uso: Textos desabilitados, placeholders
   static const double opacityHigh = 0.6;
+
+  /// Opacidade muito alta: 0.9 (90%)
+  /// Uso: Overlays semi-opacos, elementos quase sólidos
+  static const double opacityVeryHigh = 0.9;
 
   // ========== BOX SHADOWS PRÉ-DEFINIDAS ==========
 
