@@ -22,13 +22,14 @@ class NearbyBooksSection extends StatelessWidget {
             borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
             border: Border(
               top: BorderSide(
-                color: (context.isDark ? Colors.white : Colors.white)
-                    .withOpacity(context.isDark ? 0.05 : 0.5),
+                color: context.isDark
+                    ? AppColors.borderTopDark
+                    : AppColors.borderTopLight,
               ),
             ),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.05),
+                color: AppColors.shadowLight,
                 blurRadius: 20,
                 offset: const Offset(0, -5),
               ),

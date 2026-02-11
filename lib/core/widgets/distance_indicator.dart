@@ -20,23 +20,24 @@ class DistanceIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: AppSpacing.sm,
-        vertical: AppSpacing.xs,
-      ),
+      padding: AppSpacing.paddingDistanceBadge,
       decoration: BoxDecoration(
-        color: backgroundColor ?? Colors.black.withOpacity(0.6),
+        color: backgroundColor ?? AppColors.overlayDark,
         borderRadius: AppDimensions.borderRadiusSM,
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(Icons.location_on, size: 12, color: textColor ?? Colors.white),
+          Icon(
+            Icons.location_on,
+            size: 12,
+            color: textColor ?? AppColors.white,
+          ),
           const SizedBox(width: 4),
           Text(
             distance,
             style: AppTextStyles.caption(context).copyWith(
-              color: textColor ?? Colors.white,
+              color: textColor ?? AppColors.white,
               fontWeight: FontWeight.bold,
             ),
           ),

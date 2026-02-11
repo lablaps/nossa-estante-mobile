@@ -26,14 +26,14 @@ class CommunityActivitySection extends StatelessWidget {
               if (controller.isLoading)
                 Center(
                   child: Padding(
-                    padding: EdgeInsets.all(AppSpacing.lg),
+                    padding: AppSpacing.paddingAllLG,
                     child: CircularProgressIndicator(color: AppColors.primary),
                   ),
                 )
               else if (controller.communityActivities.isEmpty)
                 Center(
                   child: Padding(
-                    padding: EdgeInsets.all(AppSpacing.lg),
+                    padding: AppSpacing.paddingAllLG,
                     child: Text(
                       'Nenhuma atividade recente',
                       style: AppTextStyles.bodyMedium(
@@ -81,7 +81,7 @@ class _ActivityCard extends StatelessWidget {
           border: Border.all(color: context.borderColor),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.03),
+              color: AppColors.overlayLight,
               blurRadius: 4,
               offset: const Offset(0, 2),
             ),
@@ -93,7 +93,9 @@ class _ActivityCard extends StatelessWidget {
               width: 40,
               height: 40,
               decoration: BoxDecoration(
-                color: activityData.color.withOpacity(0.2),
+                color: activityData.color.withOpacity(
+                  AppDimensions.opacityMediumLow,
+                ),
                 shape: BoxShape.circle,
               ),
               child: Icon(

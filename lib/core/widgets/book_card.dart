@@ -58,7 +58,7 @@ class _VerticalBookCard extends StatelessWidget {
                 borderRadius: AppDimensions.borderRadiusMD,
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.15),
+                    color: AppColors.shadowDark,
                     blurRadius: 8,
                     offset: const Offset(0, 4),
                   ),
@@ -72,18 +72,15 @@ class _VerticalBookCard extends StatelessWidget {
                       top: AppSpacing.sm,
                       right: AppSpacing.sm,
                       child: Container(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: AppSpacing.sm,
-                          vertical: AppSpacing.xs,
-                        ),
+                        padding: AppSpacing.paddingDistanceBadge,
                         decoration: BoxDecoration(
-                          color: Colors.black.withOpacity(0.6),
+                          color: AppColors.overlayDark,
                           borderRadius: AppDimensions.borderRadiusSM,
                         ),
                         child: Text(
                           distance!,
                           style: AppTextStyles.caption(context).copyWith(
-                            color: Colors.white,
+                            color: AppColors.white,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -121,7 +118,7 @@ class _HorizontalBookCard extends StatelessWidget {
           border: Border.all(color: context.borderColor),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.03),
+              color: AppColors.overlayLight,
               blurRadius: 4,
               offset: const Offset(0, 2),
             ),
@@ -137,7 +134,7 @@ class _HorizontalBookCard extends StatelessWidget {
                 borderRadius: AppDimensions.borderRadiusSM,
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
+                    color: AppColors.shadowMedium,
                     blurRadius: 4,
                     offset: const Offset(0, 2),
                   ),

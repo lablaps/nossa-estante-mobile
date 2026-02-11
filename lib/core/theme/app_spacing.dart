@@ -106,6 +106,24 @@ class AppSpacing {
   /// Padding inferior para navegação (80px)
   static const double bottomNavPadding = 80.0;
 
+  /// Padding zero (sem padding)
+  static const EdgeInsets paddingZero = EdgeInsets.zero;
+
+  /// Padding de badge de distância/overlay (8px horizontal, 4px vertical)
+  static const EdgeInsets paddingDistanceBadge = EdgeInsets.symmetric(
+    horizontal: sm,
+    vertical: xs,
+  );
+
+  /// Padding de filtros/chips (16px horizontal, 8px vertical)
+  static const EdgeInsets paddingChip = EdgeInsets.symmetric(
+    horizontal: md,
+    vertical: sm,
+  );
+
+  /// Padding all grande (24px)
+  static const EdgeInsets paddingAllLG = EdgeInsets.all(lg);
+
   // ========== WIDGETS DE ESPAÇAMENTO ==========
 
   /// SizedBox vertical extra pequeno (4px)

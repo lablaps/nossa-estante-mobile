@@ -41,11 +41,13 @@ class HomeSearchBar extends StatelessWidget {
                   child: TextField(
                     decoration: InputDecoration(
                       hintText: 'Buscar livros, autores ou gêneros',
-                      hintStyle: AppTextStyles.bodyMedium(
-                        context,
-                      ).copyWith(color: context.textMuted.withOpacity(0.7)),
+                      hintStyle: AppTextStyles.bodyMedium(context).copyWith(
+                        color: context.textMuted.withOpacity(
+                          AppDimensions.opacityHigh + 0.1,
+                        ),
+                      ),
                       border: InputBorder.none,
-                      contentPadding: EdgeInsets.zero,
+                      contentPadding: AppSpacing.paddingZero,
                     ),
                     style: AppTextStyles.bodyMedium(context),
                   ),
@@ -80,10 +82,7 @@ class HomeSearchBar extends StatelessWidget {
                     return GestureDetector(
                       onTap: () => controller.setFilter(filter),
                       child: Container(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: AppSpacing.md,
-                          vertical: AppSpacing.sm,
-                        ),
+                        padding: AppSpacing.paddingChip,
                         decoration: BoxDecoration(
                           color: isSelected
                               ? AppColors.primary
@@ -102,7 +101,7 @@ class HomeSearchBar extends StatelessWidget {
                                 ? FontWeight.bold
                                 : FontWeight.w500,
                             color: isSelected
-                                ? Colors.black
+                                ? AppColors.black
                                 : context.textMuted,
                           ),
                         ),

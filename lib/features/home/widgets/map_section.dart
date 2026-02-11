@@ -44,7 +44,7 @@ class MapSection extends StatelessWidget {
                       border: Border.all(color: context.borderColor),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.1),
+                          color: AppColors.shadowMedium,
                           blurRadius: 8,
                           offset: const Offset(0, 2),
                         ),
@@ -139,12 +139,10 @@ class _MapInfoBadge extends StatelessWidget {
     return Container(
       padding: AppSpacing.paddingMapInfo,
       decoration: BoxDecoration(
-        color: context.surfaceColor.withOpacity(0.9),
+        color: context.surfaceColor.withOpacity(AppDimensions.opacityVeryHigh),
         borderRadius: AppDimensions.borderRadiusSM,
         border: Border.all(color: context.borderColor),
-        boxShadow: [
-          BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 4),
-        ],
+        boxShadow: [BoxShadow(color: AppColors.shadowLight, blurRadius: 4)],
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -196,13 +194,17 @@ class _MapPin extends StatelessWidget {
             border: Border.all(color: color, width: 2),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.2),
+                color: AppColors.shadowDarker,
                 blurRadius: 4,
                 offset: const Offset(0, 2),
               ),
             ],
           ),
-          child: Icon(icon ?? Icons.menu_book, color: Colors.white, size: 18),
+          child: Icon(
+            icon ?? Icons.menu_book,
+            color: AppColors.white,
+            size: 18,
+          ),
         ),
         CustomPaint(size: const Size(12, 8), painter: _TrianglePainter(color)),
       ],
