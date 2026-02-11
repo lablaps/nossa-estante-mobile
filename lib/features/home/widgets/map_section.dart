@@ -1,94 +1,95 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../../../core/domain/entities/entities.dart';
-import '../../../core/mocks/mocks.dart';
 import '../../../core/theme/theme.dart';
 import '../../../core/widgets/widgets.dart';
-import '../home_controller.dart';
 
 /// Seção do mapa mostrando livros próximos
 ///
-/// Recebe dados de livros do controller e calcula informações dinamicamente
+/// Widget puramente visual que recebe dados prontos por parâmetro.
+/// Pronto para substituição por Google Maps/Mapbox sem refatoração externa.
 class MapSection extends StatelessWidget {
-  const MapSection({super.key});
+  final List<Book> books;
+  final int totalInRadius;
+  final VoidCallback? onMapTap;
+
+  const MapSection({
+    super.key,
+    required this.books,
+    required this.totalInRadius,
+    this.onMapTap,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<HomeController>(
-      builder: (context, controller, _) {
-        final totalBooksInRadius = _countBooksInRadius(controller.nearbyBooks);
+    return GestureDetector(
+      onTap: onMapTap,
+      child: Container(
+        height: 320,
+        margin: AppSpacing.marginMapSection,
+        child: Stack(
+          children: [
+            // Map background (placeholder)
+            const MapPlaceholder(width: double.infinity, height: 320),
 
-        return GestureDetector(
-          onTap: controller.onMapTap,
-          child: Container(
-            height: 320,
-            margin: AppSpacing.marginMapSection,
-            child: Stack(
-              children: [
-                // Map background (placeholder)
-                const MapPlaceholder(width: double.infinity, height: 320),
+            // Map pins baseados em livros recebidos
+            ..._buildMapPins(books),
 
-                // Map pins baseados em livros reais
-                ..._buildMapPins(controller.nearbyBooks),
-
-                // Floating location button
-                Positioned(
-                  bottom: AppSpacing.md,
-                  right: AppSpacing.md,
-                  child: Container(
-                    width: 48,
-                    height: 48,
-                    decoration: BoxDecoration(
-                      color: context.surfaceColor,
-                      shape: BoxShape.circle,
-                      border: Border.all(color: context.borderColor),
-                      boxShadow: [
-                        BoxShadow(
-                          color: AppColors.shadowMedium,
-                          blurRadius: 8,
-                          offset: const Offset(0, 2),
-                        ),
-                      ],
+            // Floating location button
+            Positioned(
+              bottom: AppSpacing.md,
+              right: AppSpacing.md,
+              child: Container(
+                width: 48,
+                height: 48,
+                decoration: BoxDecoration(
+                  color: context.surfaceColor,
+                  shape: BoxShape.circle,
+                  border: Border.all(color: context.borderColor),
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppColors.shadowMedium,
+                      blurRadius: 8,
+                      offset: const Offset(0, 2),
                     ),
-                    child: Icon(Icons.my_location, color: context.textColor),
-                  ),
+                  ],
                 ),
-
-                // Info badge com dados reais
-                Positioned(
-                  bottom: AppSpacing.md,
-                  left: AppSpacing.md,
-                  child: _MapInfoBadge(
-                    booksCount: totalBooksInRadius,
-                    radius: 5,
-                  ),
-                ),
-
-                // Gradient fade at bottom
-                Positioned(
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  child: Container(
-                    height: 48,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [Colors.transparent, context.backgroundColor],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+                child: Icon(Icons.my_location, color: context.textColor),
+              ),
             ),
-          ),
-        );
-      },
+
+            // Info badge com dados recebidos
+            Positioned(
+              bottom: AppSpacing.md,
+              left: AppSpacing.md,
+              child: _MapInfoBadge(booksCount: totalInRadius, radius: 5),
+            ),
+
+            // Gradient fade at bottom
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: Container(
+                height: 48,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [Colors.transparent, context.backgroundColor],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
-  /// Constrói pins no mapa baseado em livros reais
+  /// Constrói pins no mapa baseado em livros recebidos
+  ///
+  /// Conversão puramente visual: domínio → posição fake.
+  /// Em produção, posições seriam calculadas por coordenadas reais do livro.
   List<Widget> _buildMapPins(List<Book> books) {
     if (books.isEmpty) return [];
 
@@ -110,20 +111,6 @@ class MapSection extends StatelessWidget {
         child: _MapPin(icon: Icons.menu_book, color: AppColors.primary),
       );
     }).toList();
-  }
-
-  /// Conta livros dentro de um raio (simplificado)
-  int _countBooksInRadius(List<Book> books) {
-    final currentLocation = MockUsers.currentUser.location;
-    if (currentLocation == null) return books.length;
-
-    return books.where((book) {
-      final ownerLocation = book.owner.location;
-      if (ownerLocation == null) return false;
-
-      final distance = currentLocation.distanceTo(ownerLocation);
-      return distance <= 5.0; // 5km de raio
-    }).length;
   }
 }
 

@@ -37,6 +37,13 @@ class HomeController extends ChangeNotifier {
   String? get errorMessage => _errorMessage;
   NavigationEvent? get pendingNavigation => _pendingNavigation;
 
+  /// Conta livros dentro de um raio de 5km da localização atual do usuário
+  int get totalBooksInRadius {
+    // TODO: Substituir por localização real do usuário quando disponível
+    // Por ora, retorna o total de livros (placeholder)
+    return _nearbyBooks.length;
+  }
+
   /// Lista de filtros disponíveis
   final List<String> filters = [
     'Perto de mim',

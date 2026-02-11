@@ -68,7 +68,13 @@ class _HomeViewState extends State<_HomeView> {
             const SliverToBoxAdapter(child: HomeSearchBar()),
 
             // Map Section
-            const SliverToBoxAdapter(child: MapSection()),
+            SliverToBoxAdapter(
+              child: MapSection(
+                books: controller.nearbyBooks,
+                totalInRadius: controller.totalBooksInRadius,
+                onMapTap: controller.onMapTap,
+              ),
+            ),
 
             // Books Near You
             const SliverToBoxAdapter(child: NearbyBooksSection()),
