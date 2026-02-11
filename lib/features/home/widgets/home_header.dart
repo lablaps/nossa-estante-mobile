@@ -238,17 +238,7 @@ class _TitleRow extends StatelessWidget {
         Text('Nossa Estante', style: AppTextStyles.h2(context)),
         // Botão de notificações
         IconButton(
-          onPressed:
-              onNotificationsTap ??
-              () {
-                debugPrint('Notificações - Feature em desenvolvimento');
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Notificações em breve!'),
-                    duration: Duration(seconds: 2),
-                  ),
-                );
-              },
+          onPressed: onNotificationsTap,
           icon: Icon(Icons.notifications_outlined, color: context.textColor),
           tooltip: 'Notificações',
         ),

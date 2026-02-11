@@ -21,11 +21,36 @@ class HomePage extends StatelessWidget {
   }
 }
 
-class _HomeView extends StatelessWidget {
+class _HomeView extends StatefulWidget {
   const _HomeView();
 
   @override
+  State<_HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<_HomeView> {
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    final controller = context.watch<HomeController>();
+
+    // Escuta navegações pendentes e executa
+    if (controller.pendingNavigation != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        final event = controller.pendingNavigation;
+        if (event != null && mounted) {
+          Navigator.pushNamed(context, event.route, arguments: event.arguments);
+          controller.clearNavigation();
+        }
+      });
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final controller = context.watch<HomeController>();
+
     return Scaffold(
       backgroundColor: context.backgroundColor,
       body: SafeArea(
@@ -33,7 +58,11 @@ class _HomeView extends StatelessWidget {
         child: CustomScrollView(
           slivers: [
             // Header
-            const SliverToBoxAdapter(child: HomeHeader()),
+            SliverToBoxAdapter(
+              child: HomeHeader(
+                onNotificationsTap: controller.onNotificationTap,
+              ),
+            ),
 
             // Search Bar
             const SliverToBoxAdapter(child: HomeSearchBar()),

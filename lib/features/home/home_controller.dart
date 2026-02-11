@@ -2,6 +2,14 @@ import 'package:flutter/material.dart';
 import '../../core/domain/entities/entities.dart';
 import 'home_repository.dart';
 
+/// Evento de navegação emitido pelo controller
+class NavigationEvent {
+  final String route;
+  final Object? arguments;
+
+  NavigationEvent(this.route, {this.arguments});
+}
+
 /// Controller para gerenciar o estado da Home
 ///
 /// Ponto único de acesso aos dados.
@@ -19,6 +27,7 @@ class HomeController extends ChangeNotifier {
   List<Exchange> _communityActivities = [];
   bool _isLoading = true;
   String? _errorMessage;
+  NavigationEvent? _pendingNavigation;
 
   // Getters - Expõem dados de domínio
   String get selectedFilter => _selectedFilter;
@@ -26,6 +35,7 @@ class HomeController extends ChangeNotifier {
   List<Exchange> get communityActivities => _communityActivities;
   bool get isLoading => _isLoading;
   String? get errorMessage => _errorMessage;
+  NavigationEvent? get pendingNavigation => _pendingNavigation;
 
   /// Lista de filtros disponíveis
   final List<String> filters = [
@@ -49,7 +59,6 @@ class HomeController extends ChangeNotifier {
       _communityActivities = activities;
     } catch (e) {
       _errorMessage = 'Erro ao carregar dados: $e';
-      debugPrint(_errorMessage);
     } finally {
       _isLoading = false;
       notifyListeners();
@@ -58,28 +67,39 @@ class HomeController extends ChangeNotifier {
 
   // --- Handlers (ações da UI) ---
 
+  /// Limpa navegação pendente (chamado após navegação ser executada)
+  void clearNavigation() {
+    _pendingNavigation = null;
+  }
+
   /// Handler: Quando usuário toca em um livro
   void onBookTap(Book book) {
-    debugPrint('Navegação: Detalhes do livro "${book.title}"');
-    // TODO: Navegar para detalhes do livro
+    _pendingNavigation = NavigationEvent('/book-details', arguments: book);
+    notifyListeners();
   }
 
   /// Handler: Quando usuário toca em "Ver todos"
-  void onSeeAllBooks() {
-    debugPrint('Navegação: Ver todos os livros');
-    // TODO: Navegar para lista completa de livros filtrados
+  void onViewAllNearby() {
+    _pendingNavigation = NavigationEvent('/nearby-books');
+    notifyListeners();
   }
 
   /// Handler: Quando usuário toca em uma atividade
   void onActivityTap(Exchange exchange) {
-    debugPrint('Navegação: Detalhes da troca ${exchange.id}');
-    // TODO: Navegar para detalhes da troca
+    _pendingNavigation = NavigationEvent('/book-details', arguments: exchange);
+    notifyListeners();
+  }
+
+  /// Handler: Quando usuário toca no botão de notificações
+  void onNotificationTap() {
+    _pendingNavigation = NavigationEvent('/notifications');
+    notifyListeners();
   }
 
   /// Handler: Quando usuário toca no mapa
   void onMapTap() {
-    debugPrint('Navegação: Visualização do mapa completo');
-    // TODO: Navegar para mapa em tela cheia
+    _pendingNavigation = NavigationEvent('/nearby-books');
+    notifyListeners();
   }
 
   /// Altera o filtro selecionado

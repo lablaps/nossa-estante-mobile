@@ -57,7 +57,7 @@ class NearbyBooksSection extends StatelessWidget {
                       ],
                     ),
                     GestureDetector(
-                      onTap: controller.onSeeAllBooks,
+                      onTap: controller.onViewAllNearby,
                       child: Text(
                         'Ver todos',
                         style: AppTextStyles.labelLarge(
