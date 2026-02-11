@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../../core/domain/entities/entities.dart';
+import '../../../core/mocks/mocks.dart';
 import '../../../core/theme/theme.dart';
 import '../../../core/widgets/widgets.dart';
 import '../home_controller.dart';
@@ -55,10 +57,7 @@ class NearbyBooksSection extends StatelessWidget {
                       ],
                     ),
                     GestureDetector(
-                      onTap: () {
-                        debugPrint('Navegação: Ver todos os livros');
-                        // TODO: Navegar para lista completa de livros
-                      },
+                      onTap: controller.onSeeAllBooks,
                       child: Text(
                         'Ver todos',
                         style: AppTextStyles.labelLarge(
@@ -109,17 +108,22 @@ class NearbyBooksSection extends StatelessWidget {
 }
 
 /// Card de livro individual
+///
+/// Recebe [Book] de domínio e faz conversão visual
 class _BookCard extends StatelessWidget {
-  final Map<String, dynamic> book;
+  final Book book;
 
   const _BookCard({required this.book});
 
   @override
   Widget build(BuildContext context) {
+    // Conversão domínio → visual
+    final distance = _formatDistance(book);
+
     return GestureDetector(
       onTap: () {
-        debugPrint('Navegação: Detalhes do livro ${book['title']}');
-        // TODO: Navegar para detalhes do livro
+        final controller = context.read<HomeController>();
+        controller.onBookTap(book);
       },
       child: SizedBox(
         width: 140,
@@ -141,7 +145,7 @@ class _BookCard extends StatelessWidget {
               ),
               child: Stack(
                 children: [
-                  BookPlaceholder(width: 140, height: 210, text: book['title']),
+                  BookPlaceholder(width: 140, height: 210, text: book.title),
                   Positioned(
                     top: AppSpacing.sm,
                     right: AppSpacing.sm,
@@ -155,7 +159,7 @@ class _BookCard extends StatelessWidget {
                         borderRadius: AppDimensions.borderRadiusSM,
                       ),
                       child: Text(
-                        book['distance'],
+                        distance,
                         style: AppTextStyles.caption(context).copyWith(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -170,13 +174,13 @@ class _BookCard extends StatelessWidget {
 
             // Book info
             Text(
-              book['title'],
+              book.title,
               style: AppTextStyles.labelLarge(context),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
             Text(
-              book['author'],
+              book.author,
               style: AppTextStyles.bodySmall(
                 context,
               ).copyWith(color: context.textMuted),
@@ -189,7 +193,7 @@ class _BookCard extends StatelessWidget {
                 const Icon(Icons.token, color: AppColors.primary, size: 14),
                 AppSpacing.horizontalXS,
                 Text(
-                  '${book['credits']} Créditos',
+                  '${book.creditsRequired} ${_pluralize(book.creditsRequired)}',
                   style: AppTextStyles.bodySmall(
                     context,
                   ).copyWith(fontWeight: FontWeight.bold),
@@ -200,5 +204,26 @@ class _BookCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  /// Formata distância baseado na localização do usuário
+  String _formatDistance(Book book) {
+    final currentUserLocation = MockUsers.currentUser.location;
+
+    if (currentUserLocation == null || book.owner.location == null) {
+      return 'Longe';
+    }
+
+    final distanceKm = currentUserLocation.distanceTo(book.owner.location!);
+
+    if (distanceKm < 1) {
+      return '${(distanceKm * 1000).round()}m';
+    } else {
+      return '${distanceKm.toStringAsFixed(1)}km';
+    }
+  }
+
+  String _pluralize(int count) {
+    return count == 1 ? 'Crédito' : 'Créditos';
   }
 }
