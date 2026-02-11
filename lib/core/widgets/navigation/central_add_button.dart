@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../../theme/theme.dart';
 
 /// Botão central elevado de adicionar para bottom navigation bar
-
 class CentralAddButton extends StatelessWidget {
   /// Se o botão está ativo/selecionado
   final bool isActive;
@@ -10,10 +9,18 @@ class CentralAddButton extends StatelessWidget {
   /// Callback ao tocar no botão
   final VoidCallback onTap;
 
+  /// Ícone personalizado (opcional, padrão: Icons.add)
+  final IconData? icon;
+
+  /// Label personalizada (opcional, padrão: 'Adicionar')
+  final String? label;
+
   const CentralAddButton({
     super.key,
     required this.isActive,
     required this.onTap,
+    this.icon,
+    this.label,
   });
 
   @override
@@ -41,13 +48,17 @@ class CentralAddButton extends StatelessWidget {
                   ),
                 ],
               ),
-              child: const Icon(Icons.add, color: AppColors.white, size: 28),
+              child: Icon(
+                icon ?? Icons.add,
+                color: AppColors.white,
+                size: 28,
+              ),
             ),
           ),
           Transform.translate(
             offset: const Offset(0, -16),
             child: Text(
-              'Adicionar',
+              label ?? 'Adicionar',
               style: AppTextStyles.caption(
                 context,
               ).copyWith(fontWeight: FontWeight.w500, color: context.textMuted),

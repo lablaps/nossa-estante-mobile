@@ -15,6 +15,13 @@ class AppRoutes {
   static const String nearbyBooks = '/nearby-books';
   static const String notifications = '/notifications';
 
+  // Rotas do Explore
+  static const String featured = '/featured';
+  static const String collection = '/collection';
+
+  // Rotas do My Shelf
+  static const String addBook = '/add-book';
+
   static Map<String, WidgetBuilder> get routes => {
     onboarding: (context) => const OnboardingPage(),
     login: (context) => const LoginPage(),
@@ -24,6 +31,9 @@ class AppRoutes {
         const _PlaceholderPage(title: 'Detalhes do Livro'),
     nearbyBooks: (context) => const _PlaceholderPage(title: 'Livros Próximos'),
     notifications: (context) => const _PlaceholderPage(title: 'Notificações'),
+    featured: (context) => const _PlaceholderPage(title: 'Em Destaque'),
+    collection: (context) => const _PlaceholderPage(title: 'Coleção'),
+    addBook: (context) => const _PlaceholderPage(title: 'Adicionar Livro'),
   };
 
   static Route<dynamic>? onGenerateRoute(RouteSettings settings) {
@@ -50,6 +60,20 @@ class AppRoutes {
       case notifications:
         return MaterialPageRoute(
           builder: (context) => const _PlaceholderPage(title: 'Notificações'),
+        );
+      case featured:
+        return MaterialPageRoute(
+          builder: (context) => const _PlaceholderPage(title: 'Em Destaque'),
+        );
+      case collection:
+        return MaterialPageRoute(
+          builder: (context) => const _PlaceholderPage(title: 'Coleção'),
+          settings: settings,
+        );
+      case addBook:
+        return MaterialPageRoute(
+          builder: (context) =>
+              const _PlaceholderPage(title: 'Adicionar Livro'),
         );
       default:
         return null;

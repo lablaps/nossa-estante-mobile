@@ -11,6 +11,7 @@ class Book {
   final List<String> genres;
   final User owner;
   final BookStatus status;
+  final BookCondition condition;
   final int creditsRequired;
 
   const Book({
@@ -23,6 +24,7 @@ class Book {
     this.genres = const [],
     required this.owner,
     this.status = BookStatus.available,
+    this.condition = BookCondition.good,
     required this.creditsRequired,
   });
 
@@ -36,6 +38,7 @@ class Book {
     List<String>? genres,
     User? owner,
     BookStatus? status,
+    BookCondition? condition,
     int? creditsRequired,
   }) {
     return Book(
@@ -48,6 +51,7 @@ class Book {
       genres: genres ?? this.genres,
       owner: owner ?? this.owner,
       status: status ?? this.status,
+      condition: condition ?? this.condition,
       creditsRequired: creditsRequired ?? this.creditsRequired,
     );
   }
@@ -58,4 +62,42 @@ enum BookStatus {
   available, // Disponível para troca
   inExchange, // Em processo de troca
   unavailable, // Indisponível temporariamente
+}
+
+/// Condição física do livro
+enum BookCondition {
+  new_, // Novo (sem uso)
+  likeNew, // Como novo
+  good, // Bom estado
+  fair, // Estado aceitável
+}
+
+/// Extensão para BookCondition
+extension BookConditionExtension on BookCondition {
+  String get label {
+    switch (this) {
+      case BookCondition.new_:
+        return 'New';
+      case BookCondition.likeNew:
+        return 'Like New';
+      case BookCondition.good:
+        return 'Good';
+      case BookCondition.fair:
+        return 'Fair';
+    }
+  }
+}
+
+/// Extensão para BookStatus
+extension BookStatusExtension on BookStatus {
+  String get label {
+    switch (this) {
+      case BookStatus.available:
+        return 'Available';
+      case BookStatus.inExchange:
+        return 'In Exchange';
+      case BookStatus.unavailable:
+        return 'Pending';
+    }
+  }
 }
