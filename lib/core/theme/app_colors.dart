@@ -51,4 +51,19 @@ class AppColors {
   // Cores de borda
   static const Color borderTopLight = Color(0x80FFFFFF);
   static const Color borderTopDark = Color(0x0DFFFFFF);
+
+  // Cores para bordas específicas
+  static const Color grayBorder = Color(0xFFF3F4F6); // gray-100
+
+  // Cores para status de livro
+  static const Color statusAvailable = Color(0xFF10B981); // green-600
+  static const Color statusInExchange = Color(0xFFF59E0B); // amber-600
+  static const Color statusUnavailable = Color(0xFF6B7280); // gray-500
+
+  // Cores específicas para book details
+  static const Color bookDetailsSurface = Color(
+    0xFF152b1d,
+  ); // Verde escuro específico
+  static const Color captionText = Color(0xFF9CA3AF); // gray-400
+  static const Color mutedText = Color(0xFF6B7280); // gray-500
 }

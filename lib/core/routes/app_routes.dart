@@ -3,6 +3,8 @@ import '../../features/onboarding/onboarding_page.dart';
 import '../../features/auth/login_page.dart';
 import '../../features/auth/signup_page.dart';
 import '../../features/app_shell/app_shell_page.dart';
+import '../../features/explore/book_details_page.dart';
+import '../domain/entities/entities.dart';
 
 class AppRoutes {
   static const String onboarding = '/';
@@ -27,12 +29,11 @@ class AppRoutes {
     login: (context) => const LoginPage(),
     signup: (context) => const SignupPage(),
     home: (context) => const AppShellPage(),
-    bookDetails: (context) =>
-        const _PlaceholderPage(title: 'Detalhes do Livro'),
+    // bookDetails usa onGenerateRoute para receber argumentos
     nearbyBooks: (context) => const _PlaceholderPage(title: 'Livros Próximos'),
     notifications: (context) => const _PlaceholderPage(title: 'Notificações'),
     featured: (context) => const _PlaceholderPage(title: 'Em Destaque'),
-    collection: (context) => const _PlaceholderPage(title: 'Coleção'),
+    // collection usa onGenerateRoute para receber argumentos
     addBook: (context) => const _PlaceholderPage(title: 'Adicionar Livro'),
   };
 
@@ -47,9 +48,15 @@ class AppRoutes {
       case home:
         return MaterialPageRoute(builder: (context) => const AppShellPage());
       case bookDetails:
+        final book = settings.arguments as Book?;
+        if (book == null) {
+          return MaterialPageRoute(
+            builder: (context) =>
+                const _PlaceholderPage(title: 'Livro não encontrado'),
+          );
+        }
         return MaterialPageRoute(
-          builder: (context) =>
-              const _PlaceholderPage(title: 'Detalhes do Livro'),
+          builder: (context) => BookDetailsPage(book: book),
           settings: settings,
         );
       case nearbyBooks:

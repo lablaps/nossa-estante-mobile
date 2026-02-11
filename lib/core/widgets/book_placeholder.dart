@@ -11,40 +11,47 @@ class BookPlaceholder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: width,
-      height: height,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [AppColors.primary.withOpacity(0.7), AppColors.primary],
+    final effectiveWidth = width ?? 140.0;
+    final effectiveHeight = height ?? 210.0;
+
+    return SizedBox(
+      width: effectiveWidth,
+      height: effectiveHeight,
+      child: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [AppColors.primary.withOpacity(0.7), AppColors.primary],
+          ),
+          borderRadius: AppDimensions.borderRadiusMD,
         ),
-        borderRadius: AppDimensions.borderRadiusMD,
-      ),
-      child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
           children: [
             Icon(
               Icons.menu_book_rounded,
-              size: (width ?? 140) * 0.3,
+              size: (effectiveWidth * 0.3).clamp(20.0, 60.0),
               color: AppColors.white.withOpacity(AppDimensions.opacityVeryHigh),
             ),
-            if (text != null) ...[
-              AppSpacing.verticalSM,
-              Padding(
-                padding: EdgeInsets.all(AppSpacing.xs),
-                child: Text(
-                  text!,
-                  style: AppTextStyles.caption(context).copyWith(
-                    color: AppColors.white.withOpacity(
-                      AppDimensions.opacityVeryHigh,
+            if (text != null && effectiveHeight > 80) ...[
+              SizedBox(height: 8),
+              Flexible(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: Text(
+                    text!,
+                    style: AppTextStyles.caption(context).copyWith(
+                      color: AppColors.white.withOpacity(
+                        AppDimensions.opacityVeryHigh,
+                      ),
+                      fontSize: 11,
                     ),
+                    textAlign: TextAlign.center,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                   ),
-                  textAlign: TextAlign.center,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
                 ),
               ),
             ],

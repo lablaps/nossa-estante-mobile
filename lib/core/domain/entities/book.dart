@@ -13,6 +13,9 @@ class Book {
   final BookStatus status;
   final BookCondition condition;
   final int creditsRequired;
+  final List<String> realBookPhotos;
+  final int? pageCount;
+  final String? language;
 
   const Book({
     required this.id,
@@ -26,6 +29,9 @@ class Book {
     this.status = BookStatus.available,
     this.condition = BookCondition.good,
     required this.creditsRequired,
+    this.realBookPhotos = const [],
+    this.pageCount,
+    this.language,
   });
 
   Book copyWith({
@@ -40,6 +46,9 @@ class Book {
     BookStatus? status,
     BookCondition? condition,
     int? creditsRequired,
+    List<String>? realBookPhotos,
+    int? pageCount,
+    String? language,
   }) {
     return Book(
       id: id ?? this.id,
@@ -53,6 +62,9 @@ class Book {
       status: status ?? this.status,
       condition: condition ?? this.condition,
       creditsRequired: creditsRequired ?? this.creditsRequired,
+      realBookPhotos: realBookPhotos ?? this.realBookPhotos,
+      pageCount: pageCount ?? this.pageCount,
+      language: language ?? this.language,
     );
   }
 }

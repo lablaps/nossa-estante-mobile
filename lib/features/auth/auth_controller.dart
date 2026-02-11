@@ -1,22 +1,15 @@
 import 'package:flutter/material.dart';
-import '../../core/domain/navigation_event.dart';
 
 class AuthController extends ChangeNotifier {
   bool _isLoading = false;
   bool _isPasswordVisible = false;
   bool _isConfirmPasswordVisible = false;
   String? _errorMessage;
-  NavigationEvent? _pendingNavigation;
 
   bool get isLoading => _isLoading;
   bool get isPasswordVisible => _isPasswordVisible;
   bool get isConfirmPasswordVisible => _isConfirmPasswordVisible;
   String? get errorMessage => _errorMessage;
-  NavigationEvent? get pendingNavigation => _pendingNavigation;
-
-  void clearNavigation() {
-    _pendingNavigation = null;
-  }
 
   void togglePasswordVisibility() {
     _isPasswordVisible = !_isPasswordVisible;
@@ -37,7 +30,6 @@ class AuthController extends ChangeNotifier {
 
     if (email.isNotEmpty && password.isNotEmpty) {
       _isLoading = false;
-      _pendingNavigation = NavigationEvent('/home');
       notifyListeners();
       return true;
     } else {
@@ -82,7 +74,6 @@ class AuthController extends ChangeNotifier {
     }
 
     _isLoading = false;
-    _pendingNavigation = NavigationEvent('/home');
     notifyListeners();
     return true;
   }
@@ -97,7 +88,6 @@ class AuthController extends ChangeNotifier {
     _isPasswordVisible = false;
     _isConfirmPasswordVisible = false;
     _errorMessage = null;
-    _pendingNavigation = null;
     notifyListeners();
   }
 }

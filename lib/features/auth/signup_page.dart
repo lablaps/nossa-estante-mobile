@@ -20,28 +20,6 @@ class _SignupPageState extends State<SignupPage> {
   final _confirmPasswordController = TextEditingController();
   bool _acceptedTerms = false;
 
-  // Observa eventos de navegação do controller
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-
-    final controller = context.watch<AuthController>();
-
-    if (controller.pendingNavigation != null) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        final event = controller.pendingNavigation;
-        if (event != null && mounted) {
-          Navigator.pushReplacementNamed(
-            context,
-            event.route,
-            arguments: event.arguments,
-          );
-          controller.clearNavigation();
-        }
-      });
-    }
-  }
-
   @override
   void dispose() {
     _nameController.dispose();
@@ -72,7 +50,12 @@ class _SignupPageState extends State<SignupPage> {
         confirmPassword: _confirmPasswordController.text,
       );
 
-      if (mounted && !success && controller.errorMessage != null) {
+      if (!mounted) return;
+
+      if (success) {
+        // Navigate on successful signup
+        Navigator.pushReplacementNamed(context, '/home');
+      } else if (controller.errorMessage != null) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(controller.errorMessage!),

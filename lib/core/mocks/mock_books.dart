@@ -19,6 +19,12 @@ class MockBooks {
       status: BookStatus.available,
       condition: BookCondition.likeNew,
       creditsRequired: 2,
+      pageCount: 176,
+      language: 'Português',
+      realBookPhotos: [
+        'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c',
+        'https://images.unsplash.com/photo-1512820790803-83ca734da794',
+      ],
     ),
     Book(
       id: 'book-002',
@@ -34,6 +40,8 @@ class MockBooks {
       status: BookStatus.inExchange,
       condition: BookCondition.good,
       creditsRequired: 3,
+      pageCount: 464,
+      language: 'Português',
     ),
     Book(
       id: 'book-003',
@@ -46,6 +54,13 @@ class MockBooks {
       genres: ['Ficção Científica', 'Aventura'],
       owner: MockUsers.users[2], // Lucas Oliveira
       status: BookStatus.available,
+      pageCount: 680,
+      language: 'Português',
+      realBookPhotos: [
+        'https://images.unsplash.com/photo-1532012197267-da84d127e765',
+        'https://images.unsplash.com/photo-1589998059171-988d887df646',
+        'https://images.unsplash.com/photo-1481627834876-b7833e8f5570',
+      ],
       condition: BookCondition.new_,
       creditsRequired: 2,
     ),
@@ -62,6 +77,8 @@ class MockBooks {
       status: BookStatus.unavailable,
       condition: BookCondition.fair,
       creditsRequired: 1,
+      pageCount: 328,
+      language: 'Português',
     ),
     Book(
       id: 'book-005',
@@ -76,6 +93,8 @@ class MockBooks {
       status: BookStatus.available,
       condition: BookCondition.good,
       creditsRequired: 3,
+      pageCount: 1178,
+      language: 'Português',
     ),
     Book(
       id: 'book-006',
@@ -90,6 +109,12 @@ class MockBooks {
       status: BookStatus.available,
       condition: BookCondition.new_,
       creditsRequired: 2,
+      pageCount: 288,
+      language: 'Português',
+      realBookPhotos: [
+        'https://images.unsplash.com/photo-1481627834876-b7833e8f5570',
+        'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c',
+      ],
     ),
     Book(
       id: 'book-007',
@@ -104,6 +129,14 @@ class MockBooks {
       status: BookStatus.available,
       condition: BookCondition.good,
       creditsRequired: 2,
+      pageCount: 264,
+      language: 'Português',
+      realBookPhotos: [
+        'https://images.unsplash.com/photo-1532012197267-da84d127e765',
+        'https://images.unsplash.com/photo-1589998059171-988d887df646',
+        'https://images.unsplash.com/photo-1481627834876-b7833e8f5570',
+        'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c',
+      ],
     ),
     Book(
       id: 'book-008',
@@ -118,6 +151,8 @@ class MockBooks {
       status: BookStatus.available,
       condition: BookCondition.likeNew,
       creditsRequired: 2,
+      pageCount: 432,
+      language: 'Português',
     ),
     // Livros do usuário atual
     Book(
@@ -133,6 +168,12 @@ class MockBooks {
       status: BookStatus.available,
       condition: BookCondition.likeNew,
       creditsRequired: 2,
+      pageCount: 176,
+      language: 'English',
+      realBookPhotos: [
+        'https://images.unsplash.com/photo-1589998059171-988d887df646',
+        'https://images.unsplash.com/photo-1512820790803-83ca734da794',
+      ],
     ),
     Book(
       id: 'book-010',
@@ -147,6 +188,8 @@ class MockBooks {
       status: BookStatus.inExchange,
       condition: BookCondition.good,
       creditsRequired: 3,
+      pageCount: 464,
+      language: 'English',
     ),
     Book(
       id: 'book-011',
@@ -161,6 +204,13 @@ class MockBooks {
       status: BookStatus.available,
       condition: BookCondition.new_,
       creditsRequired: 2,
+      pageCount: 320,
+      language: 'English',
+      realBookPhotos: [
+        'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c',
+        'https://images.unsplash.com/photo-1481627834876-b7833e8f5570',
+        'https://images.unsplash.com/photo-1532012197267-da84d127e765',
+      ],
     ),
     Book(
       id: 'book-012',
@@ -175,6 +225,8 @@ class MockBooks {
       status: BookStatus.unavailable,
       condition: BookCondition.fair,
       creditsRequired: 1,
+      pageCount: 328,
+      language: 'English',
     ),
     Book(
       id: 'book-013',
@@ -189,6 +241,8 @@ class MockBooks {
       status: BookStatus.available,
       condition: BookCondition.good,
       creditsRequired: 2,
+      pageCount: 368,
+      language: 'English',
     ),
     Book(
       id: 'book-014',
@@ -203,6 +257,8 @@ class MockBooks {
       status: BookStatus.available,
       condition: BookCondition.new_,
       creditsRequired: 3,
+      pageCount: 688,
+      language: 'English',
     ),
   ];
 
