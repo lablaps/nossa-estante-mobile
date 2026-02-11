@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../core/domain/entities/entities.dart';
 import '../../../core/mocks/mocks.dart';
 import '../../../core/theme/theme.dart';
+import '../../../core/widgets/widgets.dart';
 
 /// Header da página principal do app
 ///
@@ -73,7 +74,7 @@ class _UserInfoRow extends StatelessWidget {
         ),
         AppSpacing.horizontalSM,
         // Badge de créditos
-        _CreditsBadge(credits: user.credits, onTap: onCreditsTap),
+        CreditBadge(credits: user.credits, onTap: onCreditsTap),
       ],
     );
   }
@@ -167,59 +168,6 @@ class _UserAvatar extends StatelessWidget {
       color: AppColors.primary,
       size: AppDimensions.iconMD,
     );
-  }
-}
-
-/// Badge exibindo quantidade de créditos
-class _CreditsBadge extends StatelessWidget {
-  final int credits;
-  final VoidCallback? onTap;
-
-  const _CreditsBadge({required this.credits, this.onTap});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: AppSpacing.paddingBadge,
-        decoration: BoxDecoration(
-          color: AppColors.primary.withOpacity(
-            context.isDark
-                ? AppDimensions.opacityMediumLow
-                : AppDimensions.opacityLow,
-          ),
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(
-            color: AppColors.primary.withOpacity(AppDimensions.opacityMedium),
-          ),
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(
-              Icons.token,
-              color: context.isDark ? AppColors.primary : AppColors.primaryDark,
-              size: 18,
-            ),
-            AppSpacing.horizontalXS,
-            Text(
-              '$credits ${_pluralize(credits)}',
-              style: AppTextStyles.bodySmall(context).copyWith(
-                fontWeight: FontWeight.bold,
-                color: context.isDark
-                    ? AppColors.primary
-                    : AppColors.primaryDark,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  String _pluralize(int count) {
-    return count == 1 ? 'Crédito' : 'Créditos';
   }
 }
 

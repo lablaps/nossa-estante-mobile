@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../../../core/domain/entities/entities.dart';
 import '../../../core/mocks/mocks.dart';
 import '../../../core/theme/theme.dart';
+import '../../../core/widgets/widgets.dart';
 import '../home_controller.dart';
 
 /// Seção de atividades da comunidade
@@ -20,7 +21,7 @@ class CommunityActivitySection extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Atividade da Comunidade', style: AppTextStyles.h3(context)),
+              const SectionHeader(title: 'Atividade da Comunidade'),
               AppSpacing.verticalMD,
               if (controller.isLoading)
                 Center(

@@ -37,36 +37,10 @@ class NearbyBooksSection extends StatelessWidget {
           child: Column(
             children: [
               // Section header
-              Padding(
-                padding: AppSpacing.paddingHorizontal,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          'Livros Perto de Você',
-                          style: AppTextStyles.h3(context),
-                        ),
-                        AppSpacing.horizontalSM,
-                        const Icon(
-                          Icons.location_on,
-                          color: AppColors.primary,
-                          size: 20,
-                        ),
-                      ],
-                    ),
-                    GestureDetector(
-                      onTap: controller.onViewAllNearby,
-                      child: Text(
-                        'Ver todos',
-                        style: AppTextStyles.labelLarge(
-                          context,
-                        ).copyWith(color: context.primaryColor),
-                      ),
-                    ),
-                  ],
-                ),
+              SectionHeader(
+                title: 'Livros Perto de Você',
+                icon: Icons.location_on,
+                onViewAll: controller.onViewAllNearby,
               ),
               AppSpacing.verticalMD,
 
@@ -95,7 +69,13 @@ class NearbyBooksSection extends StatelessWidget {
                         separatorBuilder: (_, __) => AppSpacing.horizontalMD,
                         itemBuilder: (context, index) {
                           final book = controller.nearbyBooks[index];
-                          return _BookCard(book: book);
+                          final distance = _formatDistance(book);
+
+                          return BookCard(
+                            book: book,
+                            distance: distance,
+                            onTap: () => controller.onBookTap(book),
+                          );
                         },
                       ),
               ),
@@ -103,106 +83,6 @@ class NearbyBooksSection extends StatelessWidget {
           ),
         );
       },
-    );
-  }
-}
-
-/// Card de livro individual
-///
-/// Recebe [Book] de domínio e faz conversão visual
-class _BookCard extends StatelessWidget {
-  final Book book;
-
-  const _BookCard({required this.book});
-
-  @override
-  Widget build(BuildContext context) {
-    // Conversão domínio → visual
-    final distance = _formatDistance(book);
-
-    return GestureDetector(
-      onTap: () {
-        final controller = context.read<HomeController>();
-        controller.onBookTap(book);
-      },
-      child: SizedBox(
-        width: 140,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Book cover
-            Container(
-              height: 168,
-              decoration: BoxDecoration(
-                borderRadius: AppDimensions.borderRadiusMD,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.15),
-                    blurRadius: 8,
-                    offset: const Offset(0, 4),
-                  ),
-                ],
-              ),
-              child: Stack(
-                children: [
-                  BookPlaceholder(width: 140, height: 210, text: book.title),
-                  Positioned(
-                    top: AppSpacing.sm,
-                    right: AppSpacing.sm,
-                    child: Container(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: AppSpacing.sm,
-                        vertical: AppSpacing.xs,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.black.withOpacity(0.6),
-                        borderRadius: AppDimensions.borderRadiusSM,
-                      ),
-                      child: Text(
-                        distance,
-                        style: AppTextStyles.caption(context).copyWith(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            AppSpacing.verticalSM,
-
-            // Book info
-            Text(
-              book.title,
-              style: AppTextStyles.labelLarge(context),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
-            Text(
-              book.author,
-              style: AppTextStyles.bodySmall(
-                context,
-              ).copyWith(color: context.textMuted),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
-            AppSpacing.verticalXS,
-            Row(
-              children: [
-                const Icon(Icons.token, color: AppColors.primary, size: 14),
-                AppSpacing.horizontalXS,
-                Text(
-                  '${book.creditsRequired} ${_pluralize(book.creditsRequired)}',
-                  style: AppTextStyles.bodySmall(
-                    context,
-                  ).copyWith(fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
     );
   }
 
@@ -221,9 +101,5 @@ class _BookCard extends StatelessWidget {
     } else {
       return '${distanceKm.toStringAsFixed(1)}km';
     }
-  }
-
-  String _pluralize(int count) {
-    return count == 1 ? 'Crédito' : 'Créditos';
   }
 }
