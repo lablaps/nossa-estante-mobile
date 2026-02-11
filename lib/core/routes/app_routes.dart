@@ -4,6 +4,7 @@ import '../../features/auth/login_page.dart';
 import '../../features/auth/signup_page.dart';
 import '../../features/app_shell/app_shell_page.dart';
 import '../../features/explore/book_details_page.dart';
+import '../../features/add_book/add_book_page.dart';
 import '../domain/entities/entities.dart';
 
 class AppRoutes {
@@ -34,7 +35,7 @@ class AppRoutes {
     notifications: (context) => const _PlaceholderPage(title: 'Notificações'),
     featured: (context) => const _PlaceholderPage(title: 'Em Destaque'),
     // collection usa onGenerateRoute para receber argumentos
-    addBook: (context) => const _PlaceholderPage(title: 'Adicionar Livro'),
+    addBook: (context) => const AddBookPage(),
   };
 
   static Route<dynamic>? onGenerateRoute(RouteSettings settings) {
@@ -78,10 +79,7 @@ class AppRoutes {
           settings: settings,
         );
       case addBook:
-        return MaterialPageRoute(
-          builder: (context) =>
-              const _PlaceholderPage(title: 'Adicionar Livro'),
-        );
+        return MaterialPageRoute(builder: (context) => const AddBookPage());
       default:
         return null;
     }

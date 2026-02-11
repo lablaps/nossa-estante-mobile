@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import '../../core/theme/theme.dart';
 import '../../core/widgets/widgets.dart';
 import '../home/home_page.dart';
-import '../my_shelf/my_shelf_page.dart';
 import 'app_shell_controller.dart';
 
 class AppShellPage extends StatelessWidget {
@@ -24,7 +23,7 @@ class _AppShellView extends StatelessWidget {
   // Páginas/telas do app
   static final List<Widget> _pages = [
     const HomePage(),
-    const MyShelfPage(),
+    const _PlaceholderPage(title: 'Explorar', icon: Icons.explore),
     const _PlaceholderPage(title: 'Adicionar', icon: Icons.add),
     const _PlaceholderPage(title: 'Trocas', icon: Icons.swap_horiz),
     const _PlaceholderPage(title: 'Perfil', icon: Icons.person),
@@ -79,16 +78,15 @@ class _AppShellView extends StatelessWidget {
             onTap: () => controller.setIndex(0),
           ),
           NavItem(
-            icon: Icons.auto_stories,
-            iconOutlined: Icons.auto_stories_outlined,
-            label: 'Estante',
+            icon: Icons.map,
+            iconOutlined: Icons.map_outlined,
+            label: 'Explorar',
             isActive: controller.currentIndex == 1,
             onTap: () => controller.setIndex(1),
           ),
           CentralAddButton(
             isActive: controller.currentIndex == 2,
             onTap: () => controller.setIndex(2),
-            label: 'Adicionar Livro',
           ),
           NavItem(
             icon: Icons.chat,
