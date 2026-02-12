@@ -25,7 +25,7 @@ class ConditionBadge extends StatelessWidget {
           const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 4),
       decoration: BoxDecoration(
         color: context.isDark
-            ? AppColors.slate800.withOpacity(0.5)
+            ? AppColors.slate800.withValues(alpha: 0.5)
             : AppColors.slate200,
         borderRadius: AppDimensions.borderRadiusSM,
         border: Border.all(

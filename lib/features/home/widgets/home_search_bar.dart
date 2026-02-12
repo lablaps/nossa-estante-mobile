@@ -49,8 +49,8 @@ class HomeSearchBar extends StatelessWidget {
                     decoration: InputDecoration(
                       hintText: 'Buscar livros, autores ou gêneros',
                       hintStyle: AppTextStyles.bodyMedium(context).copyWith(
-                        color: context.textMuted.withOpacity(
-                          AppDimensions.opacityHigh + 0.1,
+                        color: context.textMuted.withValues(
+                          alpha: AppDimensions.opacityHigh + 0.1,
                         ),
                       ),
                       border: InputBorder.none,

@@ -101,7 +101,7 @@ class AddBookSettings extends StatelessWidget {
             borderRadius: AppDimensions.borderRadiusMD,
             boxShadow: [
               BoxShadow(
-                color: AppColors.black.withOpacity(0.02),
+                color: AppColors.black.withValues(alpha: 0.02),
                 blurRadius: 4,
                 offset: const Offset(0, 2),
               ),
@@ -139,7 +139,9 @@ class AddBookSettings extends StatelessWidget {
             hint: Text(
               'Selecione o idioma',
               style: TextStyle(
-                color: context.textMuted.withOpacity(AppDimensions.opacityHigh),
+                color: context.textMuted.withValues(
+                  alpha: AppDimensions.opacityHigh,
+                ),
               ),
             ),
           ),

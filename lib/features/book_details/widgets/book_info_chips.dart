@@ -54,7 +54,7 @@ class _InfoChip extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16),
       decoration: BoxDecoration(
         color: isDark
-            ? AppColors.emerald900.withOpacity(0.3)
+            ? AppColors.emerald900.withValues(alpha: 0.3)
             : AppColors.emerald100,
         borderRadius: BorderRadius.circular(AppDimensions.radiusFull),
       ),

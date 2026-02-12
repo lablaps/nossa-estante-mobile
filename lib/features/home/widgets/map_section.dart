@@ -64,8 +64,8 @@ class MapSection extends StatelessWidget {
                       borderRadius: AppDimensions.borderRadiusMD,
                       boxShadow: [
                         BoxShadow(
-                          color: AppColors.primary.withOpacity(
-                            AppDimensions.opacityMedium,
+                          color: AppColors.primary.withValues(
+                            alpha: AppDimensions.opacityMedium,
                           ),
                           blurRadius: 12,
                           offset: const Offset(0, 4),

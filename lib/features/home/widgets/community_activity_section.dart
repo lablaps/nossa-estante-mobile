@@ -100,7 +100,9 @@ class _ActivityCard extends StatelessWidget {
               width: 40,
               height: 40,
               decoration: BoxDecoration(
-                color: activityData.color.withOpacity(AppDimensions.opacityLow),
+                color: activityData.color.withValues(
+                  alpha: AppDimensions.opacityLow,
+                ),
                 shape: BoxShape.circle,
               ),
               child: Icon(

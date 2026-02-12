@@ -130,7 +130,9 @@ class _SignupPageState extends State<SignupPage> {
             width: 256,
             height: 256,
             decoration: BoxDecoration(
-              color: AppColors.primary.withOpacity(AppDimensions.opacityLow),
+              color: AppColors.primary.withValues(
+                alpha: AppDimensions.opacityLow,
+              ),
               shape: BoxShape.circle,
             ),
           ),
@@ -142,7 +144,7 @@ class _SignupPageState extends State<SignupPage> {
             width: 320,
             height: 320,
             decoration: BoxDecoration(
-              color: AppColors.primary.withOpacity(0.05),
+              color: AppColors.primary.withValues(alpha: 0.05),
               shape: BoxShape.circle,
             ),
           ),

@@ -86,7 +86,7 @@ class AppTheme {
         backgroundColor: AppColors.primary,
         foregroundColor: AppColors.textMain,
         elevation: 8,
-        shadowColor: AppColors.primary.withOpacity(0.25),
+        shadowColor: AppColors.primary.withValues(alpha: 0.25),
         shape: RoundedRectangleBorder(
           borderRadius: AppDimensions.borderRadiusFull,
         ),

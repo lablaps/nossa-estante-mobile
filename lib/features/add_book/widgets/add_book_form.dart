@@ -81,7 +81,7 @@ class AddBookForm extends StatelessWidget {
             borderRadius: AppDimensions.borderRadiusMD,
             boxShadow: [
               BoxShadow(
-                color: AppColors.black.withOpacity(0.02),
+                color: AppColors.black.withValues(alpha: 0.02),
                 blurRadius: 4,
                 offset: const Offset(0, 2),
               ),
@@ -96,7 +96,9 @@ class AddBookForm extends StatelessWidget {
             decoration: InputDecoration(
               hintText: 'Escreva uma breve descrição do livro...',
               hintStyle: TextStyle(
-                color: context.textMuted.withOpacity(AppDimensions.opacityHigh),
+                color: context.textMuted.withValues(
+                  alpha: AppDimensions.opacityHigh,
+                ),
               ),
               filled: true,
               fillColor: context.inputBackground,

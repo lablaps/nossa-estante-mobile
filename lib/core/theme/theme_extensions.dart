@@ -43,24 +43,25 @@ extension ThemeX on BuildContext {
   // ========== OVERLAYS E SOMBRAS ==========
 
   /// Overlay suave para bordas e divisórias (adapta ao tema)
-  Color get overlay => (isDark ? AppColors.white : AppColors.black).withOpacity(
-    AppDimensions.opacityVeryLow,
+  Color get overlay => (isDark ? AppColors.white : AppColors.black).withValues(
+    alpha: AppDimensions.opacityVeryLow,
   );
 
   /// Overlay médio (adapta ao tema)
   Color get overlayMedium => (isDark ? AppColors.white : AppColors.black)
-      .withOpacity(AppDimensions.opacityLow);
+      .withValues(alpha: AppDimensions.opacityLow);
 
   /// Sombra padrão
-  Color get shadow => AppColors.black.withOpacity(AppDimensions.opacityLow);
+  Color get shadow =>
+      AppColors.black.withValues(alpha: AppDimensions.opacityLow);
 
   /// Sombra suave
   Color get shadowSoft =>
-      AppColors.black.withOpacity(AppDimensions.opacityVeryLow);
+      AppColors.black.withValues(alpha: AppDimensions.opacityVeryLow);
 
   /// Sombra forte
   Color get shadowStrong =>
-      AppColors.black.withOpacity(AppDimensions.opacityMediumLow);
+      AppColors.black.withValues(alpha: AppDimensions.opacityMediumLow);
 
   // ========== CORES PRIMÁRIAS ==========
 

@@ -54,7 +54,7 @@ class CustomTextField extends StatelessWidget {
             borderRadius: AppDimensions.borderRadiusMD,
             boxShadow: [
               BoxShadow(
-                color: AppColors.black.withOpacity(0.02),
+                color: AppColors.black.withValues(alpha: 0.02),
                 blurRadius: 4,
                 offset: const Offset(0, 2),
               ),
@@ -73,7 +73,7 @@ class CustomTextField extends StatelessWidget {
             decoration: InputDecoration(
               hintText: hintText,
               hintStyle: TextStyle(
-                color: context.textMuted.withOpacity(0.7),
+                color: context.textMuted.withValues(alpha: 0.7),
               ),
               filled: true,
               fillColor: context.inputBackground,

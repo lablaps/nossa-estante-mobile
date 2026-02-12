@@ -16,7 +16,9 @@ class MapInfoBadge extends StatelessWidget {
     return Container(
       padding: AppSpacing.paddingBadge,
       decoration: BoxDecoration(
-        color: context.surfaceColor.withOpacity(AppDimensions.opacityVeryHigh),
+        color: context.surfaceColor.withValues(
+          alpha: AppDimensions.opacityVeryHigh,
+        ),
         borderRadius: AppDimensions.borderRadiusMD,
         border: Border.all(color: context.borderColor),
         boxShadow: [
@@ -38,8 +40,8 @@ class MapInfoBadge extends StatelessWidget {
               shape: BoxShape.circle,
               boxShadow: [
                 BoxShadow(
-                  color: AppColors.primary.withOpacity(
-                    AppDimensions.opacityMediumHigh,
+                  color: AppColors.primary.withValues(
+                    alpha: AppDimensions.opacityMediumHigh,
                   ),
                   blurRadius: 4,
                   spreadRadius: 1,

@@ -122,10 +122,12 @@ class _UserAvatar extends StatelessWidget {
       width: AppDimensions.avatarMedium,
       height: AppDimensions.avatarMedium,
       decoration: BoxDecoration(
-        color: AppColors.primary.withOpacity(AppDimensions.opacityLow),
+        color: AppColors.primary.withValues(alpha: AppDimensions.opacityLow),
         shape: BoxShape.circle,
         border: Border.all(
-          color: AppColors.primary.withOpacity(AppDimensions.opacityMedium),
+          color: AppColors.primary.withValues(
+            alpha: AppDimensions.opacityMedium,
+          ),
           width: AppDimensions.borderThick,
         ),
       ),

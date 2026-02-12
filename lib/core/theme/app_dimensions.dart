@@ -87,7 +87,7 @@ class AppDimensions {
 
   static List<BoxShadow> shadowGlow(Color color) => [
     BoxShadow(
-      color: color.withOpacity(opacityMedium),
+      color: color.withValues(alpha: opacityMedium),
       blurRadius: 12,
       offset: const Offset(0, 4),
     ),

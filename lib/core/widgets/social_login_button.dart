@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../theme/app_dimensions.dart';
 import '../theme/theme_extensions.dart';
 
 class SocialLoginButton extends StatelessWidget {

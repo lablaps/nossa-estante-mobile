@@ -66,8 +66,8 @@ class _AnimatedBookPinState extends State<AnimatedBookPin>
               border: Border.all(color: AppColors.primary, width: 3),
               boxShadow: [
                 BoxShadow(
-                  color: AppColors.primary.withOpacity(
-                    AppDimensions.opacityMedium,
+                  color: AppColors.primary.withValues(
+                    alpha: AppDimensions.opacityMedium,
                   ),
                   blurRadius: 8,
                   spreadRadius: 2,

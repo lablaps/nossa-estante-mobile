@@ -129,7 +129,9 @@ class _OnboardingPageState extends State<OnboardingPage> {
         child: Icon(
           Icons.map_outlined,
           size: 120,
-          color: AppColors.primary.withOpacity(AppDimensions.opacityMedium),
+          color: AppColors.primary.withValues(
+            alpha: AppDimensions.opacityMedium,
+          ),
         ),
       ),
       title: const _OnboardingTitle(
@@ -149,7 +151,9 @@ class _OnboardingPageState extends State<OnboardingPage> {
         child: Icon(
           Icons.qr_code_scanner_outlined,
           size: 120,
-          color: AppColors.primary.withOpacity(AppDimensions.opacityMedium),
+          color: AppColors.primary.withValues(
+            alpha: AppDimensions.opacityMedium,
+          ),
         ),
       ),
       title: const _OnboardingTitle(mainText: 'Escaneie e Cadastre Livros'),
@@ -166,7 +170,9 @@ class _OnboardingPageState extends State<OnboardingPage> {
         child: Icon(
           Icons.people_outline,
           size: 120,
-          color: AppColors.primary.withOpacity(AppDimensions.opacityMedium),
+          color: AppColors.primary.withValues(
+            alpha: AppDimensions.opacityMedium,
+          ),
         ),
       ),
       title: const _OnboardingTitle(
@@ -185,7 +191,9 @@ class _OnboardingPageState extends State<OnboardingPage> {
         child: Icon(
           Icons.stars,
           size: 120,
-          color: AppColors.primary.withOpacity(AppDimensions.opacityMedium),
+          color: AppColors.primary.withValues(
+            alpha: AppDimensions.opacityMedium,
+          ),
         ),
       ),
       title: const _OnboardingTitle(mainText: 'Ganhe Créditos Trocando'),
@@ -207,7 +215,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
       height: height,
       width: double.infinity,
       decoration: BoxDecoration(
-        color: AppColors.primary.withOpacity(0.05),
+        color: AppColors.primary.withValues(alpha: 0.05),
         borderRadius: AppDimensions.borderRadiusXL,
       ),
       child: Center(child: child),

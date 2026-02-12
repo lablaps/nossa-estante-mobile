@@ -45,7 +45,9 @@ class AddBookCoverPicker extends StatelessWidget {
         Icon(
           Icons.image_outlined,
           size: 64,
-          color: context.textMuted.withOpacity(AppDimensions.opacityMedium),
+          color: context.textMuted.withValues(
+            alpha: AppDimensions.opacityMedium,
+          ),
         ),
         AppSpacing.verticalSM,
         Text(
@@ -100,7 +102,7 @@ class AddBookCoverPicker extends StatelessWidget {
         borderRadius: AppDimensions.borderRadiusMD,
         boxShadow: [
           BoxShadow(
-            color: AppColors.black.withOpacity(0.02),
+            color: AppColors.black.withValues(alpha: 0.02),
             blurRadius: 4,
             offset: const Offset(0, 2),
           ),
@@ -114,7 +116,9 @@ class AddBookCoverPicker extends StatelessWidget {
         decoration: InputDecoration(
           hintText: 'Cole a URL da capa aqui',
           hintStyle: TextStyle(
-            color: context.textMuted.withOpacity(AppDimensions.opacityHigh),
+            color: context.textMuted.withValues(
+              alpha: AppDimensions.opacityHigh,
+            ),
           ),
           filled: true,
           fillColor: context.inputBackground,

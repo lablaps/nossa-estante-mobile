@@ -151,9 +151,7 @@ class _LoginPageState extends State<LoginPage> {
                     },
                     child: Text(
                       'Esqueceu a senha?',
-                      style: AppTextStyles.bodyMedium(
-                        context,
-                      ).copyWith(
+                      style: AppTextStyles.bodyMedium(context).copyWith(
                         color: context.textMuted,
                         fontWeight: FontWeight.w500,
                       ),
@@ -229,12 +227,8 @@ class _LoginPageState extends State<LoginPage> {
           margin: const EdgeInsets.only(top: AppSpacing.xl),
           padding: const EdgeInsets.symmetric(vertical: AppSpacing.xl),
           decoration: BoxDecoration(
-            color: context.backgroundColor.withOpacity(0.5),
-            border: Border(
-              top: BorderSide(
-                color: context.borderColor,
-              ),
-            ),
+            color: context.backgroundColor.withValues(alpha: 0.5),
+            border: Border(top: BorderSide(color: context.borderColor)),
           ),
           child: Center(
             child: Row(

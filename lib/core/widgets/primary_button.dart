@@ -28,7 +28,9 @@ class CircularIconButton extends StatelessWidget {
           shape: BoxShape.circle,
           boxShadow: [
             BoxShadow(
-              color: AppColors.primary.withOpacity(AppDimensions.opacityMedium),
+              color: AppColors.primary.withValues(
+                alpha: AppDimensions.opacityMedium,
+              ),
               blurRadius: 16,
               offset: const Offset(0, 4),
             ),
@@ -65,9 +67,9 @@ class PrimaryButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.primary,
           foregroundColor: AppColors.primaryButtonText,
-          disabledBackgroundColor: AppColors.primary.withOpacity(0.5),
+          disabledBackgroundColor: AppColors.primary.withValues(alpha: 0.5),
           elevation: 8,
-          shadowColor: AppColors.primary.withOpacity(0.2),
+          shadowColor: AppColors.primary.withValues(alpha: 0.2),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(9999),
           ),
@@ -78,7 +80,9 @@ class PrimaryButton extends StatelessWidget {
                 width: 24,
                 child: CircularProgressIndicator(
                   strokeWidth: 2.5,
-                  valueColor: AlwaysStoppedAnimation<Color>(AppColors.primaryButtonText),
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                    AppColors.primaryButtonText,
+                  ),
                 ),
               )
             : Row(

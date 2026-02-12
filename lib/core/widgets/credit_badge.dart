@@ -16,10 +16,12 @@ class CreditBadge extends StatelessWidget {
       child: Container(
         padding: AppSpacing.paddingBadge,
         decoration: BoxDecoration(
-          color: AppColors.primary.withOpacity(AppDimensions.opacityLow),
+          color: AppColors.primary.withValues(alpha: AppDimensions.opacityLow),
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
-            color: AppColors.primary.withOpacity(AppDimensions.opacityMedium),
+            color: AppColors.primary.withValues(
+              alpha: AppDimensions.opacityMedium,
+            ),
           ),
         ),
         child: Row(

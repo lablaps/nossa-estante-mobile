@@ -59,7 +59,9 @@ class AddBookGenreSelector extends StatelessWidget {
                 ),
                 decoration: BoxDecoration(
                   color: isSelected
-                      ? AppColors.primary.withOpacity(AppDimensions.opacityLow)
+                      ? AppColors.primary.withValues(
+                          alpha: AppDimensions.opacityLow,
+                        )
                       : context.inputBackground,
                   borderRadius: AppDimensions.borderRadiusSM,
                   border: Border.all(

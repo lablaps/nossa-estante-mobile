@@ -17,7 +17,9 @@ class AddBookActions extends StatelessWidget {
         border: Border(top: BorderSide(color: context.borderColor, width: 1)),
         boxShadow: [
           BoxShadow(
-            color: AppColors.black.withOpacity(AppDimensions.opacityVeryLow),
+            color: AppColors.black.withValues(
+              alpha: AppDimensions.opacityVeryLow,
+            ),
             blurRadius: 8,
             offset: const Offset(0, -2),
           ),
