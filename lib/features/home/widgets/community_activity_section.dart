@@ -4,7 +4,6 @@ import '../../../core/theme/theme.dart';
 import '../../../core/utils/distance_formatter.dart';
 import '../../../core/widgets/widgets.dart';
 
-// Atividades da comunidade
 class CommunityActivitySection extends StatelessWidget {
   final List<Exchange> communityActivities;
   final User currentUser;

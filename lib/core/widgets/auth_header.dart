@@ -52,23 +52,30 @@ class AuthHeader extends StatelessWidget {
             ),
             child: Icon(icon, size: iconSize, color: AppColors.primary),
           ),
-          AppSpacing.verticalLG,
+          const SizedBox(height: AppSpacing.lg),
 
           // Título
           Text(
             title,
-            style: AppTextStyles.h1(context),
+            style: AppTextStyles.h1(context).copyWith(
+              fontSize: 32,
+              fontWeight: FontWeight.bold,
+              letterSpacing: -0.5,
+            ),
             textAlign: TextAlign.center,
           ),
-          AppSpacing.verticalSM,
+          const SizedBox(height: AppSpacing.sm),
 
           // Subtítulo
-          Text(
-            subtitle,
-            style: AppTextStyles.bodyLarge(
-              context,
-            ).copyWith(color: context.textMuted),
-            textAlign: TextAlign.center,
+          ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 320),
+            child: Text(
+              subtitle,
+              style: AppTextStyles.bodyLarge(
+                context,
+              ).copyWith(color: context.textMuted),
+              textAlign: TextAlign.center,
+            ),
           ),
         ],
       ),

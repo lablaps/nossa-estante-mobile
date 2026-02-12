@@ -16,12 +16,13 @@ class SocialLoginButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Container(
       width: 56,
       height: 56,
       decoration: BoxDecoration(
-        color: context.inputBackground,
-        borderRadius: AppDimensions.borderRadiusXL,
+        color: isDark ? context.inputBackground : context.surfaceColor,
+        shape: BoxShape.circle,
         border: Border.all(color: context.borderColor),
       ),
       child: IconButton(
@@ -29,7 +30,7 @@ class SocialLoginButton extends StatelessWidget {
         icon: Icon(icon),
         color: context.textColor,
         tooltip: tooltip,
-        iconSize: 24,
+        iconSize: 28,
       ),
     );
   }

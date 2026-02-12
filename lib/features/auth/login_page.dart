@@ -4,7 +4,6 @@ import '../../core/theme/theme.dart';
 import '../../core/widgets/widgets.dart';
 import 'auth_controller.dart';
 
-// Tela de login
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -34,7 +33,6 @@ class _LoginPageState extends State<LoginPage> {
       if (!mounted) return;
 
       if (success) {
-        // Navigate on successful login
         Navigator.pushReplacementNamed(context, '/home');
       } else if (controller.errorMessage != null) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -99,7 +97,7 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               children: [
                 CustomTextField(
-                  labelText: 'Email',
+                  labelText: 'Endereço de email',
                   hintText: 'Digite seu email',
                   prefixIcon: Icons.mail_outline_rounded,
                   controller: _emailController,
@@ -155,7 +153,10 @@ class _LoginPageState extends State<LoginPage> {
                       'Esqueceu a senha?',
                       style: AppTextStyles.bodyMedium(
                         context,
-                      ).copyWith(color: context.textMuted),
+                      ).copyWith(
+                        color: context.textMuted,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                 ),
@@ -228,10 +229,12 @@ class _LoginPageState extends State<LoginPage> {
           margin: const EdgeInsets.only(top: AppSpacing.xl),
           padding: const EdgeInsets.symmetric(vertical: AppSpacing.xl),
           decoration: BoxDecoration(
-            color: context.backgroundColor.withOpacity(
-              AppDimensions.opacityMediumHigh,
+            color: context.backgroundColor.withOpacity(0.5),
+            border: Border(
+              top: BorderSide(
+                color: context.borderColor,
+              ),
             ),
-            border: Border(top: BorderSide(color: context.overlay)),
           ),
           child: Center(
             child: Row(

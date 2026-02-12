@@ -1,10 +1,6 @@
 import '../../core/domain/entities/entities.dart';
 import '../../core/mocks/mocks.dart';
 
-/// Repository que fornece dados para a Home
-///
-/// Retorna dados de domínio usando mocks.
-/// Futuramente será substituído por chamadas HTTP reais.
 class HomeRepository {
   Future<List<Book>> fetchNearbyBooks() async {
     await Future.delayed(const Duration(milliseconds: 300));

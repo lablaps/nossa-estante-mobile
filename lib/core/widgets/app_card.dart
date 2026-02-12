@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import '../theme/theme.dart';
 
-/// Card padrão reutilizável da aplicação
-///
-/// Container com bordas arredondadas, borda e sombra padronizadas.
-/// Use para manter consistência visual em cards, containers elevados, etc.
 class AppCard extends StatelessWidget {
   final Widget child;
   final EdgeInsetsGeometry? padding;
@@ -42,10 +38,7 @@ class AppCard extends StatelessWidget {
     );
 
     if (onTap != null) {
-      return GestureDetector(
-        onTap: onTap,
-        child: cardContent,
-      );
+      return GestureDetector(onTap: onTap, child: cardContent);
     }
 
     return cardContent;

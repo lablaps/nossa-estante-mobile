@@ -29,7 +29,6 @@ class _HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<_HomeView> {
-  // Observa eventos de navegação do controller
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -57,7 +56,6 @@ class _HomeViewState extends State<_HomeView> {
         bottom: false,
         child: CustomScrollView(
           slivers: [
-            // Header da Home
             SliverToBoxAdapter(
               child: HomeHeader(
                 user: controller.currentUser,
@@ -65,7 +63,6 @@ class _HomeViewState extends State<_HomeView> {
               ),
             ),
 
-            // Barra de busca com filtros
             SliverToBoxAdapter(
               child: HomeSearchBar(
                 filters: controller.filters,
@@ -74,7 +71,6 @@ class _HomeViewState extends State<_HomeView> {
               ),
             ),
 
-            // Preview do mapa
             SliverToBoxAdapter(
               child: MapSection(
                 books: controller.nearbyBooks,
@@ -83,7 +79,6 @@ class _HomeViewState extends State<_HomeView> {
               ),
             ),
 
-            // Seção de livros próximos
             SliverToBoxAdapter(
               child: NearbyBooksSection(
                 nearbyBooks: controller.nearbyBooks,
@@ -94,7 +89,6 @@ class _HomeViewState extends State<_HomeView> {
               ),
             ),
 
-            // Atividades da comunidade
             SliverToBoxAdapter(
               child: CommunityActivitySection(
                 communityActivities: controller.communityActivities,

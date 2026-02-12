@@ -27,13 +27,10 @@ class HomeController extends ChangeNotifier {
   NavigationEvent? get pendingNavigation => _pendingNavigation;
   User get currentUser => MockUsers.currentUser;
 
-  /// Conta livros dentro de um raio de 5km da localização atual do usuário
   int get totalBooksInRadius {
-    // TODO: Usar localização real do usuário
     return _nearbyBooks.length;
   }
 
-  /// Lista de filtros disponíveis
   final List<String> filters = [
     'Perto de mim',
     'Ficção',
@@ -41,7 +38,6 @@ class HomeController extends ChangeNotifier {
     'Sci-Fi',
   ];
 
-  /// Carrega dados iniciais
   Future<void> _loadData() async {
     _isLoading = true;
     _errorMessage = null;
@@ -61,42 +57,35 @@ class HomeController extends ChangeNotifier {
     }
   }
 
-  /// Limpa navegação pendente (chamado após navegação ser executada)
   void clearNavigation() {
     _pendingNavigation = null;
   }
 
-  /// Handler: Quando usuário toca em um livro
   void onBookTap(Book book) {
     _pendingNavigation = NavigationEvent('/book-details', arguments: book);
     notifyListeners();
   }
 
-  /// Handler: Quando usuário toca em "Ver todos"
   void onViewAllNearby() {
     _pendingNavigation = NavigationEvent('/nearby-books');
     notifyListeners();
   }
 
-  /// Handler: Quando usuário toca em uma atividade
   void onActivityTap(Exchange exchange) {
     _pendingNavigation = NavigationEvent('/book-details', arguments: exchange);
     notifyListeners();
   }
 
-  /// Handler: Quando usuário toca no botão de notificações
   void onNotificationTap() {
     _pendingNavigation = NavigationEvent('/notifications');
     notifyListeners();
   }
 
-  /// Handler: Quando usuário toca no mapa
   void onMapTap() {
     _pendingNavigation = NavigationEvent('/nearby-books');
     notifyListeners();
   }
 
-  /// Altera o filtro selecionado
   void setFilter(String filter) {
     if (_selectedFilter != filter) {
       _selectedFilter = filter;
@@ -104,7 +93,6 @@ class HomeController extends ChangeNotifier {
     }
   }
 
-  /// Recarrega os dados
   Future<void> refresh() async {
     await _loadData();
   }

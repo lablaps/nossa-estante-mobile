@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import '../../../core/domain/entities/entities.dart';
 import '../../../core/theme/theme.dart';
 
-/// Widget que exibe chips com informações do livro
-///
-/// Mostra gênero, número de páginas e idioma em formato de chips.
 class BookInfoChips extends StatelessWidget {
   final Book book;
 
@@ -27,7 +24,7 @@ class BookInfoChips extends StatelessWidget {
 
           // Número de páginas
           if (book.pageCount != null)
-            _InfoChip(icon: Icons.numbers, label: '${book.pageCount} Pages'),
+            _InfoChip(icon: Icons.numbers, label: '${book.pageCount} páginas'),
 
           // Idioma
           if (book.language != null)
@@ -53,34 +50,30 @@ class _InfoChip extends StatelessWidget {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Container(
-      height: 38,
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+      height: 32,
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       decoration: BoxDecoration(
         color: isDark
-            ? AppColors.primary.withValues(
-                alpha: AppDimensions.opacityMediumLow,
-              )
-            : AppColors.primary.withValues(alpha: AppDimensions.opacityMedium),
+            ? AppColors.emerald900.withOpacity(0.3)
+            : AppColors.emerald100,
         borderRadius: BorderRadius.circular(AppDimensions.radiusFull),
-        border: Border.all(
-          color: AppColors.primary.withValues(
-            alpha: AppDimensions.opacityMedium,
-          ),
-          width: 1.5,
-        ),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: 20, color: AppColors.primary),
+          Icon(
+            icon,
+            size: 18,
+            color: isDark ? AppColors.emerald300 : AppColors.emerald800,
+          ),
           const SizedBox(width: 8),
           Text(
             label.toUpperCase(),
             style: AppTextStyles.bodyMedium(context).copyWith(
-              fontWeight: FontWeight.w800,
-              letterSpacing: 0.5,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 1.0,
               fontSize: 12,
-              color: AppColors.primary,
+              color: isDark ? AppColors.emerald100 : AppColors.emerald900,
             ),
           ),
         ],

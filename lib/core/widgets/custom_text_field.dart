@@ -73,39 +73,39 @@ class CustomTextField extends StatelessWidget {
             decoration: InputDecoration(
               hintText: hintText,
               hintStyle: TextStyle(
-                color: context.textMuted.withOpacity(AppDimensions.opacityHigh),
+                color: context.textMuted.withOpacity(0.7),
               ),
               filled: true,
               fillColor: context.inputBackground,
               border: OutlineInputBorder(
-                borderRadius: AppDimensions.borderRadiusMD,
+                borderRadius: BorderRadius.circular(12),
                 borderSide: BorderSide(color: context.borderColor),
               ),
               enabledBorder: OutlineInputBorder(
-                borderRadius: AppDimensions.borderRadiusMD,
+                borderRadius: BorderRadius.circular(12),
                 borderSide: BorderSide(color: context.borderColor),
               ),
               focusedBorder: OutlineInputBorder(
-                borderRadius: AppDimensions.borderRadiusMD,
+                borderRadius: BorderRadius.circular(12),
                 borderSide: const BorderSide(
                   color: AppColors.primary,
                   width: 1.5,
                 ),
               ),
               errorBorder: OutlineInputBorder(
-                borderRadius: AppDimensions.borderRadiusMD,
+                borderRadius: BorderRadius.circular(12),
                 borderSide: const BorderSide(color: Colors.red),
               ),
               focusedErrorBorder: OutlineInputBorder(
-                borderRadius: AppDimensions.borderRadiusMD,
+                borderRadius: BorderRadius.circular(12),
                 borderSide: const BorderSide(color: Colors.red, width: 1.5),
               ),
               prefixIcon: prefixIcon != null
                   ? Icon(prefixIcon, color: context.textMuted)
                   : null,
               suffixIcon: suffixIcon,
-              contentPadding: EdgeInsets.symmetric(
-                horizontal: prefixIcon != null ? 12 : 20,
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 16,
                 vertical: 16,
               ),
             ),

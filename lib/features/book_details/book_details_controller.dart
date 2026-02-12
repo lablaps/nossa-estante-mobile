@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../core/routes/navigation_event.dart';
-import '../../../core/domain/entities/entities.dart';
+import '../../core/routes/navigation_event.dart';
+import '../../core/domain/entities/entities.dart';
 
 /// Controller for managing book details page state and navigation
 class BookDetailsController with ChangeNotifier {

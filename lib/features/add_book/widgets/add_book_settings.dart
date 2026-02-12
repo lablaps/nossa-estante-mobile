@@ -3,10 +3,6 @@ import '../../../core/domain/entities/entities.dart';
 import '../../../core/theme/theme.dart';
 import '../add_book_controller.dart';
 
-/// Seletor de condição do livro e configurações de troca
-///
-/// Permite selecionar a condição física e definir créditos necessários.
-/// Apenas renderiza - a lógica está no controller.
 class AddBookSettings extends StatelessWidget {
   final AddBookController controller;
 
@@ -112,7 +108,7 @@ class AddBookSettings extends StatelessWidget {
             ],
           ),
           child: DropdownButtonFormField<String>(
-            value: controller.language,
+            initialValue: controller.language,
             decoration: InputDecoration(
               filled: true,
               fillColor: context.inputBackground,

@@ -4,7 +4,6 @@ import '../../core/theme/theme.dart';
 import '../../core/widgets/widgets.dart';
 import 'auth_controller.dart';
 
-// Tela de cadastro
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
 
@@ -278,20 +277,34 @@ class _SignupPageState extends State<SignupPage> {
                             context,
                           ).copyWith(color: context.textMuted),
                           children: [
-                            const TextSpan(text: 'Concordo com os '),
+                            const TextSpan(
+                              text: 'Concordo com os ',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 14,
+                              ),
+                            ),
                             TextSpan(
                               text: 'Termos de Uso',
                               style: const TextStyle(
                                 color: AppColors.primary,
                                 fontWeight: FontWeight.bold,
+                                fontSize: 14,
                               ),
                             ),
-                            const TextSpan(text: ' e '),
+                            const TextSpan(
+                              text: ' e ',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 14,
+                              ),
+                            ),
                             TextSpan(
                               text: 'Política de Privacidade',
                               style: const TextStyle(
                                 color: AppColors.primary,
                                 fontWeight: FontWeight.bold,
+                                fontSize: 14,
                               ),
                             ),
                           ],

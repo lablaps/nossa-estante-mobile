@@ -4,20 +4,11 @@ import '../../core/routes/navigation_event.dart';
 import '../../core/mocks/mock_users.dart';
 import 'add_book_repository.dart';
 
-/// Controller para gerenciar o estado da tela de adicionar livro
-///
-/// Responsabilidades:
-/// - Gerenciar estado do formulário
-/// - Validar dados de entrada
-/// - Emitir eventos de navegação
-/// - Coordenar com repository para persistir dados
 class AddBookController extends ChangeNotifier {
   final AddBookRepository _repository;
 
   AddBookController({required AddBookRepository repository})
     : _repository = repository;
-
-  // ========== ESTADO DO FORMULÁRIO ==========
 
   String _title = '';
   String _author = '';
@@ -30,13 +21,9 @@ class AddBookController extends ChangeNotifier {
   String? _language;
   int? _pageCount;
 
-  // ========== ESTADO DA UI ==========
-
   bool _isLoading = false;
   String? _errorMessage;
   NavigationEvent? _pendingNavigation;
-
-  // ========== GETTERS ==========
 
   bool get isLoading => _isLoading;
   String? get errorMessage => _errorMessage;
@@ -53,8 +40,6 @@ class AddBookController extends ChangeNotifier {
   BookCondition get condition => _condition;
   String? get language => _language;
   int? get pageCount => _pageCount;
-
-  // ========== SETTERS DE FORMULÁRIO ==========
 
   void setTitle(String value) {
     _title = value;
@@ -113,8 +98,6 @@ class AddBookController extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ========== VALIDAÇÃO ==========
-
   bool _validateForm() {
     if (_title.trim().isEmpty) {
       _errorMessage = 'O título é obrigatório';
@@ -156,8 +139,6 @@ class AddBookController extends ChangeNotifier {
     }
   }
 
-  // ========== NAVEGAÇÃO ==========
-
   void clearNavigation() {
     _pendingNavigation = null;
   }
@@ -167,9 +148,6 @@ class AddBookController extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ========== AÇÃO PRINCIPAL ==========
-
-  /// Salva o livro e navega de volta
   Future<void> onSaveBook() async {
     if (!_validateForm()) {
       return;
@@ -180,10 +158,8 @@ class AddBookController extends ChangeNotifier {
     notifyListeners();
 
     try {
-      // Gera ID único
       final id = _generateId();
 
-      // Cria o livro
       final book = Book(
         id: id,
         title: _title.trim(),
@@ -200,10 +176,8 @@ class AddBookController extends ChangeNotifier {
         pageCount: _pageCount,
       );
 
-      // Salva no repository
       await _repository.addBook(book);
 
-      // Navega de volta
       _pendingNavigation = NavigationEvent.pop();
       notifyListeners();
     } catch (e) {
@@ -215,7 +189,6 @@ class AddBookController extends ChangeNotifier {
     }
   }
 
-  /// Gera um ID único para o livro
   String _generateId() {
     final timestamp = DateTime.now().millisecondsSinceEpoch;
     return 'book-$timestamp';

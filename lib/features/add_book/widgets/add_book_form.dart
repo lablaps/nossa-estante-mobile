@@ -3,10 +3,6 @@ import '../../../core/theme/theme.dart';
 import '../../../core/widgets/widgets.dart';
 import '../add_book_controller.dart';
 
-/// Formulário principal para adicionar livro
-///
-/// Contém campos para título, autor, ISBN, e descrição.
-/// Apenas renderiza - não contém lógica de negócio.
 class AddBookForm extends StatelessWidget {
   final AddBookController controller;
 

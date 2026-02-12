@@ -15,7 +15,7 @@ class RealBookPhotos extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Real Book Photos',
+          'Fotos do Livro',
           style: AppTextStyles.h5(
             context,
           ).copyWith(fontWeight: FontWeight.w700, fontSize: 18),

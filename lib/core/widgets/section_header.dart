@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import '../theme/theme.dart';
 
-/// Header de seção reutilizável
-///
-/// Exibe um título com ícone opcional e botão "Ver todos" opcional.
-/// Não contém lógica de navegação - usa callback [onViewAll].
 class SectionHeader extends StatelessWidget {
   final String title;
   final IconData? icon;

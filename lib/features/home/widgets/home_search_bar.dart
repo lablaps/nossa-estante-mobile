@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../core/theme/theme.dart';
 
-// Barra de busca com filtros
 class HomeSearchBar extends StatelessWidget {
   final List<String> filters;
   final String selectedFilter;

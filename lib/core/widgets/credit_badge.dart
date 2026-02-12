@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import '../theme/theme.dart';
 
-/// Badge de créditos reutilizável
-///
-/// Exibe quantidade de créditos do usuário com ícone de token.
-/// Não contém lógica de navegação - usa callback [onTap] opcional.
 class CreditBadge extends StatelessWidget {
   final int credits;
   final VoidCallback? onTap;

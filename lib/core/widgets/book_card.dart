@@ -3,13 +3,8 @@ import '../domain/entities/entities.dart';
 import '../theme/theme.dart';
 import 'book_cover.dart';
 
-/// Orientação do card de livro
 enum BookCardOrientation { vertical, horizontal }
 
-/// Card de livro reutilizável
-///
-/// Exibe informações de um livro com suporte para orientação vertical (padrão)
-/// ou horizontal. Não contém lógica de navegação - usa callback [onTap].
 class BookCard extends StatelessWidget {
   final Book book;
   final VoidCallback? onTap;
@@ -34,7 +29,6 @@ class BookCard extends StatelessWidget {
 
 String _pluralize(int count) => count == 1 ? 'Crédito' : 'Créditos';
 
-/// Card de livro vertical
 class _VerticalBookCard extends StatelessWidget {
   final Book book;
   final VoidCallback? onTap;
@@ -51,7 +45,6 @@ class _VerticalBookCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Book cover
             Container(
               width: 140,
               height: 210,

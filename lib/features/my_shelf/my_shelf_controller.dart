@@ -34,9 +34,7 @@ extension ShelfFilterExtension on ShelfFilter {
   }
 }
 
-/// Controller da estante do usuário
-///
-/// Gerencia livros pessoais e filtragem por status
+/// Controller da estante do usuário, gerencia livros pessoais e filtragem por status
 class MyShelfController extends ChangeNotifier {
   final MyShelfRepository _repository;
 

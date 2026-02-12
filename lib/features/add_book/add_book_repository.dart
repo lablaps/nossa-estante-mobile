@@ -1,12 +1,7 @@
 import '../../core/domain/entities/entities.dart';
 import '../../core/mocks/mocks.dart';
 
-/// Repository para adicionar livros à estante do usuário
-///
-/// Gerencia a adição de novos livros à lista mockada.
-/// Futuramente será substituído por chamadas à API.
 class AddBookRepository {
-  /// Adiciona um novo livro à lista global de livros
   Future<void> addBook(Book book) async {
     // Simula delay de rede
     await Future.delayed(const Duration(milliseconds: 500));

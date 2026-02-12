@@ -5,7 +5,6 @@ import '../../../core/widgets/widgets.dart';
 import 'animated_book_pin.dart';
 import 'map_info_badge.dart';
 
-// Preview do mapa
 class MapSection extends StatelessWidget {
   final List<Book> books;
   final int totalInRadius;
@@ -31,7 +30,6 @@ class MapSection extends StatelessWidget {
 
             ..._buildBookPins(books),
 
-            // Botão de localização e explorar
             Positioned(
               bottom: AppSpacing.md,
               right: AppSpacing.md,
@@ -108,11 +106,9 @@ class MapSection extends StatelessWidget {
     );
   }
 
-  // Renderiza pins dos livros no mapa
   List<Widget> _buildBookPins(List<Book> books) {
     if (books.isEmpty) return [];
 
-    // Posições simuladas para demo
     final positions = [
       const Offset(160, 96),
       const Offset(280, 192),

@@ -3,10 +3,6 @@ import '../../../core/theme/theme.dart';
 import '../../../core/widgets/widgets.dart';
 import '../add_book_controller.dart';
 
-/// Botão de ação principal para salvar o livro
-///
-/// Exibe botão fixo no bottom com loading state.
-/// Apenas renderiza - a lógica está no controller.
 class AddBookActions extends StatelessWidget {
   final AddBookController controller;
 

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../core/theme/theme.dart';
 
-// Badge de informação do mapa
 class MapInfoBadge extends StatelessWidget {
   final int booksCount;
   final int radius;

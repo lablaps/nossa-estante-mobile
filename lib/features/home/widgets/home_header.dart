@@ -3,7 +3,6 @@ import '../../../core/domain/entities/entities.dart';
 import '../../../core/theme/theme.dart';
 import '../../../core/widgets/widgets.dart';
 
-// Header da Home
 class HomeHeader extends StatelessWidget {
   final User user;
   final VoidCallback? onProfileTap;

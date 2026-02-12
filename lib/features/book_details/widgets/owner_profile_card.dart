@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import '../../../core/domain/entities/entities.dart';
 import '../../../core/theme/theme.dart';
 
-/// Widget que exibe informações do dono do livro
-///
-/// Mostra avatar, nome, avaliação e botão de mensagem.
 class OwnerProfileCard extends StatelessWidget {
   final User owner;
   final VoidCallback? onMessageTap;
@@ -50,7 +47,7 @@ class OwnerProfileCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Owned by',
+                  'Propriedade de',
                   style: AppTextStyles.bodySmall(context).copyWith(
                     color: context.isDark
                         ? AppColors
@@ -118,7 +115,7 @@ class OwnerProfileCard extends StatelessWidget {
               : null,
         ),
 
-        // Badge PRO (opcional - pode ser adicionado ao User)
+        // Badge PRO (pode ser adicionado ao User)
         Positioned(
           bottom: 0,
           right: 0,
@@ -157,7 +154,7 @@ class OwnerProfileCard extends StatelessWidget {
         ),
         const SizedBox(width: 4),
         Text(
-          '(124 exchanges)',
+          '(124 Trocas)',
           style: AppTextStyles.caption(context).copyWith(
             color: AppColors.captionText, // gray-400
             fontSize: 12,

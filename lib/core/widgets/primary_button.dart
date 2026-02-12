@@ -59,17 +59,17 @@ class PrimaryButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: AppDimensions.buttonHeight,
+      height: 56,
       child: ElevatedButton(
         onPressed: isLoading ? null : onPressed,
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.primary,
-          foregroundColor: AppColors.textMain,
+          foregroundColor: AppColors.primaryButtonText,
           disabledBackgroundColor: AppColors.primary.withOpacity(0.5),
           elevation: 8,
           shadowColor: AppColors.primary.withOpacity(0.2),
           shape: RoundedRectangleBorder(
-            borderRadius: AppDimensions.borderRadiusFull,
+            borderRadius: BorderRadius.circular(9999),
           ),
         ),
         child: isLoading
@@ -78,17 +78,24 @@ class PrimaryButton extends StatelessWidget {
                 width: 24,
                 child: CircularProgressIndicator(
                   strokeWidth: 2.5,
-                  valueColor: AlwaysStoppedAnimation<Color>(AppColors.textMain),
+                  valueColor: AlwaysStoppedAnimation<Color>(AppColors.primaryButtonText),
                 ),
               )
             : Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  Text(
+                    text,
+                    style: AppTextStyles.buttonLarge(context).copyWith(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.primaryButtonText,
+                    ),
+                  ),
                   if (icon != null) ...[
-                    Icon(icon, size: 20),
                     const SizedBox(width: 8),
+                    Icon(icon, size: 20),
                   ],
-                  Text(text, style: AppTextStyles.buttonLarge(context)),
                 ],
               ),
       ),

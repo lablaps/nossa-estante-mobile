@@ -2,10 +2,6 @@ import 'package:flutter/material.dart';
 import '../../../core/theme/theme.dart';
 import '../add_book_controller.dart';
 
-/// Placeholder para a capa do livro
-///
-/// Exibe um campo de texto para URL da capa ou placeholder visual.
-/// Apenas renderiza - a lógica está no controller.
 class AddBookCoverPicker extends StatelessWidget {
   final AddBookController controller;
 

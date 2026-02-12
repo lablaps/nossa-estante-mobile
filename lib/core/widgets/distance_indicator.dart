@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import '../theme/theme.dart';
 
-/// Indicador de distância reutilizável
-///
-/// Exibe um badge com ícone de localização e texto de distância.
-/// Usado para mostrar proximidade de livros ou usuários.
 class DistanceIndicator extends StatelessWidget {
   final String distance;
   final Color? backgroundColor;

@@ -2,10 +2,6 @@ import 'package:flutter/material.dart';
 import '../../../core/theme/theme.dart';
 import '../add_book_controller.dart';
 
-/// Seletor de gêneros para adicionar livro
-///
-/// Permite seleção múltipla de gêneros.
-/// Apenas renderiza - a lógica está no controller.
 class AddBookGenreSelector extends StatelessWidget {
   final AddBookController controller;
 

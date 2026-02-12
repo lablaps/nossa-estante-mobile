@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// Controller para gerenciar o estado do onboarding
 class OnboardingController extends ChangeNotifier {
   final PageController pageController = PageController();
   int _currentPage = 0;

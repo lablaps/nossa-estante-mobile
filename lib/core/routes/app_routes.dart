@@ -3,7 +3,7 @@ import '../../features/onboarding/onboarding_page.dart';
 import '../../features/auth/login_page.dart';
 import '../../features/auth/signup_page.dart';
 import '../../features/app_shell/app_shell_page.dart';
-import '../../features/explore/book_details_page.dart';
+import '../../features/book_details/book_details_page.dart';
 import '../../features/add_book/add_book_page.dart';
 import '../domain/entities/entities.dart';
 
@@ -12,17 +12,11 @@ class AppRoutes {
   static const String login = '/login';
   static const String signup = '/signup';
   static const String home = '/home';
-
-  // Rotas da Home
   static const String bookDetails = '/book-details';
   static const String nearbyBooks = '/nearby-books';
   static const String notifications = '/notifications';
-
-  // Rotas do Explore
   static const String featured = '/featured';
   static const String collection = '/collection';
-
-  // Rotas do My Shelf
   static const String addBook = '/add-book';
 
   static Map<String, WidgetBuilder> get routes => {
@@ -30,11 +24,9 @@ class AppRoutes {
     login: (context) => const LoginPage(),
     signup: (context) => const SignupPage(),
     home: (context) => const AppShellPage(),
-    // bookDetails usa onGenerateRoute para receber argumentos
     nearbyBooks: (context) => const _PlaceholderPage(title: 'Livros Próximos'),
     notifications: (context) => const _PlaceholderPage(title: 'Notificações'),
     featured: (context) => const _PlaceholderPage(title: 'Em Destaque'),
-    // collection usa onGenerateRoute para receber argumentos
     addBook: (context) => const AddBookPage(),
   };
 

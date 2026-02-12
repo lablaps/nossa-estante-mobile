@@ -9,14 +9,6 @@ import 'widgets/add_book_cover_picker.dart';
 import 'widgets/add_book_settings.dart';
 import 'widgets/add_book_actions.dart';
 
-/// Página para adicionar um novo livro à estante
-///
-/// Permite o usuário cadastrar um livro com:
-/// - Título e autor (obrigatórios)
-/// - ISBN, capa, descrição (opcionais)
-/// - Gêneros (pelo menos um obrigatório)
-/// - Condição, idioma, número de páginas
-/// - Créditos necessários para troca
 class AddBookPage extends StatelessWidget {
   const AddBookPage({super.key});
 
@@ -43,7 +35,6 @@ class _AddBookViewState extends State<_AddBookView> {
 
     final controller = context.watch<AddBookController>();
 
-    // Observa eventos de navegação
     if (controller.pendingNavigation != null) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         final navigation = controller.pendingNavigation;
@@ -62,7 +53,6 @@ class _AddBookViewState extends State<_AddBookView> {
       });
     }
 
-    // Exibe erro se houver
     if (controller.errorMessage != null) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (mounted) {
@@ -95,7 +85,6 @@ class _AddBookViewState extends State<_AddBookView> {
       ),
       body: Column(
         children: [
-          // Conteúdo com scroll
           Expanded(
             child: SingleChildScrollView(
               padding: AppSpacing.paddingPage,

@@ -106,7 +106,7 @@ class BookDetailsBottomBar extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Redeem Book',
+                          'Resgatar livro',
                           style: AppTextStyles.bodyLarge(context).copyWith(
                             color: const Color(0xFF102216),
                             fontWeight: FontWeight.w700,
