@@ -46,7 +46,7 @@ class CentralAddButton extends StatelessWidget {
           Transform.translate(
             offset: const Offset(0, -16),
             child: Text(
-              label ?? 'Adicionar',
+              label ?? 'Adicionar livro',
               style: AppTextStyles.caption(
                 context,
               ).copyWith(fontWeight: FontWeight.w500, color: context.textMuted),

@@ -3,6 +3,7 @@ import 'package:nossa_estante_mobile/features/my_shelf/my_shelf_page.dart';
 import 'package:provider/provider.dart';
 import '../../core/theme/theme.dart';
 import '../../core/widgets/widgets.dart';
+import '../add_book/add_book_page.dart';
 import '../home/home_page.dart';
 import 'app_shell_controller.dart';
 
@@ -30,7 +31,7 @@ class _AppShellViewState extends State<_AppShellView> {
   static final List<Widget> _pages = [
     const HomePage(),
     const MyShelfPage(),
-    const _PlaceholderPage(title: 'Adicionar', icon: Icons.add),
+    const AddBookPage(),
     const _PlaceholderPage(title: 'Trocas', icon: Icons.swap_horiz),
     const _PlaceholderPage(title: 'Perfil', icon: Icons.person),
   ];
