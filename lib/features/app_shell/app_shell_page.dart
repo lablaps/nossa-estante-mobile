@@ -18,9 +18,14 @@ class AppShellPage extends StatelessWidget {
   }
 }
 
-class _AppShellView extends StatelessWidget {
+class _AppShellView extends StatefulWidget {
   const _AppShellView();
 
+  @override
+  State<_AppShellView> createState() => _AppShellViewState();
+}
+
+class _AppShellViewState extends State<_AppShellView> {
   // Páginas/telas do app
   static final List<Widget> _pages = [
     const HomePage(),
@@ -29,6 +34,30 @@ class _AppShellView extends StatelessWidget {
     const _PlaceholderPage(title: 'Trocas', icon: Icons.swap_horiz),
     const _PlaceholderPage(title: 'Perfil', icon: Icons.person),
   ];
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    final controller = context.watch<AppShellController>();
+
+    // Handle navigation
+    if (controller.pendingNavigation != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        final navigation = controller.pendingNavigation;
+        if (navigation != null && mounted) {
+          controller.clearNavigation();
+          if (navigation.isPush && navigation.route != null) {
+            Navigator.pushNamed(
+              context,
+              navigation.route!,
+              arguments: navigation.arguments,
+            );
+          }
+        }
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -15,11 +15,14 @@ class AddBookController extends ChangeNotifier {
   String _isbn = '';
   String _coverUrl = '';
   String _description = '';
+  String _ownerNotes = '';
   List<String> _selectedGenres = [];
+  List<String> _realBookPhotos = [];
   int _creditsRequired = 1;
-  BookCondition _condition = BookCondition.good;
+  BookCondition _condition = BookCondition.new_;
   String? _language;
   int? _pageCount;
+  bool _isManualEntry = false;
 
   bool _isLoading = false;
   String? _errorMessage;
@@ -35,11 +38,17 @@ class AddBookController extends ChangeNotifier {
   String get isbn => _isbn;
   String get coverUrl => _coverUrl;
   String get description => _description;
+  String get ownerNotes => _ownerNotes;
   List<String> get selectedGenres => _selectedGenres;
+  List<String> get realBookPhotos => _realBookPhotos;
   int get creditsRequired => _creditsRequired;
   BookCondition get condition => _condition;
   String? get language => _language;
   int? get pageCount => _pageCount;
+  bool get isManualEntry => _isManualEntry;
+
+  bool get isTitleValid => _title.trim().isNotEmpty;
+  bool get isAuthorValid => _author.trim().isNotEmpty;
 
   void setTitle(String value) {
     _title = value;
@@ -64,6 +73,30 @@ class AddBookController extends ChangeNotifier {
   void setDescription(String value) {
     _description = value;
     _clearError();
+  }
+
+  void setOwnerNotes(String value) {
+    _ownerNotes = value;
+    _clearError();
+  }
+
+  void toggleManualEntry() {
+    _isManualEntry = !_isManualEntry;
+    notifyListeners();
+  }
+
+  void addPhoto(String photoUrl) {
+    if (_realBookPhotos.length < 4) {
+      _realBookPhotos = [..._realBookPhotos, photoUrl];
+      notifyListeners();
+    }
+  }
+
+  void removePhoto(int index) {
+    if (index >= 0 && index < _realBookPhotos.length) {
+      _realBookPhotos = List.from(_realBookPhotos)..removeAt(index);
+      notifyListeners();
+    }
   }
 
   void setGenres(List<String> genres) {
@@ -172,6 +205,7 @@ class AddBookController extends ChangeNotifier {
         status: BookStatus.available,
         condition: _condition,
         creditsRequired: _creditsRequired,
+        realBookPhotos: _realBookPhotos,
         language: _language,
         pageCount: _pageCount,
       );

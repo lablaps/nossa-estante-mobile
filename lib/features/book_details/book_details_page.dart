@@ -73,7 +73,10 @@ class _BookDetailsView extends StatelessWidget {
                   icon: const Icon(Icons.arrow_back),
                   onPressed: controller.onBackTap,
                 ),
-                title: Text('Book Details', style: AppTextStyles.h5(context)),
+                title: Text(
+                  'Detalhes do livro',
+                  style: AppTextStyles.h5(context),
+                ),
                 centerTitle: true,
                 actions: [
                   IconButton(
